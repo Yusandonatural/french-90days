@@ -1,0 +1,2850 @@
+#phrase|💬|あいさつ・決まり文句|none
+bonjour|こんにちは
+bonsoir|こんばんは
+salut|やあ
+au revoir|さようなら
+à bientôt|またね
+à tout à l'heure|また後で
+à demain|また明日
+bonne nuit|おやすみ
+bonne journée|よい一日を
+bonne soirée|よい夜を
+bon week-end|よい週末を
+bon voyage|よい旅を
+bon appétit|召し上がれ
+santé|乾杯
+merci|ありがとう
+merci beaucoup|どうもありがとう
+de rien|どういたしまして
+je vous en prie|どういたしまして（丁寧）
+s'il vous plaît|お願いします
+s'il te plaît|お願い（親しい人に）
+pardon|すみません
+excusez-moi|失礼します
+désolé|ごめんなさい
+enchanté|はじめまして
+bienvenue|ようこそ
+félicitations|おめでとう
+joyeux anniversaire|誕生日おめでとう
+bonne année|あけましておめでとう
+ça va|元気？・大丈夫
+ça va bien|元気です
+pas mal|悪くない
+comme ci comme ça|まあまあ
+oui|はい
+non|いいえ
+d'accord|わかった・賛成
+bien sûr|もちろん
+volontiers|喜んで
+avec plaisir|喜んで
+pas de problème|問題ない
+ça marche|オーケー
+c'est ça|その通り
+ça dépend|場合による
+je ne sais pas|わからない
+je comprends|わかります
+je ne comprends pas|わかりません
+tant pis|仕方ない
+tant mieux|よかった
+bon courage|がんばって
+attention|気をつけて
+voilà|はい、どうぞ・ほら
+allez|さあ・行こう
+dommage|残念
+génial|最高
+super|すごい
+bravo|ブラボー
+au secours|助けて
+à votre santé|あなたの健康に乾杯
+pas encore|まだです
+pas du tout|全然
+c'est pas grave|大したことないよ
+#food|🥐|食べ物|food
+le pain|パン
+la baguette|バゲット
+le croissant|クロワッサン
+le pain au chocolat|パン・オ・ショコラ
+le pain de mie|食パン
+la brioche|ブリオッシュ
+le riz|米・ご飯
+le riz complet|玄米
+les pâtes|パスタ
+les nouilles|麺
+la pomme|りんご
+la banane|バナナ
+l'orange|オレンジ|f
+le citron|レモン
+la fraise|いちご
+la cerise|さくらんぼ
+le raisin|ぶどう
+la pêche|桃
+la poire|洋梨
+l'abricot|あんず|m
+la prune|プラム
+le melon|メロン
+la pastèque|すいか
+l'ananas|パイナップル|m
+la mangue|マンゴー
+le kiwi|キウイ
+la figue|いちじく
+la framboise|ラズベリー
+la myrtille|ブルーベリー
+le pamplemousse|グレープフルーツ
+le kaki|柿
+la noix|くるみ
+l'amande|アーモンド|f
+la noisette|ヘーゼルナッツ
+la cacahuète|ピーナッツ
+la châtaigne|栗
+la carotte|にんじん
+la pomme de terre|じゃがいも
+la patate douce|さつまいも
+l'oignon|玉ねぎ|m
+l'ail|にんにく|m
+la tomate|トマト
+le concombre|きゅうり
+la laitue|レタス
+le chou|キャベツ
+le chou chinois|白菜
+le poireau|ポロねぎ
+le poivron|ピーマン
+l'aubergine|なす|f
+la courgette|ズッキーニ
+le champignon|きのこ
+les épinards|ほうれん草
+le brocoli|ブロッコリー
+le chou-fleur|カリフラワー
+le radis|ラディッシュ
+le radis blanc|大根
+le navet|かぶ
+le maïs|とうもろこし
+les haricots verts|さやいんげん
+les petits pois|グリーンピース
+la citrouille|かぼちゃ
+le céleri|セロリ
+la betterave|ビーツ
+l'asperge|アスパラガス|f
+l'artichaut|アーティチョーク|m
+le gingembre|しょうが
+le persil|パセリ
+le basilic|バジル
+la ciboulette|チャイブ
+la menthe|ミント
+les lentilles|レンズ豆
+le pois chiche|ひよこ豆
+le haricot|豆
+le soja|大豆
+le tofu|豆腐
+le natto|納豆
+les algues|海藻
+la viande|肉
+le bœuf|牛肉
+le porc|豚肉
+le poulet|鶏肉
+l'agneau|子羊の肉|m
+le canard|鴨肉
+la dinde|七面鳥
+le jambon|ハム
+la saucisse|ソーセージ
+le lard|ベーコン
+le steak|ステーキ
+le pâté|パテ
+le poisson|魚
+le saumon|鮭
+le thon|まぐろ
+la sardine|いわし
+le maquereau|さば
+la morue|たら
+les crevettes|えび
+les huîtres|かき
+les moules|ムール貝
+le crabe|かに
+le calmar|いか
+le poulpe|たこ
+l'œuf|卵|m
+le fromage|チーズ
+le beurre|バター
+le lait|牛乳
+la crème|生クリーム
+le yaourt|ヨーグルト
+le sucre|砂糖
+le sel|塩
+le poivre|こしょう
+l'huile|油|f
+l'huile d'olive|オリーブオイル|f
+le vinaigre|酢
+la moutarde|マスタード
+la mayonnaise|マヨネーズ
+le ketchup|ケチャップ
+la sauce soja|しょうゆ
+le miso|味噌
+la sauce|ソース
+l'épice|スパイス|f
+la vanille|バニラ
+la cannelle|シナモン
+le sésame|ごま
+le miel|はちみつ
+la confiture|ジャム
+la farine|小麦粉
+le chocolat|チョコレート
+le gâteau|ケーキ
+la tarte|タルト
+la tarte aux pommes|アップルパイ
+le biscuit|ビスケット
+le cookie|クッキー
+la glace|アイスクリーム
+le bonbon|あめ
+la crêpe|クレープ
+la gaufre|ワッフル
+la madeleine|マドレーヌ
+le macaron|マカロン
+la mousse au chocolat|チョコレートムース
+la crème brûlée|クレームブリュレ
+le flan|プリン
+la soupe|スープ
+la salade|サラダ
+le sandwich|サンドイッチ
+la pizza|ピザ
+le hamburger|ハンバーガー
+les frites|フライドポテト
+l'omelette|オムレツ|f
+le riz au curry|カレーライス
+les sushis|寿司
+les ramen|ラーメン
+la tempura|天ぷら
+le bento|弁当
+l'onigiri|おにぎり|m
+le ragoût|シチュー
+le rôti|ロースト肉
+la quiche|キッシュ
+le croque-monsieur|クロックムッシュ
+la ratatouille|ラタトゥイユ
+le pot-au-feu|ポトフ
+la bouillabaisse|ブイヤベース
+le couscous|クスクス
+la fondue|フォンデュ
+la raclette|ラクレット
+le dessert|デザート
+le plat principal|メイン料理
+le plat du jour|日替わり料理
+le petit-déjeuner|朝食
+le déjeuner|昼食
+le dîner|夕食
+le goûter|おやつ
+le repas|食事
+la tartine|タルティーヌ
+les céréales|シリアル
+les chips|ポテトチップス
+le pop-corn|ポップコーン
+les olives|オリーブ
+le fruit|果物
+le légume|野菜
+la nourriture|食べ物
+le snack|軽食
+les restes|残り物
+#drink|☕|飲み物|drink
+l'eau|水|f
+l'eau gazeuse|炭酸水|f
+l'eau minérale|ミネラルウォーター|f
+le café|コーヒー
+le café au lait|カフェオレ
+l'expresso|エスプレッソ|m
+le cappuccino|カプチーノ
+le café glacé|アイスコーヒー
+le thé|紅茶・お茶
+le thé vert|緑茶
+le thé noir|紅茶
+le thé glacé|アイスティー
+le matcha|抹茶
+le hojicha|ほうじ茶
+la tisane|ハーブティー
+le chocolat chaud|ホットチョコレート
+le jus d'orange|オレンジジュース
+le jus de pomme|りんごジュース
+le jus de fruits|フルーツジュース
+le lait de soja|豆乳
+le smoothie|スムージー
+la limonade|レモネード
+le soda|炭酸飲料
+le coca|コーラ
+le sirop|シロップ
+le vin|ワイン
+le vin rouge|赤ワイン
+le vin blanc|白ワイン
+le rosé|ロゼワイン
+le champagne|シャンパン
+la bière|ビール
+le cidre|シードル
+le saké|日本酒
+le shochu|焼酎
+le whisky|ウイスキー
+le cocktail|カクテル
+l'apéritif|食前酒|m
+le digestif|食後酒
+la boisson|飲み物
+le verre d'eau|コップ一杯の水
+la carafe d'eau|水差しの水
+#people|👪|人・家族|people
+la famille|家族
+le père|父
+la mère|母
+les parents|両親
+le papa|パパ
+la maman|ママ
+le fils|息子
+la fille|娘
+le frère|兄弟
+la sœur|姉妹
+le grand frère|兄
+la petite sœur|妹
+le grand-père|祖父
+la grand-mère|祖母
+les grands-parents|祖父母
+le petit-fils|孫息子
+la petite-fille|孫娘
+les petits-enfants|孫たち
+l'oncle|おじ|m
+la tante|おば
+le cousin|いとこ（男）
+la cousine|いとこ（女）
+le neveu|甥
+la nièce|姪
+le mari|夫
+la femme|妻
+le bébé|赤ちゃん
+l'enfant|子ども|m
+le garçon|男の子
+la jeune fille|若い女性
+l'ado|ティーンエイジャー|m
+l'adulte|大人|m
+la personne|人
+les gens|人々
+l'homme|男性|m
+la dame|婦人
+le monsieur|男の方
+l'ami|友達（男）|m
+l'amie|友達（女）|f
+le copain|仲間・彼氏
+la copine|仲間・彼女
+le petit ami|恋人（男）
+la petite amie|恋人（女）
+le fiancé|婚約者
+le collègue|同僚
+le patron|上司
+le client|客
+le voisin|隣人
+la voisine|隣人（女）
+l'invité|招待客|m
+le chef|リーダー・料理長
+l'étranger|外国人|m
+le touriste|観光客
+le camarade de classe|同級生
+le beau-père|義父
+la belle-mère|義母
+le beau-frère|義兄弟
+la belle-sœur|義姉妹
+le gendre|婿
+la belle-fille|嫁
+le jumeau|双子
+le parrain|名付け親
+le propriétaire|大家
+le locataire|借家人
+l'habitant|住民|m
+le citoyen|市民
+le public|観客
+le groupe|グループ
+le couple|カップル
+le roi|王
+la reine|女王
+#job|👩‍⚕️|職業|people
+le médecin|医者
+l'infirmier|看護師|m
+le dentiste|歯医者
+le pharmacien|薬剤師
+le professeur|先生
+l'instituteur|小学校の先生|m
+l'étudiant|学生|m
+l'élève|生徒|m
+l'avocat|弁護士|m
+le juge|裁判官
+le policier|警察官
+le pompier|消防士
+le facteur|郵便配達員
+le boulanger|パン職人
+le boucher|肉屋さん
+le pâtissier|ケーキ職人
+le cuisinier|料理人
+le serveur|ウェイター
+la serveuse|ウェイトレス
+le vendeur|店員
+le caissier|レジ係
+le chauffeur|運転手
+le chauffeur de taxi|タクシー運転手
+le pilote|パイロット
+l'hôtesse de l'air|客室乗務員|f
+le mécanicien|整備士
+l'ingénieur|エンジニア|m
+l'informaticien|IT技術者|m
+l'architecte|建築家|m
+le comptable|会計士
+le banquier|銀行員
+le directeur|部長・所長
+le secrétaire|秘書
+l'employé|従業員|m
+le fonctionnaire|公務員
+le journaliste|記者
+l'écrivain|作家|m
+l'artiste|芸術家|m
+le peintre|画家
+le musicien|音楽家
+le chanteur|歌手
+l'acteur|俳優|m
+le photographe|写真家
+le coiffeur|美容師
+le plombier|配管工
+l'électricien|電気技師|m
+le menuisier|大工
+l'agriculteur|農家|m
+le paysan|農民
+le pêcheur|漁師
+le vétérinaire|獣医
+le chercheur|研究者
+le scientifique|科学者
+le traducteur|翻訳者
+l'interprète|通訳|m
+le commerçant|商店主
+l'entrepreneur|起業家|m
+le retraité|退職者
+le chômeur|失業者
+le stagiaire|研修生
+le bénévole|ボランティア
+le moine|僧侶
+le prêtre|神父
+le jardinier|庭師
+le livreur|配達員
+le guide touristique|観光ガイド
+le potier|陶芸家
+le designer|デザイナー
+le gardien|管理人・守衛
+#time|🕒|時間・暦|none
+le jour|日
+la journée|一日
+la semaine|週
+le mois|月（暦の）
+l'année|年|f
+le siècle|世紀
+l'heure|時間・時|f
+la minute|分
+la seconde|秒
+le matin|朝
+le midi|正午
+l'après-midi|午後|m
+le soir|夕方・夜
+la nuit|夜
+minuit|真夜中
+aujourd'hui|今日
+hier|昨日
+demain|明日
+avant-hier|おととい
+après-demain|あさって
+lundi|月曜日
+mardi|火曜日
+mercredi|水曜日
+jeudi|木曜日
+vendredi|金曜日
+samedi|土曜日
+dimanche|日曜日
+janvier|1月
+février|2月
+mars|3月
+avril|4月
+mai|5月
+juin|6月
+juillet|7月
+août|8月
+septembre|9月
+octobre|10月
+novembre|11月
+décembre|12月
+le week-end|週末
+la date|日付
+l'anniversaire|誕生日|m
+le passé|過去
+le présent|現在
+l'avenir|未来|m
+le début|始まり
+la fin|終わり
+le moment|瞬間・時期
+l'instant|一瞬|m
+la fois|回・度
+le lendemain|翌日
+la veille|前日
+le quotidien|日常
+la saison|季節
+le printemps|春
+l'été|夏|m
+l'automne|秋|m
+l'hiver|冬|m
+maintenant|今
+bientôt|もうすぐ
+tôt|早く
+tard|遅く
+déjà|もう・すでに
+encore|まだ・また
+toujours|いつも
+jamais|決して〜ない
+souvent|よく・しばしば
+parfois|時々
+rarement|めったに〜ない
+d'habitude|普段は
+tout de suite|すぐに
+plus tard|後で
+autrefois|昔
+récemment|最近
+longtemps|長い間
+pendant|〜の間
+depuis|〜以来
+le Nouvel An|お正月
+Noël|クリスマス
+Pâques|復活祭
+la semaine prochaine|来週
+la semaine dernière|先週
+le mois prochain|来月
+l'année dernière|去年|f
+ce matin|今朝
+ce soir|今夜
+cette nuit|今夜・昨夜
+il y a deux jours|2日前
+dans une heure|1時間後
+à l'heure|時間どおりに
+en avance|早めに
+en retard|遅れて
+de temps en temps|ときどき
+tous les jours|毎日
+une fois par semaine|週に1回
+le jour férié|祝日
+les vacances d'été|夏休み
+#place|🏙️|町・場所|place
+la ville|町
+le village|村
+la campagne|田舎
+le quartier|地区
+la rue|通り
+l'avenue|大通り|f
+la place|広場
+le pont|橋
+le parc|公園
+le marché|市場
+le supermarché|スーパー
+le magasin|店
+la boutique|小さな店
+la boulangerie|パン屋
+la pâtisserie|ケーキ屋
+la boucherie|肉屋
+la poissonnerie|魚屋
+l'épicerie|食料品店|f
+la librairie|本屋
+la pharmacie|薬局
+la banque|銀行
+la poste|郵便局
+la mairie|市役所
+le commissariat|警察署
+la gare|駅
+l'aéroport|空港|m
+l'arrêt de bus|バス停|m
+la station de métro|地下鉄の駅
+le port|港
+l'hôpital|病院|m
+la clinique|診療所
+le cabinet médical|医院
+l'école|学校|f
+le collège|中学校
+le lycée|高校
+l'université|大学|f
+la bibliothèque|図書館
+le musée|美術館・博物館
+le théâtre|劇場
+le cinéma|映画館
+la salle de concert|コンサートホール
+le stade|スタジアム
+le gymnase|体育館
+la salle de sport|ジム
+la piscine|プール
+le restaurant|レストラン
+le bistrot|ビストロ
+le salon de thé|喫茶店
+le bar|バー
+la brasserie|ブラッスリー
+l'hôtel|ホテル|m
+l'auberge|宿|f
+le camping|キャンプ場
+l'église|教会|f
+le temple|寺
+le sanctuaire|神社
+le château|城
+la tour|塔
+le centre commercial|ショッピングセンター
+le salon de coiffure|美容院
+la laverie|コインランドリー
+la station-service|ガソリンスタンド
+le parking|駐車場
+le zoo|動物園
+l'aquarium|水族館|m
+le jardin botanique|植物園
+la plage|浜辺
+la mer|海
+la montagne|山
+la forêt|森
+le lac|湖
+la rivière|川
+la colline|丘
+le champ|畑
+la ferme|農場
+le bureau|オフィス・机
+l'usine|工場|f
+l'entreprise|会社|f
+le cimetière|墓地
+le centre-ville|中心街
+la banlieue|郊外
+l'ambassade|大使館|f
+la préfecture|県庁
+le tribunal|裁判所
+la crèche|保育園
+l'école maternelle|幼稚園|f
+le carrefour|交差点
+le trottoir|歩道
+le coin|角
+le marché aux puces|蚤の市
+la cathédrale|大聖堂
+le monument|記念建造物
+l'office de tourisme|観光案内所|m
+la frontière|国境
+le pays|国
+la région|地方
+la capitale|首都
+le sud|南
+le nord|北
+l'est|東|m
+l'ouest|西|m
+#vehicle|🚆|乗り物|vehicle
+le train|電車
+le TGV|高速列車TGV
+le métro|地下鉄
+le bus|バス
+le car|長距離バス
+le tram|路面電車
+le taxi|タクシー
+l'avion|飛行機|m
+le bateau|船
+le ferry|フェリー
+la voiture|車
+la moto|バイク
+le scooter|スクーター
+le camion|トラック
+le téléphérique|ロープウェイ
+le dernier train|終電
+le premier train|始発
+le train de nuit|夜行列車
+la navette|シャトルバス
+le bus scolaire|スクールバス
+le vol de nuit|夜の便
+#travel|🧳|旅行|travel
+le voyage|旅行
+les vacances|休暇
+le billet d'avion|航空券
+la réservation|予約
+le vol|フライト
+le quai|ホーム
+la voie|番線
+le guichet|窓口
+la consigne|荷物預かり所
+les bagages|荷物
+le sac de voyage|旅行かばん
+la carte d'embarquement|搭乗券
+la douane|税関
+le visa|ビザ
+le séjour|滞在
+l'itinéraire|旅程|m
+le guide|ガイドブック
+le souvenir|お土産・思い出
+la carte postale|絵はがき
+l'horaire|時刻表|m
+le retard|遅れ
+le départ|出発
+l'arrivée|到着|f
+la correspondance|乗り換え
+l'aller simple|片道|m
+l'aller-retour|往復|m
+la sortie|出口
+le plan du métro|地下鉄の路線図
+la chambre double|ダブルルーム
+la clé de la chambre|部屋の鍵
+la réception|フロント
+le pourboire|チップ
+le taux de change|為替レート
+le décalage horaire|時差
+le trajet|道のり
+la route|道路
+l'autoroute|高速道路|f
+le péage|料金所
+l'essence|ガソリン|f
+le GPS|カーナビ
+l'embouteillage|渋滞|m
+l'accident|事故|m
+la ceinture de sécurité|シートベルト
+le panneau|標識
+la carte routière|道路地図
+le gilet de sauvetage|救命胴衣
+le point de rendez-vous|待ち合わせ場所
+#home|🏠|家・部屋|home
+la maison|家
+l'appartement|アパート|m
+la chambre|寝室
+la cuisine|台所
+le salon|居間
+la salle à manger|食堂
+la salle de bains|浴室
+les toilettes|トイレ
+l'entrée|玄関|f
+le couloir|廊下
+l'escalier|階段|m
+le grenier|屋根裏
+la cave|地下室
+le garage|ガレージ
+le jardin|庭
+le balcon|ベランダ
+la terrasse|テラス
+le toit|屋根
+le mur|壁
+le sol|床
+le plafond|天井
+la fenêtre|窓
+la porte|ドア
+le volet|よろい戸
+le rideau|カーテン
+le portail|門
+la clôture|柵
+le potager|家庭菜園
+la pelouse|芝生
+le studio|ワンルーム
+la pièce|部屋
+le bureau à la maison|書斎
+la chambre d'amis|客間
+la buanderie|洗濯室
+le sous-sol|地階
+l'atelier|作業場|m
+le tatami|畳
+#furniture|🛋️|家具・家電|furniture
+le lit|ベッド
+le canapé|ソファ
+le fauteuil|ひじ掛け椅子
+la chaise|椅子
+la table|テーブル
+l'armoire|洋服だんす|f
+le placard|戸棚
+l'étagère|棚|f
+la commode|たんす
+le tapis|じゅうたん
+la lampe|ランプ
+le miroir|鏡
+le frigo|冷蔵庫
+le congélateur|冷凍庫
+le four|オーブン
+le micro-ondes|電子レンジ
+la cuisinière|コンロ
+le lave-vaisselle|食洗機
+la machine à laver|洗濯機
+le sèche-linge|乾燥機
+l'évier|流し台|m
+le robinet|蛇口
+la douche|シャワー
+la baignoire|浴槽
+le lavabo|洗面台
+le radiateur|暖房器具
+le chauffage|暖房
+la climatisation|エアコン
+le ventilateur|扇風機
+la cheminée|暖炉
+la prise|コンセント
+l'interrupteur|スイッチ|m
+la poubelle|ごみ箱
+la boîte aux lettres|郵便受け
+la serrure|錠
+la sonnette|呼び鈴
+l'oreiller|枕|m
+la couverture|毛布
+le drap|シーツ
+la couette|掛け布団
+le coussin|クッション
+le tableau|絵（額入り）
+le cadre|額縁
+le vase|花瓶
+la bougie|ろうそく
+l'horloge|掛け時計|f
+le réveil|目覚まし時計
+la télé|テレビ
+la radio|ラジオ
+le grille-pain|トースター
+la cafetière|コーヒーメーカー
+l'aspirateur|掃除機|m
+le fer à repasser|アイロン
+le futon|布団
+le bureau d'écolier|学習机
+#object|🔑|日用品・道具|object
+le téléphone|電話
+le portable|携帯電話
+l'ordinateur|パソコン|m
+l'ordinateur portable|ノートパソコン|m
+la tablette|タブレット
+le chargeur|充電器
+le câble|ケーブル
+les écouteurs|イヤホン
+l'appareil photo|カメラ|m
+la batterie|バッテリー
+le stylo|ペン
+le crayon|鉛筆
+la gomme|消しゴム
+le cahier|ノート
+le carnet|手帳
+le papier|紙
+l'enveloppe|封筒|f
+le timbre|切手
+la lettre|手紙
+le colis|小包
+la boîte|箱
+le sac|袋・かばん
+la valise|スーツケース
+la bouteille|瓶
+le verre|コップ
+la tasse|カップ
+le bol|お椀
+l'assiette|皿|f
+la fourchette|フォーク
+le couteau|ナイフ
+la cuillère|スプーン
+les baguettes|箸
+la casserole|鍋
+la poêle|フライパン
+la théière|急須
+la bouilloire|やかん
+le plateau|お盆
+la serviette|タオル
+le savon|せっけん
+le shampooing|シャンプー
+la brosse à dents|歯ブラシ
+le dentifrice|歯磨き粉
+le peigne|くし
+la brosse|ブラシ
+le rasoir|かみそり
+le sèche-cheveux|ドライヤー
+le maquillage|化粧品
+le parfum|香水
+le mouchoir en papier|ティッシュ
+le papier toilette|トイレットペーパー
+l'éponge|スポンジ|f
+le balai|ほうき
+le seau|バケツ
+les ciseaux|はさみ
+la colle|のり
+le scotch|セロハンテープ
+la règle|定規
+la calculatrice|電卓
+l'agenda|手帳|m
+le calendrier|カレンダー
+le livre|本
+le magazine|雑誌
+le journal|新聞
+le dictionnaire|辞書
+la carte|地図・カード
+le plan|地図（町の）
+la lampe de poche|懐中電灯
+la pile|電池
+l'outil|道具|m
+le marteau|ハンマー
+le clou|釘
+la vis|ねじ
+le tournevis|ドライバー
+la corde|ロープ
+la ficelle|ひも
+le ruban|リボン
+le jouet|おもちゃ
+la poupée|人形
+le ballon|ボール
+le vélo|自転車
+la trottinette|キックボード
+le cadeau|プレゼント
+la photo|写真
+le billet|切符・紙幣
+la pièce de monnaie|硬貨
+la carte bancaire|キャッシュカード
+la carte de crédit|クレジットカード
+le passeport|パスポート
+le permis de conduire|運転免許証
+la carte d'identité|身分証明書
+le ticket|切符・チケット
+le reçu|領収書
+la facture|請求書
+le paquet|包み
+le panier|かご
+le sac en plastique|ビニール袋
+la clé USB|USBメモリ
+l'imprimante|プリンター|f
+l'écran|画面|m
+le clavier|キーボード
+la souris|マウス
+le document|書類
+le formulaire|申込用紙
+la feuille|紙一枚・葉
+l'étiquette|ラベル|f
+le thermomètre|体温計
+le médicament|薬
+la pilule|錠剤
+le pansement|ばんそうこう
+le masque|マスク
+la crème solaire|日焼け止め
+la clé|鍵
+le porte-clés|キーホルダー
+le portefeuille|財布
+le porte-monnaie|小銭入れ
+le parapluie|傘
+les lunettes|眼鏡
+la montre|腕時計
+l'allumette|マッチ|f
+le briquet|ライター
+le cendrier|灰皿
+la carte de visite|名刺
+le badge|名札
+l'aiguille|針|f
+le fil|糸
+le bouchon|栓・コルク
+le tire-bouchon|栓抜き
+l'ouvre-boîte|缶切り|m
+la boîte de conserve|缶詰
+le thermos|魔法瓶
+la gourde|水筒
+le chiffon|ぞうきん
+la lessive|洗剤
+#clothes|👕|服・身につけるもの|clothes
+le manteau|コート
+la veste|上着
+le pull|セーター
+le pantalon|ズボン
+le jean|ジーンズ
+la jupe|スカート
+la robe|ワンピース
+la chemise|シャツ
+le chemisier|ブラウス
+le t-shirt|Tシャツ
+le short|半ズボン
+le costume|スーツ
+la cravate|ネクタイ
+le gilet|カーディガン
+le sweat|トレーナー
+le blouson|ブルゾン
+l'imperméable|レインコート|m
+le pyjama|パジャマ
+le maillot de bain|水着
+les chaussures|靴
+les baskets|スニーカー
+les bottes|ブーツ
+les sandales|サンダル
+les chaussettes|靴下
+les collants|タイツ
+le chapeau|帽子
+la casquette|キャップ
+le bonnet|ニット帽
+l'écharpe|マフラー|f
+le foulard|スカーフ
+les gants|手袋
+la ceinture|ベルト
+les lunettes de soleil|サングラス
+le bracelet|ブレスレット
+le collier|ネックレス
+la bague|指輪
+les boucles d'oreilles|イヤリング
+le sac à main|ハンドバッグ
+le sac à dos|リュック
+le tablier|エプロン
+le kimono|着物
+le yukata|浴衣
+l'uniforme|制服|m
+les sous-vêtements|下着
+la poche|ポケット
+le bouton|ボタン
+la fermeture éclair|ファスナー
+la manche|袖
+le col|襟
+la doudoune|ダウンジャケット
+les pantoufles|スリッパ
+les tongs|ビーチサンダル
+le survêtement|ジャージ
+la robe de chambre|部屋着
+le mouchoir|ハンカチ
+la tenue|服装
+les vêtements|服
+la mode|ファッション
+#body|🫀|体|body
+la tête|頭
+les cheveux|髪
+le visage|顔
+le front|額
+les yeux|目
+l'œil|片目|m
+le nez|鼻
+la bouche|口
+les lèvres|唇
+les dents|歯
+la dent|歯（1本）
+la langue|舌・言語
+l'oreille|耳|f
+les oreilles|両耳
+la joue|頬
+le menton|あご
+le cou|首
+la gorge|喉
+l'épaule|肩|f
+le bras|腕
+le coude|ひじ
+le poignet|手首
+la main|手
+le doigt|指
+le pouce|親指
+l'ongle|爪|m
+la poitrine|胸
+le dos|背中
+le ventre|お腹
+l'estomac|胃|m
+le cœur|心臓
+les poumons|肺
+le foie|肝臓
+les reins|腰・腎臓
+la hanche|腰（骨盤）
+la jambe|脚
+le genou|ひざ
+la cheville|足首
+le pied|足
+l'orteil|足の指|m
+la peau|肌
+l'os|骨|m
+le muscle|筋肉
+le cerveau|脳
+la nuque|うなじ
+le sourcil|眉
+la paupière|まぶた
+les fesses|お尻
+le talon|かかと
+la mâchoire|あご（骨）
+#health|💊|健康・病気|health
+la santé|健康
+la maladie|病気
+le rhume|風邪
+la grippe|インフルエンザ
+la fièvre|熱
+la toux|咳
+le mal de tête|頭痛
+le mal de dos|腰痛
+le mal de ventre|腹痛
+l'allergie|アレルギー|f
+la blessure|けが
+la douleur|痛み
+la fatigue|疲れ
+le stress|ストレス
+l'insomnie|不眠|f
+la diarrhée|下痢
+la nausée|吐き気
+le vertige|めまい
+la brûlure|やけど
+la coupure|切り傷
+la fracture|骨折
+l'infection|感染症|f
+le diabète|糖尿病
+la tension|血圧
+la consultation|診察
+l'ordonnance|処方せん|f
+le vaccin|ワクチン
+l'opération|手術|f
+le traitement|治療
+le régime|食事療法
+le sommeil|睡眠
+la grossesse|妊娠
+l'accouchement|出産|m
+les urgences|救急外来
+l'ambulance|救急車|f
+la prise de sang|採血
+le symptôme|症状
+le poids|体重
+la forme|体調
+le bien-être|心身の健康
+le rendez-vous chez le médecin|診察の予約
+le mal de dents|歯痛
+le coup de soleil|日焼け
+la piqûre|注射・虫刺され
+la cicatrice|傷あと
+#nature|🌤️|自然・天気|nature
+le soleil|太陽
+la lune|月
+l'étoile|星|f
+le ciel|空
+le nuage|雲
+la pluie|雨
+la neige|雪
+le vent|風
+l'orage|雷雨|m
+la tempête|嵐
+le tonnerre|雷鳴
+l'éclair|稲妻|m
+l'arc-en-ciel|虹|m
+le brouillard|霧
+le givre|霜
+la grêle|ひょう
+le typhon|台風
+le tremblement de terre|地震
+l'inondation|洪水|f
+la chaleur|暑さ
+le froid|寒さ
+le temps|天気・時間
+la météo|天気予報
+la température|気温
+le climat|気候
+la nature|自然
+la terre|土・地球
+le sable|砂
+la pierre|石
+le rocher|岩
+l'océan|大洋|m
+la vague|波
+la côte|海岸
+l'île|島|f
+le volcan|火山
+la vallée|谷
+la grotte|洞窟
+la cascade|滝
+la source|泉
+le désert|砂漠
+la prairie|草原
+le paysage|景色
+la vue|眺め
+le lever du soleil|日の出
+le coucher du soleil|夕日
+l'air|空気|m
+la fumée|煙
+la boue|泥
+la poussière|ほこり
+l'ombre|影・日陰|f
+la lumière|光
+le monde|世界
+l'univers|宇宙|m
+la planète|惑星
+la rosée|露
+le ruisseau|小川
+la glace sur le lac|湖の氷
+le sommet|頂上
+le feu de camp|たき火
+#animal|🐈|動物|animal
+l'animal|動物|m
+le chien|犬
+le chat|猫
+l'oiseau|鳥|m
+le poisson rouge|金魚
+le lapin|うさぎ
+le cheval|馬
+la vache|牛
+le cochon|豚
+le mouton|羊
+la chèvre|山羊
+la poule|めんどり
+le coq|おんどり
+l'âne|ろば|m
+le rat|ねずみ
+l'écureuil|リス|m
+le renard|きつね
+le loup|おおかみ
+l'ours|くま|m
+le cerf|鹿
+le sanglier|いのしし
+le singe|猿
+l'éléphant|象|m
+la girafe|キリン
+le lion|ライオン
+le tigre|トラ
+le zèbre|シマウマ
+le serpent|へび
+la grenouille|かえる
+la tortue|かめ
+le crocodile|ワニ
+la baleine|くじら
+le dauphin|イルカ
+le requin|サメ
+la méduse|クラゲ
+le papillon|ちょう
+l'abeille|みつばち|f
+la fourmi|あり
+la mouche|はえ
+le moustique|蚊
+l'araignée|くも|f
+le ver de terre|みみず
+l'escargot|かたつむり|m
+la coccinelle|てんとう虫
+le hibou|ふくろう
+le corbeau|カラス
+le pigeon|鳩
+le moineau|すずめ
+l'aigle|わし|m
+le pingouin|ペンギン
+le panda|パンダ
+le kangourou|カンガルー
+le hamster|ハムスター
+le poussin|ひよこ
+le chaton|子猫
+le chiot|子犬
+la grue|鶴
+le canard sauvage|鴨
+la chauve-souris|こうもり
+le criquet|バッタ
+la luciole|蛍
+#plant|🌱|植物・農|plant
+la plante|植物
+l'arbre|木|m
+la fleur|花
+la rose|バラ
+la tulipe|チューリップ
+le tournesol|ひまわり
+le lys|ゆり
+la marguerite|ひなぎく
+le cerisier|桜の木
+le pin|松
+le bambou|竹
+le chêne|オーク
+l'érable|かえで|m
+la branche|枝
+la racine|根
+la graine|種
+la tige|茎
+l'herbe|草|f
+la mousse|苔
+le buisson|茂み
+la haie|生け垣
+le théier|茶の木
+la feuille de thé|茶葉
+le jardin de thé|茶畑
+la rizière|田んぼ
+le blé|小麦
+l'orge|大麦|f
+le verger|果樹園
+la vigne|ぶどうの木
+la récolte|収穫
+l'engrais|肥料|m
+le compost|堆肥
+la pelle|スコップ
+le râteau|熊手
+la bêche|鋤
+l'arrosoir|じょうろ|m
+la brouette|手押し車
+le tracteur|トラクター
+la serre|温室
+le bourgeon|芽
+le pétale|花びら
+le bouquet|花束
+le cactus|サボテン
+la fougère|シダ
+l'orchidée|蘭|f
+le muguet|すずらん
+la lavande|ラベンダー
+le chrysanthème|菊
+le camélia|椿
+la mauvaise herbe|雑草
+le prunier|梅の木
+le saule|柳
+l'olivier|オリーブの木|m
+le pommier|りんごの木
+le sapin|もみの木
+#work|💼|仕事・お金|work
+le travail|仕事
+l'emploi|職|m
+le métier|職業
+la réunion|会議
+le rendez-vous|約束・予約
+le projet|プロジェクト
+le rapport|報告書
+le contrat|契約
+le salaire|給料
+la prime|ボーナス
+l'argent|お金|m
+le prix|値段・賞
+la monnaie|おつり・小銭
+le compte|口座
+le chèque|小切手
+le virement|振込
+l'impôt|税金|m
+la taxe|税
+le budget|予算
+la dépense|支出
+le revenu|収入
+le bénéfice|利益
+la perte|損失
+la dette|借金
+le crédit|ローン
+l'épargne|貯金|f
+la commande|注文
+la livraison|配達
+le produit|製品
+le service|サービス
+le fournisseur|仕入れ先
+la vente|販売
+l'achat|購入|m
+la publicité|広告
+la marque|ブランド
+le logo|ロゴ
+le site web|ウェブサイト
+le mail|メール
+le planning|スケジュール
+la pause|休憩
+les congés|休暇（仕事の）
+la retraite|退職・年金
+la carrière|キャリア
+l'entretien|面接|m
+le CV|履歴書
+la candidature|応募
+le stage|研修
+la formation|研修・教育
+la compétence|能力
+l'équipe|チーム|f
+le département|部署
+le siège|本社
+la succursale|支店
+la société|会社・社会
+la réussite|成功
+l'échec|失敗|m
+l'objectif|目標|m
+la stratégie|戦略
+la décision|決定
+la solution|解決策
+le problème|問題
+la présentation|発表
+la note|メモ・成績
+le dossier|書類一式
+la signature|署名
+le tampon|はんこ
+la photocopie|コピー
+le devis|見積書
+le paiement|支払い
+le remboursement|返金
+la réduction|割引
+les soldes|バーゲン
+le ticket de caisse|レシート
+la caisse|レジ
+la file d'attente|行列
+le chiffre d'affaires|売上
+le marché du travail|労働市場
+la clientèle|顧客
+le stock|在庫
+l'inventaire|棚卸し|m
+la boutique en ligne|オンラインショップ
+l'emballage|包装|m
+l'étiquette de prix|値札|f
+#school|📚|学校・勉強|school
+la classe|クラス・教室
+le cours|授業
+la leçon|レッスン
+l'exercice|練習問題|m
+les devoirs|宿題
+l'examen|試験|m
+le diplôme|学位・卒業証書
+le bac|バカロレア
+la matière|科目
+les maths|数学
+le français|フランス語
+l'anglais|英語|m
+le japonais|日本語
+le chinois|中国語
+l'histoire|歴史|f
+la géographie|地理
+les sciences|理科
+la physique|物理
+la chimie|化学
+la biologie|生物
+la musique|音楽
+le dessin|図画
+la philosophie|哲学
+l'économie|経済|f
+le droit|法律学
+la médecine|医学
+l'informatique|情報科学|f
+le vocabulaire|語彙
+la grammaire|文法
+la conjugaison|活用
+la prononciation|発音
+la phrase|文
+le mot|単語
+la question|質問
+la réponse|答え
+l'erreur|間違い|f
+la faute|ミス
+le tableau noir|黒板
+le manuel|教科書
+le cartable|ランドセル
+la trousse|筆箱
+la récréation|休み時間
+la cantine|学食
+la rentrée|新学期
+le semestre|学期
+la bourse|奨学金
+la thèse|論文
+le mémoire|卒業論文
+la conférence|講演
+le niveau|レベル
+le progrès|進歩
+le résumé|要約
+la traduction|翻訳
+la dictée|書き取り
+l'emploi du temps|時間割|m
+#hobby|🎾|趣味・スポーツ・文化|hobby
+le sport|スポーツ
+le football|サッカー
+le tennis|テニス
+le basket|バスケットボール
+le volley|バレーボール
+le rugby|ラグビー
+le golf|ゴルフ
+le ski|スキー
+la natation|水泳
+le cyclisme|自転車競技
+la course à pied|ランニング
+le marathon|マラソン
+le yoga|ヨガ
+la danse|ダンス
+la randonnée|ハイキング
+l'escalade|クライミング|f
+le surf|サーフィン
+la plongée|ダイビング
+la pêche à la ligne|釣り
+le judo|柔道
+le karaté|空手
+la boxe|ボクシング
+les échecs|チェス
+le jeu vidéo|テレビゲーム
+le jeu de société|ボードゲーム
+la lecture|読書
+l'écriture|書くこと|f
+la peinture|絵画
+la photographie|写真撮影
+le jardinage|園芸
+le bricolage|日曜大工
+la couture|裁縫
+le tricot|編み物
+la poterie|陶芸
+la calligraphie|書道
+la cérémonie du thé|茶道
+l'ikebana|生け花|m
+le chant|歌唱
+le piano|ピアノ
+la guitare|ギター
+le violon|バイオリン
+la flûte|フルート
+les percussions|打楽器
+le concert|コンサート
+le festival|フェスティバル
+le film|映画
+la série|ドラマ
+le documentaire|ドキュメンタリー
+le dessin animé|アニメ
+le manga|漫画
+le roman|小説
+la poésie|詩
+la pièce de théâtre|演劇
+l'opéra|オペラ|m
+l'exposition|展覧会|f
+la sculpture|彫刻
+l'architecture|建築|f
+la chanson|歌
+le spectacle|ショー
+le cirque|サーカス
+le karaoké|カラオケ
+la fête|パーティー
+le pique-nique|ピクニック
+la promenade|散歩
+la collection|コレクション
+le puzzle|パズル
+les cartes|トランプ
+le match|試合
+le joueur|選手
+le champion|チャンピオン
+la compétition|競技会
+la victoire|勝利
+la défaite|敗北
+le score|得点
+le but|ゴール
+le loisir|余暇
+le passe-temps|趣味
+la méditation|瞑想
+la musculation|筋トレ
+le ping-pong|卓球
+le baseball|野球
+le sumo|相撲
+l'art floral|フラワーアレンジメント|m
+#tech|📱|テクノロジー・メディア|tech
+internet|インターネット
+le réseau|ネットワーク
+le wifi|Wi-Fi
+le mot de passe|パスワード
+le compte en ligne|オンラインアカウント
+l'application|アプリ|f
+le logiciel|ソフト
+le programme|プログラム・番組
+le fichier|ファイル
+la vidéo|動画
+le podcast|ポッドキャスト
+les réseaux sociaux|SNS
+le message vocal|ボイスメッセージ
+la notification|通知
+le navigateur|ブラウザ
+le moteur de recherche|検索エンジン
+l'intelligence artificielle|人工知能|f
+le robot|ロボット
+la télécommande|リモコン
+l'appareil|機器|m
+le haut-parleur|スピーカー
+le micro|マイク
+le casque|ヘッドホン
+la caméra|ビデオカメラ
+la page|ページ
+le blog|ブログ
+la chaîne|チャンネル
+l'émission|番組|f
+les actualités|ニュース
+le journal télévisé|テレビのニュース
+la presse|報道
+l'article|記事|m
+l'abonnement|定期購読|m
+le téléchargement|ダウンロード
+la mise à jour|アップデート
+la carte SIM|SIMカード
+le code QR|QRコード
+le selfie|自撮り
+la capture d'écran|スクリーンショット
+le lien|リンク
+#idea|💭|気持ち・考え|idea
+l'amour|愛|m
+l'amitié|友情|f
+la joie|喜び
+le bonheur|幸せ
+la tristesse|悲しみ
+la colère|怒り
+la peur|恐れ
+la honte|恥
+l'étonnement|驚き|m
+l'espoir|希望|m
+le rêve|夢
+la confiance|信頼
+le respect|尊敬
+la patience|忍耐
+le courage|勇気
+la liberté|自由
+la paix|平和
+la guerre|戦争
+la vérité|真実
+le mensonge|うそ
+la justice|正義
+la vie|人生
+la mort|死
+la naissance|誕生
+la jeunesse|青春
+la vieillesse|老年
+le temps libre|自由時間
+la chance|運
+le hasard|偶然
+le destin|運命
+le sens|意味
+l'idée|考え|f
+l'opinion|意見|f
+le conseil|助言
+le choix|選択
+la raison|理由
+la cause|原因
+la conséquence|結果・影響
+le résultat|結果
+le changement|変化
+la différence|違い
+la relation|関係
+le lien d'amitié|友人関係
+la culture|文化
+la tradition|伝統
+la religion|宗教
+la politique|政治
+l'environnement|環境|m
+la pollution|汚染
+l'énergie|エネルギー|f
+la crise|危機
+l'art|芸術|m
+la beauté|美しさ
+la simplicité|簡素さ
+la sagesse|知恵
+la connaissance|知識
+l'expérience|経験|f
+l'habitude|習慣|f
+la loi|法律
+le devoir|義務
+la responsabilité|責任
+la promesse|約束
+le secret|秘密
+le plaisir|楽しみ
+le goût|味・好み
+l'odeur|におい|f
+le bruit|音・騒音
+le silence|静けさ
+la voix|声
+le langage|言葉遣い
+le message|メッセージ
+la nouvelle|知らせ
+l'information|情報|f
+le sujet|話題
+l'avantage|利点|m
+l'inconvénient|欠点|m
+la qualité|長所・質
+le défaut|短所
+l'esprit|精神|m
+l'âme|魂|f
+le corps|体
+la pensée|思考
+la mémoire|記憶
+l'imagination|想像力|f
+la curiosité|好奇心
+la gentillesse|親切
+la politesse|礼儀
+la solitude|孤独
+la nostalgie|郷愁
+l'harmonie|調和|f
+la gratitude|感謝
+la passion|情熱
+l'ennui|退屈|m
+la motivation|やる気
+le doute|疑い
+la surprise|サプライズ
+le souci|心配事
+la volonté|意志
+le hasard heureux|幸運な偶然
+#adjstate|🙂|気分・性格（形容詞）|adj
+content|うれしい
+heureux|幸せな
+triste|悲しい
+fatigué|疲れた||疲れる|疲れていた
+malade|病気の||病気になる|病気だった
+occupé|忙しい
+libre|暇な
+calme|落ち着いた||落ち着く|落ち着いていた
+nerveux|緊張した||緊張する|緊張していた
+stressé|ストレスがたまった||ストレスがたまる|ストレスがたまっていた
+inquiet|心配な
+surpris|驚いた||驚く|驚いていた
+déçu|がっかりした||がっかりする|がっかりしていた
+fier|誇らしい
+jaloux|やきもち焼きの||やきもちを焼く|やきもちを焼いていた
+gentil|親切な
+sympa|感じがいい
+méchant|意地悪な
+poli|礼儀正しい
+timide|内気な
+drôle|おもしろい
+sérieux|まじめな
+intelligent|頭がいい
+patient|我慢強い
+généreux|気前がいい
+paresseux|怠惰な
+travailleur|勤勉な
+curieux|好奇心旺盛な
+courageux|勇敢な
+prudent|慎重な
+honnête|正直な
+discret|控えめな
+bavard|おしゃべりな
+grand|背が高い
+petit|背が低い
+gros|太った||太る|太っていた
+mince|ほっそりした||ほっそりする|ほっそりしていた
+beau|かっこいい
+jeune|若い
+vieux|年をとった||年をとる|年をとっていた
+fort|強い
+faible|弱い
+riche|裕福な
+pauvre|貧しい
+célèbre|有名な
+seul|孤独な
+prêt|準備ができた||準備ができる|準備ができていた
+sûr|確信した||確信する|確信していた
+ravi|大喜びの||大喜びする|大喜びしていた
+amoureux|恋をしている||恋をする|恋をしていた
+marié|結婚している||結婚する|結婚していた
+célibataire|独身の||独身になる|独身だった
+mouillé|濡れた||濡れる|濡れていた
+perdu|道に迷った||道に迷う|道に迷っていた
+réveillé|目が覚めた||目が覚める|目が覚めていた
+pressé|急いでいる||急ぐ|急いでいた
+motivé|やる気がある||やる気が出る|やる気があった
+énervé|いらいらした||いらいらする|いらいらしていた
+détendu|リラックスした||リラックスする|リラックスしていた
+satisfait|満足な
+fâché|怒った||怒る|怒っていた
+choqué|ショックを受けた||ショックを受ける|ショックを受けていた
+ému|感動した||感動する|感動していた
+gêné|気まずい
+optimiste|楽観的な
+pessimiste|悲観的な
+présent|出席している||出席する|出席していた
+absent|欠席の||欠席する|欠席していた
+disponible|手が空いている||手が空く|手が空いていた
+capable|有能な
+indépendant|自立した||自立する|自立していた
+organisé|きちんとした||きちんとする|きちんとしていた
+sportif|スポーツ好きな
+bronzé|日焼けした||日焼けする|日焼けしていた
+enrhumé|風邪気味の||風邪気味になる|風邪気味だった
+blessé|けがをした||けがをする|けがをしていた
+guéri|治った||治る|治っていた
+ivre|酔った||酔う|酔っていた
+affamé|空腹な
+sage|おとなしい
+gourmand|食いしん坊な
+têtu|頑固な
+#adjdesc|🎨|色・形・様子（形容詞）|none
+rouge|赤い
+bleu|青い
+vert|緑の
+jaune|黄色い
+noir|黒い
+blanc|白い
+gris|灰色の
+rose|ピンクの
+violet|紫の
+marron|茶色の
+beige|ベージュの
+doré|金色の
+argenté|銀色の
+clair|明るい・薄い
+foncé|濃い
+nouveau|新しい
+ancien|古い・元の
+moderne|現代的な
+traditionnel|伝統的な
+long|長い
+court|短い
+large|幅の広い
+étroit|狭い
+haut|高い
+bas|低い
+lourd|重い
+léger|軽い
+dur|硬い
+mou|柔らかい
+doux|柔らかい・穏やかな
+chaud|熱い・暖かい
+froid|冷たい
+tiède|ぬるい
+sec|乾いた
+humide|湿った
+plein|いっぱいの
+vide|空の
+ouvert|開いた
+fermé|閉じた
+cher|高価な
+bon marché|安い
+gratuit|無料の
+bon|おいしい・良い
+mauvais|悪い・まずい
+meilleur|より良い
+délicieux|とてもおいしい
+sucré|甘い
+salé|しょっぱい
+amer|苦い
+acide|酸っぱい
+épicé|辛い
+frais|新鮮な・涼しい
+cru|生の
+cuit|火の通った
+bio|有機の
+naturel|自然な
+facile|簡単な
+difficile|難しい
+simple|シンプルな
+compliqué|複雑な
+important|重要な
+possible|可能な
+impossible|不可能な
+nécessaire|必要な
+utile|役に立つ
+inutile|役に立たない
+intéressant|面白い
+ennuyeux|退屈な
+amusant|楽しい
+agréable|心地よい
+désagréable|不快な
+magnifique|すばらしい
+superbe|見事な
+horrible|ひどい
+bizarre|変な
+normal|普通の
+spécial|特別な
+différent|違う
+pareil|同じような
+même|同じ
+autre|他の
+premier|最初の
+dernier|最後の
+prochain|次の
+entier|全体の
+vrai|本当の
+faux|偽の
+juste|正しい
+exact|正確な
+propre|清潔な
+sale|汚い
+bruyant|うるさい
+silencieux|静かな
+sombre|暗い
+lumineux|明るい
+ensoleillé|晴れた
+nuageux|曇った
+pluvieux|雨の多い
+énorme|巨大な
+minuscule|とても小さい
+rond|丸い
+carré|四角い
+pointu|とがった
+plat|平らな
+profond|深い
+épais|厚い
+fin|薄い
+lisse|なめらかな
+proche|近い
+lointain|遠い
+public|公共の
+privé|私的な
+local|地元の
+national|国の
+international|国際的な
+français|フランスの
+japonais|日本の
+populaire|人気のある
+rare|珍しい
+fréquent|よくある
+typique|典型的な
+parfait|完璧な
+cassé|壊れた
+âgé|年配の
+mignon|かわいい
+laid|醜い
+élégant|上品な
+chic|おしゃれな
+confortable|快適な
+pratique|便利な
+dangereux|危険な
+sain|健康的な
+vivant|生きている
+réel|現実の
+tranquille|静かな・穏やかな
+joli|きれいな
+vite|速く
+lent|遅い
+rapide|速い
+#adv|🔗|よく使う小さな言葉|none
+très|とても
+trop|〜すぎる
+assez|十分に
+beaucoup|たくさん
+peu|少し
+un peu|少し
+plus|もっと
+moins|より少なく
+aussi|〜も
+bien|よく
+mal|悪く
+lentement|ゆっくり
+ensemble|一緒に
+seulement|〜だけ
+surtout|特に
+vraiment|本当に
+peut-être|たぶん
+sûrement|きっと
+presque|ほとんど
+environ|約
+exactement|ちょうど
+ici|ここ
+là|そこ
+là-bas|あそこ
+partout|どこでも
+ailleurs|よそで
+dedans|中に
+dehors|外に
+devant|前に
+derrière|後ろに
+en haut|上に
+en bas|下に
+à côté|隣に
+loin|遠くに
+près|近くに
+tout droit|まっすぐ
+à gauche|左に
+à droite|右に
+et|そして
+ou|または
+mais|しかし
+donc|だから
+parce que|なぜなら
+alors|それでは
+ensuite|それから
+puis|次に
+enfin|ついに
+d'abord|まず
+si|もし
+quand|〜とき・いつ
+comme|〜のように
+pourtant|それでも
+cependant|しかしながら
+sinon|さもないと
+avec|〜と一緒に
+sans|〜なしで
+pour|〜のために
+chez|〜の家で
+entre|〜の間に
+sous|〜の下に
+sur|〜の上に
+dans|〜の中に
+vers|〜の方へ
+contre|〜に反対して
+selon|〜によれば
+grâce à|〜のおかげで
+à cause de|〜のせいで
+malgré|〜にもかかわらず
+avant|前に
+après|後で
+jusqu'à|〜まで
+qui|誰
+que|何
+quoi|何
+où|どこ
+comment|どうやって
+pourquoi|なぜ
+combien|いくら・いくつ
+quel|どの
+rien|何も〜ない
+personne|誰も〜ない
+quelque chose|何か
+quelqu'un|誰か
+chaque|それぞれの
+tout|すべて
+plusieurs|いくつかの
+certains|一部の
+en fait|実は
+d'ailleurs|ところで
+par exemple|たとえば
+au moins|少なくとも
+en tout cas|とにかく
+quand même|それでも
+de toute façon|どっちみち
+par contre|その代わり
+heureusement|幸い
+malheureusement|残念ながら
+évidemment|もちろん
+probablement|おそらく
+finalement|結局
+justement|まさに
+plutôt|むしろ
+vachement|すごく（くだけて）
+c'est-à-dire|つまり
+à peu près|だいたい
+tout à fait|まったくその通り
+en même temps|同時に
+#num|🔢|数|none
+zéro|0
+un|1
+deux|2
+trois|3
+quatre|4
+cinq|5
+six|6
+sept|7
+huit|8
+neuf|9
+dix|10
+onze|11
+douze|12
+treize|13
+quatorze|14
+quinze|15
+seize|16
+dix-sept|17
+dix-huit|18
+dix-neuf|19
+vingt|20
+trente|30
+quarante|40
+cinquante|50
+soixante|60
+soixante-dix|70
+quatre-vingts|80
+quatre-vingt-dix|90
+cent|100
+mille|1000
+un million|100万
+la moitié|半分
+le quart|4分の1
+la douzaine|1ダース
+le premier|1番目
+le deuxième|2番目
+le troisième|3番目
+#country|🌍|国・都市|none
+la France|フランス
+le Japon|日本
+la Chine|中国
+la Corée|韓国
+l'Italie|イタリア|f
+l'Espagne|スペイン|f
+l'Allemagne|ドイツ|f
+l'Angleterre|イギリス|f
+la Belgique|ベルギー
+la Suisse|スイス
+les États-Unis|アメリカ
+le Canada|カナダ
+le Mexique|メキシコ
+le Brésil|ブラジル
+l'Australie|オーストラリア|f
+l'Inde|インド|f
+la Russie|ロシア
+l'Europe|ヨーロッパ|f
+l'Asie|アジア|f
+l'Afrique|アフリカ|f
+l'Amérique|アメリカ大陸|f
+Paris|パリ
+Lyon|リヨン
+Marseille|マルセイユ
+Bordeaux|ボルドー
+Nice|ニース
+Tokyo|東京
+Kyoto|京都
+Osaka|大阪
+Nara|奈良
+#verb2|🧩|もっと動詞|none
+accompagner|同行する
+ajouter|加える
+améliorer|改善する
+annoncer|知らせる
+apercevoir|見かける
+appuyer|押す
+attacher|結ぶ
+augmenter|増やす
+avancer|進む
+baisser|下げる
+bouger|動く
+briller|輝く
+brûler|燃やす
+cacher|隠す
+calmer|落ち着かせる
+casser la croûte|軽く食べる
+charger|積む・充電する
+chauffer|温める
+chuchoter|ささやく
+citer|引用する
+coller|貼る
+combattre|戦う
+commenter|コメントする
+comparer|比べる
+compléter|完成させる
+compter sur|頼りにする
+conseiller|助言する
+consommer|消費する
+construire un projet|計画を練る
+contacter|連絡する
+convaincre|説得する
+copier|コピーする
+coudre|縫う
+couvrir|覆う
+craindre|恐れる
+créer|創る
+croiser|すれ違う
+cultiver|栽培する
+débarrasser|片付ける
+déchirer|破る
+décorer|飾る
+décrire|描写する
+défendre|守る
+déjeuner|昼食をとる
+demander pardon|謝る
+démarrer|始動する
+dépendre|〜次第である
+déposer|置いていく
+déranger|邪魔する
+désirer|望む
+dessiner un plan|設計する
+détester|嫌う
+développer|発展させる
+deviner|当てる
+dîner|夕食をとる
+diminuer|減らす
+disparaître|消える
+distribuer|配る
+divorcer|離婚する
+douter|疑う
+durer|続く
+échanger|交換する
+éclairer|照らす
+écraser|つぶす
+effacer|消す
+élever|育てる
+embrasser|キスする・抱きしめる
+empêcher|妨げる
+employer|雇う・使う
+encourager|励ます
+endormir|眠らせる
+enlever|取り除く
+ennuyer|退屈させる
+entretenir|手入れする
+envisager|検討する
+épeler|つづりを言う
+épouser|結婚する
+espérer|期待する
+éternuer|くしゃみする
+étendre|広げる
+éviter|避ける
+exagérer|大げさに言う
+examiner|調べる
+exister|存在する
+expédier|発送する
+exprimer|表現する
+fabriquer|製造する
+fâcher|怒らせる
+faillir|危うく〜しそうになる
+fixer|固定する
+fondre|溶ける
+frapper|たたく
+freiner|ブレーキをかける
+frotter|こする
+glisser|滑る
+goûter au thé|お茶を味わう
+grimper|よじ登る
+habituer|慣れさせる
+ignorer|知らない・無視する
+imaginer|想像する
+imiter|まねる
+indiquer|示す
+informer|知らせる
+insister|強調する
+interdire|禁止する
+intéresser|興味を持たせる
+inventer|発明する
+jeter|捨てる
+joindre|連絡をとる
+juger|判断する
+lâcher|放す
+lancer|投げる
+libérer|解放する
+lier|結びつける
+livrer|配達する
+loger|泊める
+lutter|闘う
+manquer|欠ける・恋しい
+mélanger|混ぜる
+mentir|うそをつく
+mériter|値する
+mesurer|測る
+mélanger les cartes|カードを切る
+moquer|からかう
+multiplier|掛ける
+négliger|おろそかにする
+nourrir|食べさせる
+obéir|従う
+obliger|強いる
+observer|観察する
+obtenir|得る
+oser|あえて〜する
+partager un repas|食事を共にする
+participer|参加する
+peser|量る
+pincer|つねる
+plaire|気に入られる
+plier|たたむ
+pousser|押す
+pratiquer|実践する
+prévenir|予告する
+prévoir|予定する
+produire|生産する
+profiter|楽しむ・利用する
+progresser|上達する
+protéger|守る
+prouver|証明する
+publier|出版する
+punir|罰する
+quitter des yeux|目を離す
+ramasser|拾う
+ranger ses affaires|持ち物を片付ける
+rapporter|持ち帰る
+rassurer|安心させる
+réaliser|実現する
+recevoir des invités|客を迎える
+reconnaître|見分ける・認める
+recycler|リサイクルする
+regretter|後悔する
+rejoindre|合流する
+remarquer|気づく
+remplacer|取り替える
+renseigner|情報を与える
+renverser|こぼす
+répandre|広める
+repasser|アイロンをかける
+représenter|表す
+résoudre|解決する
+respecter|尊重する
+respirer|呼吸する
+ressembler|似ている
+retenir|覚える・引き止める
+réunir|集める
+révéler|明かす
+réviser|復習する
+saluer|あいさつする
+sauter|跳ぶ
+sauver|救う
+secouer|振る
+sembler|〜のように見える
+séparer|分ける
+serrer|握る・締める
+siffler|口笛を吹く
+soigner|手当てする
+sonner|鳴る
+souffrir|苦しむ
+souhaiter|願う
+souligner|強調する
+soutenir|支える
+supporter|耐える
+supposer|推測する
+surveiller|見張る
+taper|打つ
+téléphoner à un ami|友達に電話する
+terminer|終える
+tirer|引く
+toucher|触る
+tousser|咳をする
+transporter|運ぶ
+trembler|震える
+tricher|ずるをする
+tuer|殺す
+unir|結ぶ
+vérifier un compte|口座を確認する
+verser|注ぐ
+viser|狙う
+voler|飛ぶ・盗む
+voter|投票する
+abandonner|あきらめる
+accueillir|迎える
+acquérir|手に入れる
+admirer|感嘆する
+adopter|採用する・養子にする
+affirmer|断言する
+agir|行動する
+aimer bien|けっこう好き
+analyser|分析する
+apparaître|現れる
+applaudir|拍手する
+apprécier|高く評価する
+approcher|近づける
+arracher|引き抜く
+arranger|整える
+assister|出席する
+assurer|保証する
+atteindre|到達する
+avaler|飲み込む
+avertir|警告する
+avouer|白状する
+bâiller|あくびする
+balayer|掃く
+battre|打つ・勝つ
+bavarder|おしゃべりする
+bénir|祝福する
+blesser|傷つける
+bloquer|ふさぐ
+boucher|ふさぐ
+bouillir|沸く
+bricoler|日曜大工をする
+bronzer|日焼けする
+caresser|なでる
+célébrer|祝う
+choquer|ショックを与える
+classer|分類する
+cligner|まばたきする
+cocher|チェックを入れる
+coiffer|髪を整える
+collectionner|収集する
+communiquer|伝える
+composer|作曲する・構成する
+comprendre mal|誤解する
+concentrer|集中させる
+conclure|結論を出す
+confier|任せる
+congeler|冷凍する
+connecter|接続する
+conserver|保存する
+consulter|相談する・調べる
+contenir|含む
+contrôler|管理する
+corriger un texte|文章を直す
+courir après|追いかける
+cracher|吐く
+creuser|掘る
+crever|パンクする
+critiquer|批判する
+cuire|焼く・煮る
+danser le tango|タンゴを踊る
+débrancher|コンセントを抜く
+découper|切り抜く
+décrocher|受話器を取る
+dédier|捧げる
+défaire|ほどく
+dégoûter|うんざりさせる
+déguster|味わう
+délivrer|発行する
+demeurer|とどまる
+dénoncer|告発する
+dépasser|追い越す
+déplacer|移動させる
+désobéir|従わない
+dessiner une carte|地図を描く
+détruire|破壊する
+diriger|指揮する
+discuter le prix|値引き交渉する
+disputer|けんかする
+dissoudre|溶かす
+doubler|倍にする・追い越す
+dresser|立てる
+ébouillanter|湯通しする
+écarter|遠ざける
+éclater|破裂する
+économiser l'énergie|エネルギーを節約する
+écrire à la main|手書きする
+égaler|等しい
+élire|選出する
+éloigner|遠ざける
+emballer|包む
+embaucher|雇う
+émouvoir|感動させる
+emporter|持ち去る
+emprisonner|投獄する
+enchanter|魅了する
+enfermer|閉じ込める
+enfoncer|打ち込む
+engager|雇う・始める
+enrichir|豊かにする
+enseigner le thé|お茶を教える
+entendre parler|うわさを聞く
+enterrer|埋める
+entourer|囲む
+envahir|侵入する
+envoler|飛び立たせる
+estimer|評価する
+étonner|驚かせる
+étouffer|息苦しくさせる
+évaluer|評価する
+éveiller|目覚めさせる
+évoluer|進化する
+exciter|興奮させる
+exiger|要求する
+expliquer encore|もう一度説明する
+exploiter|活用する
+exposer|展示する
+fabriquer du thé|お茶を製造する
+faciliter|容易にする
+fatiguer|疲れさせる
+feuilleter|ぱらぱらめくる
+fleurir|花が咲く
+flotter|浮かぶ
+fonctionner|機能する
+fonder|設立する
+forcer|強制する
+former|形成する・養成する
+fournir|供給する
+franchir|越える
+gâcher|台無しにする
+garantir|保証する
+geler|凍る
+gérer|管理する
+gonfler|ふくらませる
+gratter|かく
+griller|焼く
+guider|案内する
+héberger|泊める
+hurler|わめく
+illuminer|照らす
+imposer|課す
+imprimer un billet|チケットを印刷する
+incliner|傾ける
+inclure|含める
+influencer|影響を与える
+inonder|水浸しにする
+inscrire|登録する
+inspirer|刺激を与える
+instruire|教育する
+interroger|質問する
+interrompre|中断する
+introduire|導入する
+inviter à danser|ダンスに誘う
+isoler|孤立させる
+jardiner|庭いじりをする
+jurer|誓う
+klaxonner|クラクションを鳴らす
+lécher|なめる
+lever la main|手を挙げる
+limiter|制限する
+louer une chambre|部屋を借りる
+maintenir|維持する
+maîtriser|習得する
+manifester|示す・デモをする
+maquiller|化粧する
+marquer|記す・得点する
+méditer|瞑想する
+menacer|脅す
+mentionner|言及する
+mépriser|軽蔑する
+modifier|修正する
+monter une tente|テントを張る
+mordre|かむ
+moudre|挽く
+murmurer|つぶやく
+naviguer|航海する・ネットを見る
+nettoyer à fond|大掃除する
+nommer|名付ける
+noter une idée|アイデアをメモする
+noyer|おぼれさせる
+numéroter|番号をつける
+offenser|侮辱する
+omettre|省く
+opérer|手術する
+opposer|対立させる
+ordonner|命令する
+organiser une fête|パーティーを開く
+orienter|方向づける
+pardonner|許す
+parier|賭ける
+parcourir|歩き回る
+partir en voyage|旅に出る
+passionner|夢中にさせる
+patienter|辛抱して待つ
+pêcher|釣りをする
+peigner|髪をとかす
+pencher|傾く
+percer|穴をあける
+perfectionner|完璧にする
+permettre|許可する
+persuader|説得する
+photographier|写真を撮る
+piloter|操縦する
+placer|置く
+plaisanter|冗談を言う
+pleuvoir des cordes|土砂降りになる
+plonger|潜る
+polir|磨く
+porter plainte|訴える
+posséder|所有する
+poursuivre|追跡する・続ける
+précéder|先行する
+préciser|明確にする
+prédire|予言する
+présenter|紹介する
+presser|絞る・急がせる
+prétendre|主張する
+prier|祈る
+priver|奪う
+procurer|調達する
+programmer|プログラムする
+prolonger|延長する
+promener le chien|犬の散歩をする
+prononcer|発音する
+proposer|提案する
+provoquer|引き起こす
+qualifier|形容する
+questionner|質問する
+raccrocher|電話を切る
+rafraîchir|冷やす
+rajouter|付け足す
+ralentir|減速する
+rallumer|再点火する
+ramener|連れ戻す
+ranimer|蘇生させる
+rassembler|集める
+rater le train|電車に乗り遅れる
+rayer|線を引いて消す
+réagir|反応する
+recevoir un prix|賞をもらう
+réchauffer|温め直す
+réclamer|要求する
+recommencer|やり直す
+réconcilier|仲直りさせる
+reculer|後退する
+redescendre|再び降りる
+réduire|減らす
+réfléchir bien|よく考える
+refroidir|冷ます
+régler|支払う・調整する
+rembourser|払い戻す
+remonter|再び上がる
+remplir un formulaire|書類に記入する
+remuer|かき混ぜる
+renoncer|あきらめる
+renouveler|更新する
+rentrer chez soi|帰宅する
+renvoyer|送り返す・解雇する
+répartir|分配する
+repeindre|塗り直す
+replier|折りたたむ
+reporter|延期する
+reprocher|非難する
+réserver une table|席を予約する
+résister|抵抗する
+ressentir|感じる
+rester debout|立ったままでいる
+retarder|遅らせる
+retirer|引き出す
+réussir sa vie|人生で成功する
+revoir|再会する・見直す
+rouler|転がる・走行する
+ruiner|破産させる
+saisir|つかむ
+salir|汚す
+satisfaire|満足させる
+sécher|乾かす
+semer|種をまく
+sentir bon|いい香りがする
+signaler|知らせる
+simplifier|単純化する
+skier|スキーをする
+soulever|持ち上げる
+soupirer|ため息をつく
+sourire à la vie|人生に微笑む
+stationner|駐車する
+subir|受ける・被る
+succéder|後を継ぐ
+suggérer|提案する
+suivre un cours|授業を受ける
+surprendre|驚かす
+survivre|生き延びる
+tailler|切りそろえる
+tenter|試みる
+tirer au sort|くじを引く
+tisser|織る
+tolérer|大目に見る
+tondre|刈る
+tordre|ねじる
+tracer|描く
+traîner|ぐずぐずする・引きずる
+traiter|扱う
+transformer|変える
+travailler dur|一生懸命働く
+tremper|浸す
+trier|分別する
+tromper la faim|空腹をまぎらす
+trouver le temps|時間を見つける
+utiliser bien|うまく使う
+vaincre|打ち負かす
+valoir|価値がある
+varier|変化をつける
+veiller|夜更かしする・見守る
+vendre en ligne|ネットで売る
+venger|仇を討つ
+vibrer|振動する
+vider|空にする
+vieillir|年をとる
+visiter un ami|友達を訪ねる
+vivre ensemble|一緒に暮らす
+voir clair|はっきりわかる
+vomir|吐く
+voyager léger|身軽に旅する
+zapper|チャンネルを変える
+#expr|🗣️|会話フレーズ|none
+je voudrais|〜が欲しいのですが
+j'ai besoin de|〜が必要です
+il y a|〜がある
+il n'y a pas de|〜がない
+c'est combien|いくらですか
+ça coûte combien|これはいくら？
+l'addition, s'il vous plaît|お会計をお願いします
+je peux|〜してもいいですか
+on y va|行こう
+on se voit|会おうよ
+à plus tard|また後でね
+quoi de neuf|最近どう？
+ça te dit|どう？（誘い）
+pourquoi pas|いいね・なぜだめ？
+ça me plaît|気に入った
+j'en ai marre|もううんざり
+je m'en fiche|どうでもいい
+j'ai hâte|待ちきれない
+ça vaut le coup|やる価値がある
+c'est pas vrai|うそでしょ
+c'est vrai|本当だ
+tu as raison|君の言う通り
+j'ai tort|私が間違っている
+je suis d'accord|賛成です
+je ne suis pas d'accord|反対です
+à mon avis|私の意見では
+je pense que|〜だと思う
+je crois que|〜だと思う
+j'espère que|〜だといいな
+il faut que|〜しなければならない
+ça fait longtemps|久しぶり
+ça fait du bien|気持ちいい
+ça sent bon|いい匂い
+c'est délicieux|とてもおいしい
+c'est bon|おいしい・大丈夫
+c'est cher|高い
+c'est pas cher|安い
+il fait beau|天気がいい
+il fait chaud|暑い
+il fait froid|寒い
+il fait mauvais|天気が悪い
+j'ai faim|お腹が空いた
+j'ai soif|喉が渇いた
+j'ai sommeil|眠い
+j'ai chaud|暑い（体が）
+j'ai froid|寒い（体が）
+j'ai peur|怖い
+j'ai mal|痛い
+je suis en retard|遅れています
+je suis prêt|準備できた
+je reviens|すぐ戻る
+j'arrive|今行く
+attends|待って
+vas-y|どうぞ・行って
+viens|おいで
+regarde|見て
+écoute|聞いて
+dis donc|ねえ・おい
+tiens|ほら・あれ
+bref|要するに
+enfin bref|まあとにかく
+ben|えーと
+euh|えー
+du coup|それで・だから
+en plus|しかも
+à la fois|同時に
+pas trop|あまり〜ない
+ça arrive|よくあることだ
+c'est la vie|人生そんなもの
+on verra|様子を見よう
+pas question|とんでもない
+n'importe quoi|でたらめ
+ça ne fait rien|気にしないで
+je t'en prie|どういたしまして（親しい人に）
+avec joie|喜んで
+bonne chance|幸運を
+bonne fête|おめでとう（祝日・名の日）
+bon rétablissement|お大事に
+à table|ごはんですよ
+fais attention|気をつけて
+dépêche-toi|急いで
+calme-toi|落ち着いて
+assieds-toi|座って
+lève-toi|起きて
+tais-toi|黙って
+c'est parti|さあ始めよう
+c'est fini|終わった
+ça y est|できた・ついに
+pas grave|大丈夫
+ça suffit|もう十分
+j'adore ça|大好き
+moi aussi|私も
+moi non plus|私も〜ない
+toi aussi|君もね
+et toi|君は？
+et vous|あなたは？
+comment ça va|元気ですか
+comment tu t'appelles|名前は？
+je m'appelle|私の名前は
+j'habite à|〜に住んでいます
+je viens du Japon|日本から来ました
+je travaille dans|〜で働いています
+qu'est-ce que c'est|これは何？
+qu'est-ce qui se passe|どうしたの？
+où sont les toilettes|トイレはどこ？
+à quelle heure|何時に
+depuis quand|いつから
+pour combien de temps|どのくらいの期間
+#kitchen|🍳|料理・台所|none
+la recette|レシピ
+l'ingrédient|材料|m
+la cuisson|加熱調理
+la poêle à frire|揚げ鍋
+le mixeur|ミキサー
+le fouet|泡立て器
+la planche à découper|まな板
+le saladier|サラダボウル
+la louche|おたま
+la passoire|ざる
+le moule|型
+le rouleau à pâtisserie|めん棒
+le bouillon|だし・スープストック
+la pâte|生地
+la pâte à pizza|ピザ生地
+le pain grillé|トースト
+la purée|ピュレ
+le gratin|グラタン
+la sauce tomate|トマトソース
+la vinaigrette|ドレッシング
+le riz cantonais|チャーハン
+les boulettes|肉団子
+la brochette|串焼き
+le grill|グリル
+le barbecue|バーベキュー
+la tranche|一切れ
+le morceau|かけら
+la cuillère à soupe|大さじ
+la cuillère à café|小さじ
+la pincée|ひとつまみ
+le litre|リットル
+le kilo|キロ
+le gramme|グラム
+la portion|一人前
+la boîte à bento|弁当箱
+le thé matcha|抹茶
+les feuilles de thé|茶葉
+la boulette de riz|おにぎり（ライスボール）
+le gyoza|餃子
+le udon|うどん
+le soba|そば
+le miso soupe|味噌汁
+le curry|カレー
+le pain perdu|フレンチトースト
+le cake|パウンドケーキ
+la pomme de terre au four|ベイクドポテト
+le fromage blanc|フロマージュ・ブラン
+la crème fraîche|サワークリーム
+le beurre salé|有塩バター
+le sucre roux|きび砂糖
+#city|🏪|町のくらし|place
+la boutique de souvenirs|お土産屋
+le fleuriste|花屋
+le kiosque|売店
+le distributeur|自動販売機・ATM
+le distributeur de billets|ATM
+le guichet automatique|自動券売機
+la cabine téléphonique|電話ボックス
+la fontaine|噴水
+la statue|像
+le jardin public|公園
+le terrain de jeux|遊び場
+l'aire de jeux|子どもの遊び場|f
+le chantier|工事現場
+le passage piéton|横断歩道
+le feu rouge|赤信号
+la piste cyclable|自転車道
+le quai de la gare|駅のホーム
+le marché de Noël|クリスマスマーケット
+la foire|見本市・縁日
+la galerie|ギャラリー
+la salle des fêtes|公民館
+le club de sport|スポーツクラブ
+le bureau de poste|郵便局（窓口）
+le cabinet dentaire|歯科医院
+la maison de retraite|老人ホーム
+la station de ski|スキー場
+le refuge|山小屋
+le belvédère|展望台
+le sentier|小道
+le chemin|道
+l'impasse|行き止まり|f
+le rond-point|ロータリー
+la caserne de pompiers|消防署
+la prison|刑務所
+le magasin bio|オーガニックショップ
+la cave à vin|ワインショップ
+la quincaillerie|金物屋
+la papeterie|文房具店
+la droguerie|日用品店
+le grand magasin|デパート
+#life|🧺|暮らし・家事|none
+le ménage|掃除・家事
+la vaisselle|食器・皿洗い
+le linge|洗濯物
+la lessive du dimanche|日曜の洗濯
+les courses|買い物
+la liste de courses|買い物リスト
+les déchets|ごみ
+le tri des déchets|ごみの分別
+le recyclage|リサイクル
+la facture d'électricité|電気代の請求書
+le gaz|ガス
+l'électricité|電気|f
+l'eau chaude|お湯|f
+le loyer|家賃
+le déménagement|引っ越し
+les voisins|近所の人たち
+la clé de secours|合鍵
+le colis en retard|遅れている荷物
+la réparation|修理
+la panne|故障
+la fuite d'eau|水漏れ
+le chauffe-eau|給湯器
+le bricoleur|器用な人
+la tondeuse|芝刈り機
+le sac poubelle|ごみ袋
+le panier à linge|洗濯かご
+le séchoir|物干し
+la pince à linge|洗濯ばさみ
+le cintre|ハンガー
+la nappe|テーブルクロス
+le set de table|ランチョンマット
+le dessous-de-plat|鍋敷き
+le torchon|ふきん
+le tablier de cuisine|料理用エプロン
+le réveil-matin|目覚まし
+la routine|日課
+la sieste|昼寝
+le bain|お風呂
+la douche du matin|朝のシャワー
+le petit déjeuner en famille|家族の朝ごはん
+#society|🏛️|社会・ニュース|idea
+la société civile|市民社会
+le gouvernement|政府
+le président|大統領
+le ministre|大臣
+le maire|市長
+l'élection|選挙|f
+le vote|投票
+le parti|政党
+la loi sur le travail|労働法
+la manifestation|デモ
+la grève|ストライキ
+la population|人口
+la ville natale|故郷
+la génération|世代
+la jeunesse d'aujourd'hui|今の若者
+la retraite anticipée|早期退職
+le chômage|失業
+l'inflation|インフレ|f
+la croissance|成長
+la mondialisation|グローバル化
+le commerce|商業
+l'agriculture|農業|f
+l'industrie|産業|f
+le tourisme|観光業
+l'éducation|教育|f
+la santé publique|公衆衛生
+la sécurité|安全
+la violence|暴力
+le crime|犯罪
+la police|警察
+la justice sociale|社会正義
+l'égalité|平等|f
+la diversité|多様性
+l'immigration|移民（現象）|f
+le changement climatique|気候変動
+le réchauffement|温暖化
+la sécheresse|干ばつ
+la biodiversité|生物多様性
+le développement durable|持続可能な発展
+l'énergie solaire|太陽エネルギー|f
+le nucléaire|原子力
+la science|科学
+la recherche|研究
+la découverte|発見
+l'invention|発明|f
+la technologie|技術
+le progrès technique|技術の進歩
+l'histoire de France|フランスの歴史|f
+la révolution|革命
+le patrimoine|遺産

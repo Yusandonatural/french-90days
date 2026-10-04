@@ -1,0 +1,18 @@
+/* 聞く: player. */
+.k-pr{--c:var(--ink);--cs:color-mix(in srgb,var(--ink) 10%,var(--surface))}
+.pl-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px;color:var(--muted)}
+.pl-verb{font-family:'Literata',Georgia,serif;font-size:clamp(30px,9vw,44px);font-weight:600;line-height:1.1;margin:6px 0 2px}
+.pl-gloss{color:var(--muted);font-size:14px;margin:0 0 12px}
+.pl-lines{display:grid;gap:8px}
+.pl-line{display:block;width:100%;text-align:left;border:2px solid var(--line);background:var(--bg);border-radius:var(--r-btn);padding:10px 14px}
+.pl-line .fr{display:block;font-size:19px;color:var(--c);font-weight:600}
+.pl-line .ja{display:block;font-size:13px;color:var(--muted);line-height:1.4}
+.pl-line.on{border-color:var(--c);background:var(--cs)}
+.pl-line.rare{opacity:.45}
+.pl-ctrl{display:flex;justify-content:center;align-items:center;gap:18px;margin:18px 0 8px}
+.pl-ctrl .round{width:52px;height:52px;border-radius:50%;border:2px solid var(--line);background:var(--surface);font-size:18px}
+.pl-ctrl .main{width:72px;height:72px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);font-size:24px;box-shadow:0 4px 0 var(--press)}
+.pl-ctrl .main:active{transform:translateY(3px);box-shadow:0 1px 0 var(--press)}
+.pl-set{display:grid;gap:10px;margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.pl-set .seg{margin:4px 0 0}
+.pl-set .seg button{font-size:13.5px;padding:6px 2px}

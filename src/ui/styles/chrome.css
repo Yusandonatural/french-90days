@@ -1,0 +1,22 @@
+/* App chrome: Day timer pill, toast, tab bar, footer. */
+#dayBar{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top,0px) + 8px);z-index:20;display:flex;gap:4px;background:var(--ink);color:var(--bg);border-radius:999px;padding:4px;box-shadow:0 4px 14px rgba(0,0,0,.18);max-width:calc(100% - 20px)}
+#dayBar[hidden]{display:none}
+#dayBar button{background:none;border:0;color:inherit;font-size:13px;min-height:36px;padding:6px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#dayBar .db-x{border-left:1px solid color-mix(in srgb,var(--bg) 30%,transparent)}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 84px);background:var(--ok);color:#fff;padding:12px 18px;border-radius:999px;z-index:30;font-weight:700;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.18);max-width:calc(100% - 32px);text-align:center}
+#toast[hidden]{display:none}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;justify-content:center;gap:2px;padding:6px 6px calc(env(safe-area-inset-bottom,0px) + 6px)}
+nav.tabs button{flex:1;max-width:120px;display:flex;flex-direction:column;align-items:center;gap:2px;border:0;background:none;padding:6px 2px;border-radius:14px;font-size:11.5px;color:var(--muted);min-height:54px}
+nav.tabs svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav.tabs button[aria-selected="true"]{color:var(--ink);font-weight:700;background:var(--bg)}
+nav.tabs button[aria-selected="true"] svg{stroke-width:2.3}
+.foot{margin-top:40px;font-size:13px;color:var(--muted);text-align:center}
+.foot[hidden]{display:none}
+.linkbtn{background:none;border:0;padding:6px 2px;color:var(--muted);text-decoration:underline;font-size:13px}
+@media (prefers-reduced-motion: no-preference){
+  .opt,.chip,.seg button,.cell,.modes button,.btn,.cont,.unit,.say,.blk{transition:background .15s,border-color .15s,transform .08s,box-shadow .08s}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important}
+  .btn:active,.opt:active,.cont:active,.unit:active{transform:none!important}
+}

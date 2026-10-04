@@ -1,6 +1,6 @@
 {
   "site_name": "90日フランス語",
-  "site_url": "https://french.yusando.com",
+  "site_url": "https://yusandonatural.github.io/french-90days",
   "ga4_measurement_id": "G-9JG1FFTL1B",
   "ads_conversion_id": "",
   "ads_conversion_labels": {
@@ -10,6 +10,6 @@
   "search_console_verification": "",
   "default_locale": "ja",
   "locales": ["ja"],
-  "og_image": "https://french.yusando.com/og.jpg",
+  "og_image": "https://yusandonatural.github.io/french-90days/og.jpg",
   "spa": false
 }

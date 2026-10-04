@@ -1,0 +1,801 @@
+verb_key	obj	ru	ta	now
+être	malade	病気になる	病気だった	病気だ
+être	très occupé	とても忙しくなる	とても忙しかった	とても忙しい
+être	au bureau toute la journée	一日中会社にいる	一日中会社にいた	一日中会社にいる
+être	en vacances	休暇に入る	休暇中だった	休暇中だ
+avoir	soif	喉が渇く	喉が渇いた	喉が渇いている
+avoir	un rendez-vous chez le dentiste	歯医者の予約がある	歯医者の予約があった	歯医者の予約がある
+avoir	de la chance	運がいい	運がよかった	運がいい
+avoir	une idée géniale	すごいアイデアを思いつく	すごいアイデアを思いついた	すごいアイデアがある
+faire	la vaisselle	皿洗いをする	皿洗いをした	
+faire	une promenade au parc	公園を散歩する	公園を散歩した	
+faire	du sport le matin	朝に運動する	朝に運動した	
+faire	un gâteau au chocolat	チョコレートケーキを作る	チョコレートケーキを作った	
+dire	bonjour aux voisins	近所の人にあいさつする	近所の人にあいさつした	
+dire	merci au serveur	店員にお礼を言う	店員にお礼を言った	
+dire	non à cette proposition	その提案にノーと言う	その提案にノーと言った	
+dire	au revoir à tout le monde	みんなにさよならを言う	みんなにさよならを言った	
+pouvoir	venir à la réunion	会議に来られる	会議に来られた	
+pouvoir	dormir dans le train	電車で眠れる	電車で眠れた	
+pouvoir	parler avec le directeur	部長と話せる	部長と話せた	
+pouvoir	finir avant midi	昼前に終えられる	昼前に終えられた	
+aller	à la plage	海に行く	海に行った	
+aller	chez le médecin	医者に行く	医者に行った	
+aller	au cinéma avec des amis	友達と映画館に行く	友達と映画館に行った	
+aller	à la boulangerie	パン屋に行く	パン屋に行った	
+voir	la mer	海を見る	海を見た	
+voir	un spectacle au théâtre	劇場で芝居を見る	劇場で芝居を見た	
+voir	des amis d'enfance	幼なじみに会う	幼なじみに会った	
+voir	le coucher du soleil	夕日を見る	夕日を見た	
+savoir	le résultat	結果を知る	結果を知った	結果を知っている
+savoir	la nouvelle	その知らせを知る	その知らせを知った	その知らせを知っている
+savoir	le prix du billet	切符の値段を知る	切符の値段を知った	切符の値段を知っている
+savoir	la date de la fête	パーティーの日を知る	パーティーの日を知った	パーティーの日を知っている
+vouloir	rester à la maison	家にいたくなる	家にいたかった	家にいたい
+vouloir	voir la tour Eiffel	エッフェル塔を見たくなる	エッフェル塔を見たかった	エッフェル塔を見たい
+vouloir	apprendre le piano	ピアノを習いたくなる	ピアノを習いたかった	ピアノを習いたい
+vouloir	changer de travail	転職したくなる	転職したかった	転職したい
+venir	à la fête	パーティーに来る	パーティーに来た	
+venir	en voiture	車で来る	車で来た	
+venir	avec un ami	友達と来る	友達と来た	
+venir	chez Marie	マリーの家に来る	マリーの家に来た	
+devoir	travailler tard	遅くまで働かなければならない	遅くまで働かなければならなかった	
+devoir	attendre une heure	1時間待たなければならない	1時間待たなければならなかった	
+devoir	payer en liquide	現金で払わなければならない	現金で払わなければならなかった	
+devoir	annuler le voyage	旅行を取りやめなければならない	旅行を取りやめなければならなかった	
+prendre	le métro	地下鉄に乗る	地下鉄に乗った	
+prendre	une douche	シャワーを浴びる	シャワーを浴びた	
+prendre	un taxi à la gare	駅でタクシーに乗る	駅でタクシーに乗った	
+prendre	le petit-déjeuner	朝ごはんを食べる	朝ごはんを食べた	
+trouver	un bon hôtel	いいホテルを見つける	いいホテルを見つけた	
+trouver	du travail	仕事を見つける	仕事を見つけた	
+trouver	une place de parking	駐車スペースを見つける	駐車スペースを見つけた	
+trouver	un cadeau pour Marie	マリーへのプレゼントを見つける	マリーへのプレゼントを見つけた	
+donner	des conseils	アドバイスをする	アドバイスをした	
+donner	à manger au chat	猫にえさをやる	猫にえさをやった	
+donner	un coup de main	手を貸す	手を貸した	
+donner	une réponse claire	はっきり答える	はっきり答えた	
+falloir	attendre longtemps	長く待たなければならない	長く待たなければならなかった	
+falloir	réserver à l'avance	前もって予約しなければならない	前もって予約しなければならなかった	
+falloir	changer de train	電車を乗り換えなければならない	電車を乗り換えなければならなかった	
+falloir	se lever tôt	早起きしなければならない	早起きしなければならなかった	
+parler	français	フランス語を話す	フランス語を話した	
+parler	au téléphone	電話で話す	電話で話した	
+parler	avec le voisin	隣の人と話す	隣の人と話した	
+parler	de ce projet	この企画について話す	この企画について話した	
+mettre	un manteau	コートを着る	コートを着た	
+mettre	la clé dans le sac	鍵をかばんに入れる	鍵をかばんに入れた	
+mettre	du sucre dans le café	コーヒーに砂糖を入れる	コーヒーに砂糖を入れた	
+mettre	le réveil à six heures	目覚ましを6時にセットする	目覚ましを6時にセットした	
+passer	l'examen	試験を受ける	試験を受けた	
+passer	les vacances à la mer	休暇を海で過ごす	休暇を海で過ごした	
+passer	chez Paul	ポールの家に寄る	ポールの家に寄った	
+passer	une heure au téléphone	電話で1時間過ごす	電話で1時間過ごした	
+aimer	ce restaurant	このレストランを気に入る	このレストランを気に入った	このレストランが好きだ
+aimer	la cuisine japonaise	和食を気に入る	和食を気に入った	和食が好きだ
+aimer	ce livre	この本を気に入る	この本を気に入った	この本が好きだ
+aimer	la musique de ce groupe	このバンドの音楽を気に入る	このバンドの音楽を気に入った	このバンドの音楽が好きだ
+croire	cette nouvelle	このニュースを信じる	このニュースを信じた	このニュースを信じている
+croire	le médecin	医者の言うことを信じる	医者の言うことを信じた	医者の言うことを信じている
+croire	à cette idée	この考えを信じる	この考えを信じた	この考えを信じている
+croire	aux rêves	夢を信じる	夢を信じた	夢を信じている
+penser	à l'avenir	将来のことを考える	将来のことを考えた	将来のことを考えている
+penser	aux vacances	休暇のことを考える	休暇のことを考えた	休暇のことを考えている
+penser	à la réunion	会議のことを考える	会議のことを考えた	会議のことを考えている
+penser	à la famille	家族のことを考える	家族のことを考えた	家族のことを考えている
+demander	l'heure	時間を尋ねる	時間を尋ねた	
+demander	de l'aide	助けを求める	助けを求めた	
+demander	un conseil au professeur	先生にアドバイスを求める	先生にアドバイスを求めた	
+demander	l'addition	お会計を頼む	お会計を頼んだ	
+laisser	un pourboire	チップを置く	チップを置いた	
+laisser	la porte ouverte	ドアを開けたままにする	ドアを開けたままにした	
+laisser	la voiture au garage	車を修理工場に預ける	車を修理工場に預けた	
+laisser	un mot sur la table	テーブルにメモを残す	テーブルにメモを残した	
+rester	au lit	ベッドで休む	ベッドで休んでいた	ベッドで休んでいる
+rester	une semaine à Paris	パリに1週間滞在する	パリに1週間滞在した	パリに1週間滞在している
+rester	à l'hôtel	ホテルに泊まる	ホテルに泊まった	ホテルに泊まっている
+rester	calme	落ち着いている	落ち着いていた	落ち着いている
+regarder	les infos	ニュースを見る	ニュースを見た	
+regarder	un match de foot	サッカーの試合を見る	サッカーの試合を見た	
+regarder	la carte	地図を見る	地図を見た	
+regarder	les étoiles	星を眺める	星を眺めた	
+attendre	le train	電車を待つ	電車を待った	電車を待っている
+attendre	un ami au café	カフェで友達を待つ	カフェで友達を待った	カフェで友達を待っている
+attendre	une réponse	返事を待つ	返事を待った	返事を待っている
+attendre	le train de huit heures	8時の電車を待つ	8時の電車を待った	8時の電車を待っている
+comprendre	l'explication	説明を理解する	説明を理解した	説明がわかる
+comprendre	le film en français	フランス語の映画を理解する	フランス語の映画を理解した	フランス語の映画がわかる
+comprendre	la situation	状況を理解する	状況を理解した	状況がわかっている
+comprendre	la blague	冗談がわかる	冗談がわかった	冗談がわかる
+arriver	à la gare	駅に着く	駅に着いた	
+arriver	en retard	遅れて着く	遅れて着いた	
+arriver	à Paris	パリに着く	パリに着いた	
+arriver	au bureau à neuf heures	9時に会社に着く	9時に会社に着いた	
+partir	en vacances	休暇に出かける	休暇に出かけた	
+partir	au travail	仕事に出かける	仕事に出かけた	
+partir	pour Tokyo	東京へ発つ	東京へ発った	
+partir	sans parapluie	傘を持たずに出かける	傘を持たずに出かけた	
+sortir	avec des amis	友達と出かける	友達と出かけた	
+sortir	du bureau	会社を出る	会社を出た	
+sortir	au restaurant	外食に出かける	外食に出かけた	
+sortir	avec le chien	犬と外に出る	犬と外に出た	
+entendre	la sonnette	呼び鈴が聞こえる	呼び鈴が聞こえた	
+entendre	une chanson à la radio	ラジオで歌を聞く	ラジオで歌を聞いた	
+entendre	des oiseaux	鳥の声を聞く	鳥の声を聞いた	
+entendre	la nouvelle à la télé	テレビでそのニュースを聞く	テレビでそのニュースを聞いた	
+connaître	la ville	この町を知る	この町を知った	この町を知っている
+connaître	les parents de Marie	マリーの両親と知り合う	マリーの両親と知り合った	マリーの両親を知っている
+connaître	un bon restaurant	いいレストランを知る	いいレストランを知った	いいレストランを知っている
+connaître	la réponse	答えを知る	答えを知った	答えを知っている
+chercher	du travail	仕事を探す	仕事を探した	仕事を探している
+chercher	les clés partout	あちこち鍵を探す	あちこち鍵を探した	あちこち鍵を探している
+chercher	un cadeau	プレゼントを探す	プレゼントを探した	プレゼントを探している
+chercher	des informations sur internet	ネットで情報を探す	ネットで情報を探した	ネットで情報を探している
+appeler	un taxi	タクシーを呼ぶ	タクシーを呼んだ	
+appeler	le médecin	医者に電話する	医者に電話した	
+appeler	les parents de Paul	ポールの両親に電話する	ポールの両親に電話した	
+appeler	le restaurant pour réserver	予約しようとレストランに電話する	予約しようとレストランに電話した	
+manger	une pizza	ピザを食べる	ピザを食べた	
+manger	au restaurant	レストランで食べる	レストランで食べた	
+manger	des légumes	野菜を食べる	野菜を食べた	
+manger	avec des collègues	同僚と食事をする	同僚と食事をした	
+boire	de l'eau	水を飲む	水を飲んだ	
+boire	un verre de vin	ワインを一杯飲む	ワインを一杯飲んだ	
+boire	du thé vert	緑茶を飲む	緑茶を飲んだ	
+boire	un jus d'orange	オレンジジュースを飲む	オレンジジュースを飲んだ	
+travailler	à la maison	家で仕事をする	家で仕事をした	
+travailler	dans un restaurant	レストランで働く	レストランで働いた	
+travailler	tard	遅くまで働く	遅くまで働いた	
+travailler	sur un nouveau projet	新しいプロジェクトに取り組む	新しいプロジェクトに取り組んだ	
+jouer	du piano	ピアノを弾く	ピアノを弾いた	
+jouer	aux cartes	トランプをする	トランプをした	
+jouer	avec les enfants	子どもと遊ぶ	子どもと遊んだ	
+jouer	au football	サッカーをする	サッカーをした	
+rentrer	tard	遅く帰る	遅く帰った	
+rentrer	à pied	歩いて帰る	歩いて帰った	
+rentrer	en taxi	タクシーで帰る	タクシーで帰った	
+rentrer	du travail	仕事から帰る	仕事から帰った	
+finir	le repas	食事を終える	食事を終えた	
+finir	ce livre	この本を読み終える	この本を読み終えた	
+finir	les devoirs	宿題を終える	宿題を終えた	
+finir	le rapport	報告書を仕上げる	報告書を仕上げた	
+commencer	un nouveau travail	新しい仕事を始める	新しい仕事を始めた	
+commencer	le régime	ダイエットを始める	ダイエットを始めた	
+commencer	la réunion	会議を始める	会議を始めた	
+commencer	les cours de yoga	ヨガのレッスンを始める	ヨガのレッスンを始めた	
+écrire	une lettre	手紙を書く	手紙を書いた	
+écrire	un message à Marie	マリーにメッセージを書く	マリーにメッセージを書いた	
+écrire	dans un carnet	手帳に書く	手帳に書いた	
+écrire	un article	記事を書く	記事を書いた	
+lire	le journal	新聞を読む	新聞を読んだ	
+lire	un roman	小説を読む	小説を読んだ	
+lire	le menu	メニューを読む	メニューを読んだ	
+lire	les messages	メッセージを読む	メッセージを読んだ	
+répondre	au téléphone	電話に出る	電話に出た	
+répondre	à la question	質問に答える	質問に答えた	
+répondre	au client	お客さんに返事をする	お客さんに返事をした	
+répondre	à l'invitation	招待に返事をする	招待に返事をした	
+tenir	le bébé	赤ちゃんを抱っこする	赤ちゃんを抱っこした	
+tenir	la main de Marie	マリーの手を握る	マリーの手を握った	
+tenir	le parapluie	傘を持つ	傘を持った	
+tenir	une promesse	約束を守る	約束を守った	
+rendre	la monnaie	おつりを渡す	おつりを渡した	
+rendre	visite à Paul	ポールを訪ねる	ポールを訪ねた	
+rendre	les clés	鍵を返す	鍵を返した	
+rendre	le devoir au professeur	先生に宿題を提出する	先生に宿題を提出した	
+sentir	la fatigue	疲れを感じる	疲れを感じた	疲れを感じている
+sentir	le froid	寒さを感じる	寒さを感じた	寒さを感じている
+sentir	une douleur au dos	背中に痛みを感じる	背中に痛みを感じた	背中に痛みを感じている
+sentir	le parfum des fleurs	花の香りを感じる	花の香りを感じた	花の香りがする
+porter	des lunettes	眼鏡をかける	眼鏡をかけた	眼鏡をかけている
+porter	un sac lourd	重いかばんを持つ	重いかばんを持った	重いかばんを持っている
+porter	un chapeau	帽子をかぶる	帽子をかぶった	帽子をかぶっている
+porter	un costume	スーツを着る	スーツを着た	スーツを着ている
+entrer	dans la maison	家に入る	家に入った	
+entrer	dans le magasin	店に入る	店に入った	
+entrer	à l'université	大学に入る	大学に入った	
+entrer	par la porte de derrière	裏口から入る	裏口から入った	
+revenir	de vacances	休暇から戻る	休暇から戻った	
+revenir	à la maison	家に戻ってくる	家に戻ってきた	
+revenir	du marché	市場から戻る	市場から戻った	
+revenir	au Japon	日本に戻ってくる	日本に戻ってきた	
+devenir	professeur	先生になる	先生になった	
+devenir	célèbre	有名になる	有名になった	
+devenir	père	父親になる	父親になった	
+devenir	plus patient	もっと我慢強くなる	もっと我慢強くなった	
+tomber	malade	病気になる	病気になった	
+tomber	dans l'escalier	階段で転ぶ	階段で転んだ	
+tomber	amoureux	恋に落ちる	恋に落ちた	
+tomber	de vélo	自転車から落ちる	自転車から落ちた	
+perdre	le portefeuille	財布をなくす	財布をなくした	
+perdre	le match	試合に負ける	試合に負けた	
+perdre	du poids	体重が減る	体重が減った	
+perdre	du temps	時間を無駄にする	時間を無駄にした	
+vivre	à la campagne	田舎で暮らす	田舎で暮らした	田舎で暮らしている
+vivre	seul	一人で暮らす	一人で暮らした	一人で暮らしている
+vivre	à l'étranger	海外で暮らす	海外で暮らした	海外で暮らしている
+vivre	une belle expérience	素晴らしい経験をする	素晴らしい経験をした	素晴らしい経験をしている
+dormir	huit heures	8時間眠る	8時間眠った	
+dormir	chez des amis	友達の家に泊まる	友達の家に泊まった	
+dormir	dans le train	電車で眠る	電車で眠った	
+dormir	mal	よく眠れない	よく眠れなかった	
+acheter	des légumes au marché	市場で野菜を買う	市場で野菜を買った	
+acheter	un billet de train	電車の切符を買う	電車の切符を買った	
+acheter	une nouvelle voiture	新しい車を買う	新しい車を買った	
+acheter	des fleurs pour Marie	マリーに花を買う	マリーに花を買った	
+payer	le loyer	家賃を払う	家賃を払った	
+payer	par carte	カードで払う	カードで払った	
+payer	les courses	買い物の代金を払う	買い物の代金を払った	
+payer	le billet en ligne	ネットで切符代を払う	ネットで切符代を払った	
+oublier	le rendez-vous	約束を忘れる	約束を忘れた	
+oublier	le nom du restaurant	レストランの名前を忘れる	レストランの名前を忘れた	
+oublier	le téléphone dans le taxi	タクシーに携帯を置き忘れる	タクシーに携帯を置き忘れた	
+oublier	l'anniversaire de Paul	ポールの誕生日を忘れる	ポールの誕生日を忘れた	
+essayer	une nouvelle recette	新しいレシピを試す	新しいレシピを試した	
+essayer	cette veste	この上着を試着する	この上着を試着した	
+essayer	de dormir	眠ろうとする	眠ろうとした	
+essayer	le yoga	ヨガをやってみる	ヨガをやってみた	
+aider	les voisins	近所の人を手伝う	近所の人を手伝った	
+aider	un touriste	観光客を助ける	観光客を助けた	
+aider	Paul à déménager	ポールの引っ越しを手伝う	ポールの引っ越しを手伝った	
+aider	les enfants avec les devoirs	子どもの宿題を手伝う	子どもの宿題を手伝った	
+suivre	le guide	ガイドについて行く	ガイドについて行った	
+suivre	un régime	食事制限をする	食事制限をした	
+suivre	les conseils du médecin	医者の助言に従う	医者の助言に従った	
+suivre	la série	そのドラマを見続ける	そのドラマを見続けた	
+montrer	le chemin	道を教える	道を教えた	
+montrer	la maison à Marie	マリーに家を見せる	マリーに家を見せた	
+montrer	le passeport	パスポートを見せる	パスポートを見せた	
+montrer	le jardin aux invités	お客さんに庭を見せる	お客さんに庭を見せた	
+ouvrir	la porte	ドアを開ける	ドアを開けた	
+ouvrir	un compte en banque	銀行口座を開く	銀行口座を開いた	
+ouvrir	le cadeau	プレゼントを開ける	プレゼントを開けた	
+ouvrir	une bouteille de vin	ワインを開ける	ワインを開けた	
+fermer	la fenêtre	窓を閉める	窓を閉めた	
+fermer	le magasin	店を閉める	店を閉めた	
+fermer	les yeux	目を閉じる	目を閉じた	
+fermer	la porte à clé	ドアに鍵をかける	ドアに鍵をかけた	
+changer	de train	電車を乗り換える	電車を乗り換えた	
+changer	de l'argent	両替する	両替した	
+changer	de travail	転職する	転職した	
+changer	les draps	シーツを替える	シーツを替えた	
+apprendre	à nager	泳ぎを習う	泳ぎを習った	
+apprendre	la nouvelle	その知らせを聞く	その知らせを聞いた	
+apprendre	le chinois	中国語を学ぶ	中国語を学んだ	
+apprendre	à conduire	運転を習う	運転を習った	
+recevoir	une lettre	手紙を受け取る	手紙を受け取った	
+recevoir	des amis à la maison	家に友達を迎える	家に友達を迎えた	
+recevoir	un cadeau	プレゼントをもらう	プレゼントをもらった	
+recevoir	un message de Marie	マリーからメッセージをもらう	マリーからメッセージをもらった	
+envoyer	un message	メッセージを送る	メッセージを送った	
+envoyer	une carte postale	絵はがきを送る	絵はがきを送った	
+envoyer	le dossier par mail	メールで書類を送る	メールで書類を送った	
+envoyer	des photos à la famille	家族に写真を送る	家族に写真を送った	
+écouter	la radio	ラジオを聴く	ラジオを聴いた	
+écouter	le professeur	先生の話を聞く	先生の話を聞いた	
+écouter	un podcast	ポッドキャストを聴く	ポッドキャストを聴いた	
+écouter	les conseils de Paul	ポールの助言に耳を傾ける	ポールの助言に耳を傾けた	
+habiter	à la campagne	田舎に住む	田舎に住んでいた	田舎に住んでいる
+habiter	près de la gare	駅の近くに住む	駅の近くに住んでいた	駅の近くに住んでいる
+habiter	dans un appartement	アパートに住む	アパートに住んでいた	アパートに住んでいる
+habiter	chez des amis	友達の家に住む	友達の家に住んでいた	友達の家に住んでいる
+marcher	jusqu'à la gare	駅まで歩く	駅まで歩いた	
+marcher	dans la forêt	森を歩く	森を歩いた	
+marcher	vite	速く歩く	速く歩いた	
+marcher	au bord de la mer	海辺を歩く	海辺を歩いた	
+courir	dans le parc	公園で走る	公園で走った	
+courir	un marathon	マラソンを走る	マラソンを走った	
+courir	pour attraper le bus	バスに乗ろうと走る	バスに乗ろうと走った	
+courir	cinq kilomètres	5キロ走る	5キロ走った	
+monter	dans le train	電車に乗り込む	電車に乗り込んだ	
+monter	au sommet	頂上に登る	頂上に登った	
+monter	dans la voiture	車に乗る	車に乗った	
+monter	en ascenseur	エレベーターで上がる	エレベーターで上がった	
+descendre	du bus	バスを降りる	バスを降りた	
+descendre	à la cave	地下室に降りる	地下室に降りた	
+descendre	par l'escalier	階段で降りる	階段で降りた	
+descendre	en ville	街に出る	街に出た	
+retrouver	les clés	鍵を見つけ出す	鍵を見つけ出した	
+retrouver	Marie au café	カフェでマリーと落ち合う	カフェでマリーと落ち合った	
+retrouver	la forme	元気を取り戻す	元気を取り戻した	
+retrouver	un vieil ami	昔の友達と再会する	昔の友達と再会した	
+rencontrer	des gens sympas	感じのいい人たちに出会う	感じのいい人たちに出会った	
+rencontrer	le directeur	部長に会う	部長に会った	
+rencontrer	des difficultés	困難にぶつかる	困難にぶつかった	
+rencontrer	un artiste	芸術家に会う	芸術家に会った	
+raconter	le voyage	旅行の話をする	旅行の話をした	
+raconter	une blague	冗談を言う	冗談を言った	
+raconter	la vérité	本当のことを話す	本当のことを話した	
+raconter	un conte aux enfants	子どもにお話を聞かせる	子どもにお話を聞かせた	
+expliquer	la règle	ルールを説明する	ルールを説明した	
+expliquer	le chemin	道順を説明する	道順を説明した	
+expliquer	la situation au patron	上司に状況を説明する	上司に状況を説明した	
+expliquer	la recette	作り方を説明する	作り方を説明した	
+préparer	le petit-déjeuner	朝食を作る	朝食を作った	
+préparer	les valises	荷造りをする	荷造りをした	
+préparer	l'examen	試験の準備をする	試験の準備をした	
+préparer	une surprise	サプライズを用意する	サプライズを用意した	
+utiliser	un ordinateur	パソコンを使う	パソコンを使った	
+utiliser	le dictionnaire	辞書を使う	辞書を使った	
+utiliser	les transports en commun	公共交通機関を使う	公共交通機関を使った	
+utiliser	une carte de crédit	クレジットカードを使う	クレジットカードを使った	
+arrêter	de boire du café	コーヒーをやめる	コーヒーをやめた	
+arrêter	la voiture	車を止める	車を止めた	
+arrêter	le travail	仕事の手を止める	仕事の手を止めた	
+arrêter	la musique	音楽を止める	音楽を止めた	
+continuer	tout droit	まっすぐ進む	まっすぐ進んだ	
+continuer	les études	勉強を続ける	勉強を続けた	
+continuer	à courir	走り続ける	走り続けた	
+continuer	le projet	プロジェクトを続ける	プロジェクトを続けた	
+choisir	un plat	料理を選ぶ	料理を選んだ	
+choisir	une date	日にちを選ぶ	日にちを選んだ	
+choisir	le vin	ワインを選ぶ	ワインを選んだ	
+choisir	une couleur	色を選ぶ	色を選んだ	
+décider	de rester	残ることに決める	残ることに決めた	
+décider	de changer de vie	生き方を変えることに決める	生き方を変えることに決めた	
+décider	d'acheter une maison	家を買うことに決める	家を買うことに決めた	
+décider	de prendre des vacances	休みを取ることに決める	休みを取ることに決めた	
+garder	le secret	秘密を守る	秘密を守った	
+garder	le ticket	切符を取っておく	切符を取っておいた	
+garder	le chien des voisins	近所の犬を預かる	近所の犬を預かった	
+garder	la monnaie	おつりを取っておく	おつりを取っておいた	
+quitter	le bureau	会社を出る	会社を出た	
+quitter	la maison	家を出る	家を出た	
+quitter	le travail	仕事を辞める	仕事を辞めた	
+quitter	la ville	町を離れる	町を離れた	
+gagner	de l'argent	お金を稼ぐ	お金を稼いだ	
+gagner	un prix	賞を取る	賞を取った	
+gagner	du temps	時間を稼ぐ	時間を稼いだ	
+gagner	à la loterie	宝くじに当たる	宝くじに当たった	
+poser	le sac par terre	かばんを床に置く	かばんを床に置いた	
+poser	une question au professeur	先生に質問する	先生に質問した	
+poser	les assiettes sur la table	お皿をテーブルに並べる	お皿をテーブルに並べた	
+poser	le téléphone sur la table	携帯をテーブルに置く	携帯をテーブルに置いた	
+tourner	à droite	右に曲がる	右に曲がった	
+tourner	la page	ページをめくる	ページをめくった	
+tourner	un film	映画を撮る	映画を撮った	
+tourner	la clé	鍵を回す	鍵を回した	
+visiter	le château	城を見学する	城を見学した	
+visiter	Kyoto	京都を観光する	京都を観光した	
+visiter	une exposition	展覧会を見に行く	展覧会を見に行った	
+visiter	la vieille ville	旧市街を見て回る	旧市街を見て回った	
+accepter	l'invitation	招待を受ける	招待を受けた	
+accepter	le poste	そのポストを引き受ける	そのポストを引き受けた	
+accepter	la proposition	提案を受け入れる	提案を受け入れた	
+accepter	les conditions	条件をのむ	条件をのんだ	
+refuser	l'invitation	招待を断る	招待を断った	
+refuser	de payer	払うのを拒む	払うのを拒んだ	
+refuser	le cadeau	プレゼントを受け取らない	プレゼントを受け取らなかった	
+refuser	la proposition	提案を断る	提案を断った	
+retourner	à l'école	学校に戻る	学校に戻った	
+retourner	en France	フランスに戻る	フランスに戻った	
+retourner	au restaurant	レストランにまた行く	レストランにまた行った	
+retourner	chez le médecin	もう一度医者に行く	もう一度医者に行った	
+promettre	d'appeler	電話すると約束する	電話すると約束した	
+promettre	de faire attention	気をつけると約束する	気をつけると約束した	
+promettre	un cadeau aux enfants	子どもにプレゼントを約束する	子どもにプレゼントを約束した	
+promettre	d'arriver à l'heure	時間どおりに来ると約束する	時間どおりに来ると約束した	
+réserver	une chambre d'hôtel	ホテルの部屋を予約する	ホテルの部屋を予約した	
+réserver	un billet d'avion	航空券を予約する	航空券を予約した	
+réserver	une place au théâtre	劇場の席を予約する	劇場の席を予約した	
+réserver	un taxi	タクシーを予約する	タクシーを予約した	
+nettoyer	la salle de bains	浴室を掃除する	浴室を掃除した	
+nettoyer	la voiture	車をきれいにする	車をきれいにした	
+nettoyer	les fenêtres	窓をふく	窓をふいた	
+nettoyer	le frigo	冷蔵庫を掃除する	冷蔵庫を掃除した	
+conduire	prudemment	慎重に運転する	慎重に運転した	
+conduire	les enfants à l'école	子どもを学校まで送る	子どもを学校まで送った	
+conduire	un camion	トラックを運転する	トラックを運転した	
+conduire	la nuit	夜に運転する	夜に運転した	
+voyager	en train	電車で旅行する	電車で旅行した	
+voyager	seul	一人旅をする	一人旅をした	
+voyager	en Europe	ヨーロッパを旅行する	ヨーロッパを旅行した	
+voyager	avec des amis	友達と旅行する	友達と旅行した	
+danser	la salsa	サルサを踊る	サルサを踊った	
+danser	toute la nuit	一晩中踊る	一晩中踊った	
+danser	au mariage	結婚式で踊る	結婚式で踊った	
+danser	avec Marie	マリーと踊る	マリーと踊った	
+chanter	au karaoké	カラオケで歌う	カラオケで歌った	
+chanter	dans une chorale	合唱団で歌う	合唱団で歌った	
+chanter	sous la douche	シャワーを浴びながら歌う	シャワーを浴びながら歌った	
+chanter	une berceuse	子守歌を歌う	子守歌を歌った	
+se lever	tôt	早く起きる	早く起きた	
+se lever	à sept heures	7時に起きる	7時に起きた	
+se lever	tard	遅く起きる	遅く起きた	
+se lever	sans réveil	目覚ましなしで起きる	目覚ましなしで起きた	
+se coucher	tard	遅く寝る	遅く寝た	
+se coucher	tôt	早く寝る	早く寝た	
+se coucher	à minuit	夜12時に寝る	夜12時に寝た	
+se coucher	sans dîner	夕食を取らずに寝る	夕食を取らずに寝た	
+se réveiller	en retard	寝坊する	寝坊した	
+se réveiller	à six heures	6時に目を覚ます	6時に目を覚ました	
+se réveiller	plusieurs fois	何度も目を覚ます	何度も目を覚ました	
+se réveiller	de bonne humeur	気分よく目覚める	気分よく目覚めた	
+s'habiller	vite	急いで服を着る	急いで服を着た	
+s'habiller	chaudement	暖かい服装をする	暖かい服装をした	
+s'habiller	en noir	黒い服を着る	黒い服を着た	
+s'habiller	pour la fête	パーティー用に着替える	パーティー用に着替えた	
+se laver	à l'eau froide	冷たい水で体を洗う	冷たい水で体を洗った	
+se laver	rapidement	さっと体を洗う	さっと体を洗った	
+se laver	avec du savon	せっけんで体を洗う	せっけんで体を洗った	
+se laver	après le sport	運動の後に体を洗う	運動の後に体を洗った	
+se doucher	vite	さっとシャワーを浴びる	さっとシャワーを浴びた	
+se doucher	après le travail	仕事の後にシャワーを浴びる	仕事の後にシャワーを浴びた	
+se doucher	à l'eau chaude	熱いシャワーを浴びる	熱いシャワーを浴びた	
+se doucher	avant de sortir	出かける前にシャワーを浴びる	出かける前にシャワーを浴びた	
+se dépêcher	pour attraper le train	電車に間に合うように急ぐ	電車に間に合うように急いだ	
+se dépêcher	de finir	急いで終わらせる	急いで終わらせた	
+se dépêcher	de manger	急いで食べる	急いで食べた	
+se dépêcher	de rentrer	急いで帰る	急いで帰った	
+se promener	dans le parc	公園を散歩する	公園を散歩した	
+se promener	au bord de la rivière	川沿いを散歩する	川沿いを散歩した	
+se promener	en ville	街をぶらぶらする	街をぶらぶらした	
+se promener	avec le chien	犬と散歩する	犬と散歩した	
+se reposer	un peu	少し休む	少し休んだ	
+se reposer	à la maison	家で休む	家で休んだ	
+se reposer	après le déjeuner	昼食後に休む	昼食後に休んだ	
+se reposer	pendant les vacances	休暇中に休む	休暇中に休んだ	
+s'asseoir	sur le banc	ベンチに座る	ベンチに座った	
+s'asseoir	à côté de Marie	マリーの隣に座る	マリーの隣に座った	
+s'asseoir	par terre	床に座る	床に座った	
+s'asseoir	près de la fenêtre	窓際に座る	窓際に座った	
+se souvenir	du nom	名前を思い出す	名前を思い出した	名前を覚えている
+se souvenir	de cette chanson	この歌を思い出す	この歌を思い出した	この歌を覚えている
+se souvenir	du rendez-vous	約束を思い出す	約束を思い出した	約束を覚えている
+se souvenir	de l'adresse	住所を思い出す	住所を思い出した	住所を覚えている
+s'amuser	à la fête	パーティーで楽しむ	パーティーで楽しんだ	パーティーで楽しんでいる
+s'amuser	avec les enfants	子どもと遊んで楽しむ	子どもと遊んで楽しんだ	子どもと遊んで楽しんでいる
+s'amuser	au parc d'attractions	遊園地で楽しむ	遊園地で楽しんだ	遊園地で楽しんでいる
+s'amuser	pendant le voyage	旅行中に楽しむ	旅行中に楽しんだ	旅行を楽しんでいる
+se tromper	de chemin	道を間違える	道を間違えた	
+se tromper	de jour	日にちを間違える	日にちを間違えた	
+se tromper	de numéro	番号を間違える	番号を間違えた	
+se tromper	dans le calcul	計算を間違える	計算を間違えた	
+s'inquiéter	pour rien	何でもないことで心配する	何でもないことで心配した	何でもないことで心配している
+s'inquiéter	pour l'examen	試験のことを心配する	試験のことを心配した	試験のことを心配している
+s'inquiéter	pour la santé de Paul	ポールの健康を心配する	ポールの健康を心配した	ポールの健康を心配している
+s'inquiéter	pour l'avenir	将来を心配する	将来を心配した	将来を心配している
+s'occuper	du jardin	庭の手入れをする	庭の手入れをした	
+s'occuper	des clients	お客さんの対応をする	お客さんの対応をした	
+s'occuper	du dîner	夕食の担当をする	夕食の担当をした	
+s'occuper	des billets	切符の手配をする	切符の手配をした	
+se préparer	pour la réunion	会議の準備をする	会議の準備をした	
+se préparer	pour sortir	出かける支度をする	出かける支度をした	
+se préparer	au voyage	旅行の準備をする	旅行の準備をした	
+se préparer	vite	急いで支度をする	急いで支度をした	
+s'arrêter	au feu rouge	赤信号で止まる	赤信号で止まった	
+s'arrêter	à la station-service	ガソリンスタンドに寄る	ガソリンスタンドに寄った	
+s'arrêter	de fumer	タバコをやめる	タバコをやめた	
+s'arrêter	pour regarder la vue	景色を見るために立ち止まる	景色を見るために立ち止まった	
+se marier	avec Marie	マリーと結婚する	マリーと結婚した	
+se marier	à l'église	教会で結婚する	教会で結婚した	
+se marier	à Kyoto	京都で結婚式を挙げる	京都で結婚式を挙げた	
+se marier	jeune	若くして結婚する	若くして結婚した	
+se sentir	fatigué	疲れを感じる	疲れを感じた	疲れている
+se sentir	seul	寂しくなる	寂しかった	寂しい
+se sentir	bien ici	ここが居心地よく感じる	ここが居心地よく感じた	ここは居心地がいい
+se sentir	à l'aise	くつろげる	くつろげた	くつろいでいる
+se perdre	dans la ville	町で迷う	町で迷った	
+se perdre	dans la forêt	森で迷う	森で迷った	
+se perdre	dans le métro	地下鉄で迷う	地下鉄で迷った	
+se perdre	en voiture	車で道に迷う	車で道に迷った	
+nager	dans la mer	海で泳ぐ	海で泳いだ	
+nager	à la piscine	プールで泳ぐ	プールで泳いだ	
+nager	dans le lac	湖で泳ぐ	湖で泳いだ	
+nager	une heure	1時間泳ぐ	1時間泳いだ	
+cuisiner	pour les amis	友達のために料理する	友達のために料理した	
+cuisiner	avec des légumes du jardin	畑の野菜で料理する	畑の野菜で料理した	
+cuisiner	pour la famille	家族のために料理する	家族のために料理した	
+cuisiner	un plat japonais	日本料理を作る	日本料理を作った	
+laver	la vaisselle	食器を洗う	食器を洗った	
+laver	le linge	洗濯をする	洗濯をした	
+laver	les fruits	果物を洗う	果物を洗った	
+laver	le sol	床を洗う	床を洗った	
+ranger	le bureau	机を片付ける	机を片付けた	
+ranger	les vêtements	服をしまう	服をしまった	
+ranger	les courses	買ったものをしまう	買ったものをしまった	
+ranger	le garage	ガレージを片付ける	ガレージを片付けた	
+goûter	la soupe	スープの味見をする	スープの味見をした	
+goûter	un fromage français	フランスのチーズを味わう	フランスのチーズを味わった	
+goûter	le gâteau	ケーキを味見する	ケーキを味見した	
+goûter	la cuisine locale	地元の料理を味わう	地元の料理を味わった	
+étudier	le français	フランス語を勉強する	フランス語を勉強した	
+étudier	à la bibliothèque	図書館で勉強する	図書館で勉強した	
+étudier	pour l'examen	試験勉強をする	試験勉強をした	
+étudier	l'histoire	歴史を勉強する	歴史を勉強した	
+enseigner	les mathématiques	数学を教える	数学を教えた	
+enseigner	dans un lycée	高校で教える	高校で教えた	
+enseigner	la cuisine	料理を教える	料理を教えた	
+enseigner	l'anglais aux enfants	子どもに英語を教える	子どもに英語を教えた	
+inviter	les voisins à dîner	近所の人を夕食に招く	近所の人を夕食に招いた	
+inviter	Marie au restaurant	マリーをレストランに誘う	マリーをレストランに誘った	
+inviter	la famille	家族を招く	家族を招いた	
+inviter	des collègues à la maison	同僚を家に招く	同僚を家に招いた	
+fêter	l'anniversaire de Marie	マリーの誕生日を祝う	マリーの誕生日を祝った	
+fêter	le nouvel an	新年を祝う	新年を祝った	
+fêter	la victoire	勝利を祝う	勝利を祝った	
+fêter	la fin des examens	試験が終わったのを祝う	試験が終わったのを祝った	
+louer	un appartement	アパートを借りる	アパートを借りた	
+louer	un vélo	自転車を借りる	自転車を借りた	
+louer	une maison au bord de la mer	海辺の家を借りる	海辺の家を借りた	
+louer	une salle pour la fête	パーティー会場を借りる	パーティー会場を借りた	
+vendre	la vieille voiture	古い車を売る	古い車を売った	
+vendre	des légumes au marché	市場で野菜を売る	市場で野菜を売った	
+vendre	des livres d'occasion	古本を売る	古本を売った	
+vendre	des billets	チケットを売る	チケットを売った	
+réparer	la machine à laver	洗濯機を直す	洗濯機を直した	
+réparer	le toit	屋根を修理する	屋根を修理した	
+réparer	la porte	ドアを直す	ドアを直した	
+réparer	l'ordinateur	パソコンを直す	パソコンを直した	
+construire	un mur	塀を作る	塀を作った	
+construire	une cabane	小屋を建てる	小屋を建てた	
+construire	un pont	橋を作る	橋を作った	
+construire	une étagère	棚を組み立てる	棚を組み立てた	
+couper	les légumes	野菜を切る	野菜を切った	
+couper	les cheveux	髪を切る	髪を切った	
+couper	le gâteau	ケーキを切り分ける	ケーキを切り分けた	
+couper	l'herbe	草を刈る	草を刈った	
+casser	une assiette	皿を割る	皿を割った	
+casser	la vitre	窓ガラスを割る	窓ガラスを割った	
+casser	des œufs	卵を割る	卵を割った	
+casser	le téléphone	携帯を壊す	携帯を壊した	
+allumer	la télé	テレビをつける	テレビをつけた	
+allumer	le chauffage	暖房をつける	暖房をつけた	
+allumer	une bougie	ろうそくに火をつける	ろうそくに火をつけた	
+allumer	l'ordinateur	パソコンの電源を入れる	パソコンの電源を入れた	
+éteindre	la télé	テレビを消す	テレビを消した	
+éteindre	le chauffage	暖房を消す	暖房を消した	
+éteindre	le téléphone	携帯の電源を切る	携帯の電源を切った	
+éteindre	le feu	火を消す	火を消した	
+remplir	le verre	グラスを満たす	グラスを満たした	
+remplir	le réservoir	ガソリンを満タンにする	ガソリンを満タンにした	
+remplir	la valise	スーツケースに荷物を詰める	スーツケースに荷物を詰めた	
+remplir	le frigo	冷蔵庫をいっぱいにする	冷蔵庫をいっぱいにした	
+signer	le document	書類にサインする	書類にサインした	
+signer	la lettre	手紙に署名する	手紙に署名した	
+signer	le reçu	領収書にサインする	領収書にサインした	
+signer	un nouveau contrat	新しい契約を結ぶ	新しい契約を結んだ	
+imprimer	les billets	チケットを印刷する	チケットを印刷した	
+imprimer	des photos	写真をプリントする	写真をプリントした	
+imprimer	le rapport	報告書を印刷する	報告書を印刷した	
+imprimer	le plan	地図を印刷する	地図を印刷した	
+télécharger	un film	映画をダウンロードする	映画をダウンロードした	
+télécharger	les photos	写真をダウンロードする	写真をダウンロードした	
+télécharger	un livre numérique	電子書籍をダウンロードする	電子書籍をダウンロードした	
+télécharger	le formulaire	申込書をダウンロードする	申込書をダウンロードした	
+partager	le repas	食事を分け合う	食事を分け合った	
+partager	un appartement	アパートをシェアする	アパートをシェアした	
+partager	les frais	費用を割り勘にする	費用を割り勘にした	
+partager	une idée	アイデアを共有する	アイデアを共有した	
+enregistrer	un message vocal	音声メッセージを録音する	音声メッセージを録音した	
+enregistrer	le document	書類を保存する	書類を保存した	
+enregistrer	une chanson	歌を録音する	歌を録音した	
+enregistrer	les bagages	荷物を預ける	荷物を預けた	
+traduire	la lettre	手紙を翻訳する	手紙を翻訳した	
+traduire	le menu en anglais	メニューを英語に訳す	メニューを英語に訳した	
+traduire	un livre	本を翻訳する	本を翻訳した	
+traduire	la conversation	会話を通訳する	会話を通訳した	
+répéter	la question	質問を繰り返す	質問を繰り返した	
+répéter	le numéro	番号を復唱する	番号を復唱した	
+répéter	la leçon	レッスンを復習する	レッスンを復習した	
+répéter	pour le concert	コンサートのリハーサルをする	コンサートのリハーサルをした	
+corriger	les fautes	間違いを直す	間違いを直した	
+corriger	le texte	文章を添削する	文章を添削した	
+corriger	les copies	答案を採点する	答案を採点した	
+corriger	la date	日付を訂正する	日付を訂正した	
+vérifier	l'heure du train	電車の時刻を確かめる	電車の時刻を確かめた	
+vérifier	les comptes	会計をチェックする	会計をチェックした	
+vérifier	la réservation	予約を確認する	予約を確認した	
+vérifier	les freins	ブレーキを点検する	ブレーキを点検した	
+noter	l'adresse	住所をメモする	住所をメモした	
+noter	les idées	アイデアを書き留める	アイデアを書き留めた	
+noter	le rendez-vous dans l'agenda	手帳に予定を書き込む	手帳に予定を書き込んだ	
+noter	la recette	レシピを書き留める	レシピを書き留めた	
+compter	les jours	日数を数える	日数を数えた	
+compter	les invités	招待客の数を数える	招待客の数を数えた	
+compter	jusqu'à dix	10まで数える	10まで数えた	
+compter	la monnaie	おつりを数える	おつりを数えた	
+dépenser	beaucoup d'argent	たくさんお金を使う	たくさんお金を使った	
+dépenser	tout le salaire	給料を全部使う	給料を全部使った	
+dépenser	trop au restaurant	外食でお金を使いすぎる	外食でお金を使いすぎた	
+dépenser	de l'énergie	エネルギーを使う	エネルギーを使った	
+économiser	pour les vacances	休暇のために節約する	休暇のために節約した	
+économiser	l'électricité	電気を節約する	電気を節約した	
+économiser	du temps	時間を節約する	時間を節約した	
+économiser	l'eau	水を節約する	水を節約した	
+emprunter	de l'argent	お金を借りる	お金を借りた	
+emprunter	la voiture de Paul	ポールの車を借りる	ポールの車を借りた	
+emprunter	un parapluie	傘を借りる	傘を借りた	
+emprunter	des livres à la bibliothèque	図書館で本を借りる	図書館で本を借りた	
+prêter	de l'argent à Paul	ポールにお金を貸す	ポールにお金を貸した	
+prêter	la voiture	車を貸す	車を貸した	
+prêter	un livre à Marie	マリーに本を貸す	マリーに本を貸した	
+prêter	des outils aux voisins	近所の人に道具を貸す	近所の人に道具を貸した	
+apporter	un dessert	デザートを持っていく	デザートを持っていった	
+apporter	des fleurs	花を持ってくる	花を持ってきた	
+apporter	le café	コーヒーを運ぶ	コーヒーを運んだ	
+apporter	des cadeaux	プレゼントを持ってくる	プレゼントを持ってきた	
+amener	des amis à la fête	パーティーに友達を連れてくる	パーティーに友達を連れてきた	
+amener	le chien chez le vétérinaire	犬を獣医に連れていく	犬を獣医に連れていった	
+amener	un invité	お客さんを連れてくる	お客さんを連れてきた	
+amener	la voiture au garage	車を修理工場に持っていく	車を修理工場に持っていった	
+emmener	les enfants au parc	子どもを公園に連れていく	子どもを公園に連れていった	
+emmener	Paul à l'aéroport	ポールを空港まで送る	ポールを空港まで送った	
+emmener	la famille en vacances	家族を休暇に連れていく	家族を休暇に連れていった	
+emmener	les invités au restaurant	お客さんをレストランに連れていく	お客さんをレストランに連れていった	
+récupérer	les enfants à l'école	学校に子どもを迎えに行く	学校に子どもを迎えに行った	
+récupérer	les clés	鍵を取りに行く	鍵を取りに行った	
+récupérer	la voiture	車を引き取る	車を引き取った	
+récupérer	les billets au guichet	窓口でチケットを受け取る	窓口でチケットを受け取った	
+déménager	à Lyon	リヨンに引っ越す	リヨンに引っ越した	
+déménager	à la campagne	田舎に引っ越す	田舎に引っ越した	
+déménager	dans un plus grand appartement	もっと広いアパートに引っ越す	もっと広いアパートに引っ越した	
+déménager	pour le travail	仕事の都合で引っ越す	仕事の都合で引っ越した	
+annuler	le voyage	旅行をキャンセルする	旅行をキャンセルした	
+annuler	la réservation	予約を取り消す	予約を取り消した	
+annuler	la réunion	会議を中止にする	会議を中止にした	
+annuler	la commande	注文を取り消す	注文を取り消した	
+confirmer	le rendez-vous	約束を確定する	約束を確定した	
+confirmer	la date	日にちを確定する	日にちを確定した	
+confirmer	la commande	注文を確定する	注文を確定した	
+confirmer	la présence à la réunion	会議への出席を伝える	会議への出席を伝えた	
+organiser	un voyage	旅行を計画する	旅行を計画した	
+organiser	une réunion	会議を設定する	会議を設定した	
+organiser	un pique-nique	ピクニックを企画する	ピクニックを企画した	
+organiser	le mariage	結婚式の準備をする	結婚式の準備をした	
+rater	le bus	バスに乗り遅れる	バスに乗り遅れた	
+rater	l'avion	飛行機に乗り遅れる	飛行機に乗り遅れた	
+rater	l'examen	試験に落ちる	試験に落ちた	
+rater	le gâteau	ケーキ作りに失敗する	ケーキ作りに失敗した	
+attraper	un rhume	風邪をひく	風邪をひいた	
+attraper	le ballon	ボールを捕る	ボールを捕った	
+attraper	le dernier train	終電に間に合う	終電に間に合った	
+attraper	un poisson	魚を釣る	魚を釣った	
+traverser	le pont	橋を渡る	橋を渡った	
+traverser	la ville	町を横切る	町を横切った	
+traverser	la forêt	森を抜ける	森を抜けた	
+traverser	la France en voiture	車でフランスを横断する	車でフランスを横断した	
+garer	la voiture devant la maison	家の前に車を停める	家の前に車を停めた	
+garer	le vélo	自転車を停める	自転車を停めた	
+garer	la voiture au parking	駐車場に車を停める	駐車場に車を停めた	
+garer	la moto	バイクを停める	バイクを停めた	
+découvrir	un petit village	小さな村を見つける	小さな村を見つけた	
+découvrir	la vérité	真実を知る	真実を知った	
+découvrir	la cuisine coréenne	韓国料理に出会う	韓国料理に出会った	
+découvrir	un nouveau chanteur	新しい歌手を知る	新しい歌手を知った	
+offrir	un cadeau à Marie	マリーにプレゼントを贈る	マリーにプレゼントを贈った	
+offrir	un verre à Paul	ポールに一杯おごる	ポールに一杯おごった	
+offrir	des chocolats	チョコレートを贈る	チョコレートを贈った	
+offrir	un livre aux enfants	子どもに本を贈る	子どもに本を贈った	
+remercier	les invités	お客さんにお礼を言う	お客さんにお礼を言った	
+remercier	le médecin	医者にお礼を言う	医者にお礼を言った	
+remercier	les voisins	近所の人にお礼を言う	近所の人にお礼を言った	
+remercier	tout le monde	みんなにお礼を言う	みんなにお礼を言った	
+féliciter	les mariés	新郎新婦を祝う	新郎新婦を祝った	
+féliciter	Paul pour le nouveau travail	ポールの新しい仕事を祝う	ポールの新しい仕事を祝った	
+féliciter	l'équipe	チームをたたえる	チームをたたえた	
+féliciter	les gagnants	勝者を祝福する	勝者を祝福した	
+rire	aux éclats	大笑いする	大笑いした	
+rire	devant le film	映画を見て笑う	映画を見て笑った	
+rire	avec des amis	友達と笑う	友達と笑った	
+rire	de la blague	冗談に笑う	冗談に笑った	
+pleurer	de joie	うれし泣きする	うれし泣きした	
+pleurer	devant le film	映画を見て泣く	映画を見て泣いた	
+pleurer	au mariage	結婚式で泣く	結婚式で泣いた	
+pleurer	de rire	笑いすぎて涙が出る	笑いすぎて涙が出た	
+sourire	aux clients	お客さんに笑顔を向ける	お客さんに笑顔を向けた	
+sourire	pour la photo	写真のために笑顔を作る	写真のために笑顔を作った	
+sourire	au bébé	赤ちゃんに微笑む	赤ちゃんに微笑んだ	
+sourire	à Marie	マリーに微笑む	マリーに微笑んだ	
+crier	de joie	喜びの声を上げる	喜びの声を上げた	
+crier	au secours	助けを呼ぶ	助けを呼んだ	
+crier	très fort	大声で叫ぶ	大声で叫んだ	
+crier	pendant le match	試合中に叫ぶ	試合中に叫んだ	
+discuter	du problème	問題について話し合う	問題について話し合った	
+discuter	avec le patron	上司と話し合う	上司と話し合った	
+discuter	du prix	値段の交渉をする	値段の交渉をした	
+discuter	des vacances	休暇について話し合う	休暇について話し合った	
+téléphoner	au médecin	医者に電話する	医者に電話した	
+téléphoner	à la banque	銀行に電話する	銀行に電話した	
+téléphoner	aux parents de Marie	マリーの両親に電話する	マリーの両親に電話した	
+téléphoner	à l'hôtel	ホテルに電話する	ホテルに電話した	
+rappeler	le client	お客さんに折り返し電話する	お客さんに折り返し電話した	
+rappeler	le médecin	医者に折り返し電話する	医者に折り返し電話した	
+rappeler	le rendez-vous à Paul	ポールに約束を念押しする	ポールに約束を念押しした	
+rappeler	l'agence	代理店に電話をかけ直す	代理店に電話をかけ直した	
+dessiner	un plan	図面を描く	図面を描いた	
+dessiner	un portrait	似顔絵を描く	似顔絵を描いた	
+dessiner	des fleurs	花の絵を描く	花の絵を描いた	
+dessiner	un paysage	風景を描く	風景を描いた	
+peindre	la porte en bleu	ドアを青く塗る	ドアを青く塗った	
+peindre	un tableau	絵を描く	絵を描いた	
+peindre	la chambre	部屋を塗る	部屋を塗った	
+peindre	des montagnes	山の絵を描く	山の絵を描いた	
+planter	des tomates	トマトを植える	トマトを植えた	
+planter	des fleurs	花を植える	花を植えた	
+planter	un cerisier	桜の木を植える	桜の木を植えた	
+planter	des pommes de terre	じゃがいもを植える	じゃがいもを植えた	
+cueillir	des cerises	さくらんぼを摘む	さくらんぼを摘んだ	
+cueillir	des champignons	きのこを採る	きのこを採った	
+cueillir	des feuilles de thé	茶葉を摘む	茶葉を摘んだ	
+cueillir	des fraises	いちごを摘む	いちごを摘んだ	
+arroser	les fleurs	花に水をやる	花に水をやった	
+arroser	les plantes	植木に水をやる	植木に水をやった	
+arroser	le potager	菜園に水をやる	菜園に水をやった	
+arroser	les tomates	トマトに水をやる	トマトに水をやった	
+servir	le dîner	夕食を出す	夕食を出した	
+servir	les clients	お客さんに給仕する	お客さんに給仕した	
+servir	du vin	ワインをつぐ	ワインをついだ	
+servir	le dessert	デザートを出す	デザートを出した	
+commander	une pizza	ピザを注文する	ピザを注文した	
+commander	un taxi	タクシーを手配する	タクシーを手配した	
+commander	des livres en ligne	ネットで本を注文する	ネットで本を注文した	
+commander	le plat du jour	日替わり料理を頼む	日替わり料理を頼んだ	
+recommander	ce livre	この本を勧める	この本を勧めた	
+recommander	un bon médecin	いい医者を紹介する	いい医者を紹介した	
+recommander	ce film	この映画を勧める	この映画を勧めた	
+recommander	un hôtel	ホテルを勧める	ホテルを勧めた	
+adorer	ce plat	この料理をすごく気に入る	この料理をすごく気に入った	この料理が大好きだ
+adorer	ce village	この村をすごく気に入る	この村をすごく気に入った	この村が大好きだ
+adorer	le cadeau	プレゼントをすごく気に入る	プレゼントをすごく気に入った	プレゼントが大好きだ
+adorer	cette chanson	この歌をすごく気に入る	この歌をすごく気に入った	この歌が大好きだ
+hésiter	longtemps	長い間迷う	長い間迷った	長い間迷っている
+hésiter	entre deux vestes	2着の上着で迷う	2着の上着で迷った	2着の上着で迷っている
+hésiter	à répondre	答えるのをためらう	答えるのをためらった	答えるのをためらっている
+hésiter	à partir	出発するのをためらう	出発するのをためらった	出発するのをためらっている
+réfléchir	à la question	その問題についてよく考える	その問題についてよく考えた	
+réfléchir	avant de répondre	答える前によく考える	答える前によく考えた	
+réfléchir	à l'avenir	将来についてよく考える	将来についてよく考えた	
+réfléchir	à la proposition	提案をよく考える	提案をよく考えた	
+réussir	le permis de conduire	運転免許に合格する	運転免許に合格した	
+réussir	le gâteau	ケーキ作りに成功する	ケーキ作りに成功した	
+réussir	le concours	試験に受かる	試験に受かった	
+réussir	à dormir	うまく眠れる	うまく眠れた	
+grandir	à la campagne	田舎で育つ	田舎で育った	
+grandir	à Paris	パリで育つ	パリで育った	
+grandir	vite	早く大きくなる	早く大きくなった	
+grandir	au bord de la mer	海辺で育つ	海辺で育った	
+maigrir	un peu	少しやせる	少しやせた	
+maigrir	de trois kilos	3キロやせる	3キロやせた	
+maigrir	grâce au sport	運動のおかげでやせる	運動のおかげでやせた	
+maigrir	en mangeant mieux	食生活を改めてやせる	食生活を改めてやせた	
+grossir	un peu	少し太る	少し太った	
+grossir	de deux kilos	2キロ太る	2キロ太った	
+grossir	pendant les vacances	休暇中に太る	休暇中に太った	
+grossir	à cause du stress	ストレスで太る	ストレスで太った	
+guérir	vite	すぐ治る	すぐ治った	
+guérir	du rhume	風邪が治る	風邪が治った	
+guérir	complètement	すっかり治る	すっかり治った	
+guérir	grâce au repos	休養のおかげで治る	休養のおかげで治った	
+naître	à l'hôpital	病院で生まれる	病院で生まれた	
+naître	à la maison	家で生まれる	家で生まれた	
+naître	au Japon	日本で生まれる	日本で生まれた	
+naître	en avance	予定より早く生まれる	予定より早く生まれた	
+mourir	à l'hôpital	病院で亡くなる	病院で亡くなった	
+mourir	de vieillesse	老衰で亡くなる	老衰で亡くなった	
+mourir	dans un accident	事故で亡くなる	事故で亡くなった	
+mourir	en paix	安らかに亡くなる	安らかに亡くなった	
+s'installer	à la campagne	田舎に移り住む	田舎に移り住んだ	
+s'installer	dans le salon	居間でくつろぐ	居間でくつろいだ	
+s'installer	à Paris	パリに移り住む	パリに移り住んだ	
+s'installer	à la terrasse	テラス席に座る	テラス席に座った	
+s'entraîner	pour le marathon	マラソンに向けて練習する	マラソンに向けて練習した	
+s'entraîner	à la salle de sport	ジムでトレーニングする	ジムでトレーニングした	
+s'entraîner	avec un coach	コーチとトレーニングする	コーチとトレーニングした	
+s'entraîner	au piano	ピアノの練習をする	ピアノの練習をした	
+fumer	une cigarette	タバコを一本吸う	タバコを一本吸った	
+fumer	dehors	外でタバコを吸う	外でタバコを吸った	
+fumer	la pipe	パイプを吸う	パイプを吸った	
+fumer	sur le balcon	ベランダでタバコを吸う	ベランダでタバコを吸った	
+pleuvoir	toute la journée	一日中雨が降る	一日中雨が降った	一日中雨が降っている
+pleuvoir	à verse	土砂降りになる	土砂降りだった	土砂降りだ
+pleuvoir	à Paris	パリで雨が降る	パリで雨が降った	パリは雨が降っている
+pleuvoir	un peu	少し雨が降る	少し雨が降った	少し雨が降っている
+neiger	toute la nuit	一晩中雪が降る	一晩中雪が降った	一晩中雪が降っている
+neiger	en montagne	山で雪が降る	山で雪が降った	山は雪が降っている
+neiger	beaucoup	たくさん雪が降る	たくさん雪が降った	たくさん雪が降っている
+neiger	un peu	少し雪が降る	少し雪が降った	少し雪が降っている
+rêver	de vacances	休暇を夢見る	休暇を夢見た	休暇を夢見ている
+rêver	d'une maison à la campagne	田舎の家を夢見る	田舎の家を夢見た	田舎の家を夢見ている
+rêver	de voyager	旅行することを夢見る	旅行することを夢見た	旅行することを夢見ている
+rêver	de Marie	マリーの夢を見る	マリーの夢を見た	
