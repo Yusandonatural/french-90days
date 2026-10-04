@@ -17,6 +17,11 @@ import { initHome, renderHome } from './ui/screens/Home';
 import { initSpeak } from './ui/screens/Speak';
 import { initDayBar } from './ui/screens/DayBar';
 import { initFooter } from './ui/screens/Footer';
+import { initSyncCard } from './ui/screens/Sync';
+import { initSync } from './sync/cloud';
+import { renderUnits } from './ui/screens/Words';
+import { SES } from './engine/session';
+import { isShown } from './ui/router';
 
 initSpeech();
 initRouter();
@@ -34,3 +39,11 @@ renderProgress();
 renderConj();
 renderPlayer();
 renderHome();
+
+// Cloud sync: when another device's progress is merged in, refresh what's on screen.
+initSyncCard();
+initSync(() => {
+  renderProgress();
+  renderHome();
+  if (isShown('words') && !SES.on) renderUnits();
+});

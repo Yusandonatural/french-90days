@@ -26,7 +26,8 @@ src/
                       ja.ts（jaOf, jNeg, jNegPast, adjJa）, frames.ts（単語→動詞文）
   engine/             pick.ts（出題の重み）, session.ts（10問・XP・連続日数・バッジ）,
                       course.ts（Day 割り当て・タイマー・診断採点・自分専用フレーズ）
-  store/              state.ts（ST と移行）, rec.ts（IndexedDB の録音）
+  store/              state.ts（ST と移行）, merge.ts（端末どうしの記録の合わせ方）, rec.ts（IndexedDB の録音）
+  sync/               cloud.ts（Firebase：Google ログインと同期）, firebase-config.ts（設定値）
   ui/                 styles/（tokens.css ほか。読み込み順＝元の CSS の順）, speech.ts, router.ts,
                       components/lesson.ts, screens/（Home, Course, Diagnosis, Drill, Conj, Words,
                       Listen, Speak, Learn, DayBar, Footer）

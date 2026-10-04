@@ -67,3 +67,20 @@ main に入ると数分で公開ページに反映されます。
    ```
 4. DNS が通ったら Settings → Pages で **Enforce HTTPS** にチェック。Search Console に新しいURLを追加。
 5. 保存先がドメインごとに分かれるので、利用者には §4 の手順で進み具合を移してもらう。
+
+## 7. iPhone と Web の同期（Firebase）
+Google でログインすると、進み具合が Firestore の `progress/{ユーザーID}` に保存され、端末どうしで合わさります。
+合わせ方は `src/store/merge.ts`（数は大きい方、設定は新しい方、リセットは新しい方が優先）。録音とプレーヤー設定は同期しません。
+
+**初回の設定（Firebase コンソール https://console.firebase.google.com ）**
+1. プロジェクトを追加（名前は例：french-90days。Google アナリティクスは不要）。料金は無料の Spark プランのままで足ります。
+2. **Authentication** → 始める → ログイン方法で **Google** を有効にする（サポートメールを選ぶ）。
+3. **Authentication → 設定 → 承認済みドメイン** に `yusandonatural.github.io` を追加（独自ドメインに移したら `french.yusando.com` も）。
+4. **Firestore Database** → データベースを作成 → 本番環境モード → ロケーション `asia-northeast1`（東京）。
+5. Firestore の **ルール** タブに、このリポジトリの `firestore.rules` の中身を貼って公開。
+6. **プロジェクトの設定 → マイアプリ → ウェブアプリ（</>）を追加** → 表示される `firebaseConfig` の値を `src/sync/firebase-config.ts` の `FIREBASE_CONFIG` に入れる。
+7. `npm run build` してコミット・push。ホーム画面のいちばん下に「記録の同期」が出ます。
+
+`FIREBASE_CONFIG` が `null` のあいだは同期の表示は出ず、これまでどおり端末の中だけに保存されます。
+
+**開発用**：`npx firebase-tools emulators:start --only auth,firestore --project demo-french` を起動し、`VITE_FIREBASE_EMULATOR=1 npm run dev` で手元のエミュレーターにつながります。

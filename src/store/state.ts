@@ -25,6 +25,10 @@ export interface State {
   days: Record<string, number>; goal: number; lessons: number; perfect: number;
   wd: Record<string, Tally>;
   course?: Course;
+  /** ms of the last change (used when syncing devices) */
+  updatedAt?: number;
+  /** set by 成績をリセット; a newer epoch replaces older data instead of merging with it */
+  epoch?: number;
 }
 
 export const blank = (): State => ({ forms: { pc: [0, 0], vd: [0, 0], al: [0, 0], neg: [0, 0] }, streak: 0, best: 0, total: 0, v: {}, stage: 0, xp: 0, days: {}, goal: 50, lessons: 0, perfect: 0, wd: {} });
@@ -44,8 +48,14 @@ function load(): State {
 }
 
 export let ST: State = load();
-export function save() { try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch { /* ignore */ } }
-export function resetState() { ST = blank(); save(); }
+function write() { try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch { /* ignore */ } }
+const listeners: (() => void)[] = [];
+/** Called after every save (cloud sync pushes from here). */
+export function onSaved(fn: () => void) { listeners.push(fn); }
+export function save() { ST.updatedAt = Date.now(); write(); listeners.forEach(f => f()); }
+export function resetState() { ST = blank(); ST.epoch = Date.now(); save(); }
+/** Replace the whole state (after merging with another device). Does not notify listeners. */
+export function replaceState(s: State) { ST = s; write(); }
 
 /* ---------- verbs ---------- */
 export const vc = (k: string) => (ST.v[k] || [0, 0])[0];
