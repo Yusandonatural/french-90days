@@ -1,0 +1,39 @@
+/* Home, lessons, word units, badges. */
+/* home & duolingo-like */
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.stat b{display:block;font-size:20px}.stat span{font-size:12px;color:var(--muted)}
+.goalrow,.prow{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;margin:6px 0 4px}
+.bar.thick{height:12px;border-radius:6px}
+.bar.thick i{border-radius:6px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:14px;align-items:end}
+.wk{text-align:center;font-size:12px;color:var(--muted)}
+.wk.today{color:var(--ink);font-weight:700}
+.wkbar{height:64px;background:var(--bg);border-radius:6px;display:flex;align-items:flex-end;overflow:hidden;margin-bottom:3px}
+.wkbar i{display:block;width:100%;background:var(--al);border-radius:6px 6px 0 0}
+.cont,.unit{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;margin:8px 0}
+.cont>span:nth-child(2),.ubody{flex:1;display:flex;flex-direction:column;gap:2px}
+.cemo,.uemo{font-size:26px;width:36px;text-align:center}
+.ugo{font-size:16px;color:var(--muted)}
+.unit.next{border-color:var(--vd);box-shadow:0 0 0 2px color-mix(in srgb,var(--vd) 25%,transparent)}
+.utitle{font-weight:700}.umeta{font-size:12.5px;color:var(--muted)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.bdg{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center;opacity:.4;filter:grayscale(1)}
+.bdg.got{opacity:1;filter:none;border-color:var(--al)}
+.bdg .be{display:block;font-size:24px}.bdg b{display:block;font-size:13px}.bdg span:last-child{font-size:11px;color:var(--muted);line-height:1.3;display:block}
+.ses{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.ses:empty{display:none}
+.sesbar{flex:1;height:14px;background:var(--line);border-radius:7px;overflow:hidden}
+.sesfill{height:100%;background:var(--ok);border-radius:7px;transition:width .3s}
+.sesn{font-size:13px;color:var(--muted);min-width:42px;text-align:right}
+.summary{text-align:center;padding:10px 0}
+.sumtitle{font-family:'Literata',Georgia,serif;font-size:28px;font-weight:600;margin-bottom:12px}
+.sumgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 10px}
+.sumgrid div{background:var(--bg);border-radius:12px;padding:12px 4px}
+.sumgrid b{display:block;font-size:22px}.sumgrid span{font-size:12px;color:var(--muted)}
+.wcard{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--bg);border-radius:12px;padding:16px;margin:8px 0}
+.wfr{font-size:clamp(24px,7vw,32px);font-weight:600}
+.wja{font-size:22px;font-weight:700}
+.gtag{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:0 8px;color:var(--muted)}
+.bigprog{margin:6px 0 10px}.bigprog b{font-size:22px}
+.lesson-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}

@@ -3,10 +3,11 @@
 ## このフォルダの中身
 | ファイル | 役割 |
 |---|---|
-| `docs/index.html` | アプリ本体（GA4・SEO・OGP・構造化データ入り） |
-| `docs/og.jpg` | SNSで共有したときに出る画像（1200×630） |
-| `docs/404.html`・`robots.txt`・`sitemap.xml` | 検索エンジン向けの土台 |
-| `docs/CNAME` | 独自ドメイン `french.yusando.com`（変えるならこの1行と `google-ids.json`・`sitemap.xml`・index.html 内のURLを置換） |
+| `docs/` | 公開されるビルド結果。`npm run build` で作り直す（手で編集しない） |
+| `index.html` | アプリの骨組み（GA4・SEO・OGP・構造化データ入り） |
+| `public/og.jpg` | SNSで共有したときに出る画像（1200×630） |
+| `public/404.html`・`robots.txt`・`sitemap.xml` | 検索エンジン向けの土台 |
+| `public/CNAME` | 独自ドメイン `french.yusando.com`（変えるならこの1行と `google-ids.json`・`public/sitemap.xml`・`index.html` 内のURLを置換） |
 | `google-ids.json` | GA4（G-9JG1FFTL1B・全サービス共通）と広告IDの設定 |
 
 ## 1. GitHub に置く
@@ -52,6 +53,7 @@ aws route53 change-resource-record-sets --hosted-zone-id "$HZ" --change-batch '{
 （Day 0 の録音はブラウザごとの保存なので移りません）
 
 ## 5. 公開前チェック
+- [ ] `npm test` が通り、`npm run build` で作り直した `docs/` をコミットした
 - [x] gtag は1本だけ（本番ドメイン以外では送信しない）
 - [x] title / description / canonical / OGP / JSON-LD（WebSite＋Organization＋WebApplication）
 - [x] robots.txt・sitemap.xml・404.html・CNAME・.nojekyll
