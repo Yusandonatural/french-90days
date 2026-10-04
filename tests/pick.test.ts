@@ -35,3 +35,18 @@ describe('learned after one correct answer', () => {
     setCourseDay(0);
   });
 });
+
+describe('bringing the next items forward', () => {
+  test('a learned stage moves on to the next stage', async () => {
+    const { advanceStage } = await import('../src/engine/pick');
+    ST.v = Object.fromEntries(stageVerbs(0).map(v => [v.key, [1, 1]])); ST.stage = 0;
+    expect(advanceStage()).toBe(1);
+    expect(ST.stage).toBe(1);
+    expect(advanceStage()).toBeNull(); // stage 1 not learned yet
+  });
+  test('course: everything up to Day N learned → next verbs', () => {
+    ST.v = Object.fromEntries(VERBS.slice(0, 11).map(v => [v.key, [1, 1]])); setCourseDay(5);
+    for (let i = 0; i < 50; i++) expect([11, 12, 13]).toContain(pickVerb().idx);
+    setCourseDay(0);
+  });
+});

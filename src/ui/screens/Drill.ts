@@ -9,7 +9,8 @@ import { jaNegOf, jaOf } from '../../grammar/ja';
 import { advCandidates, advForm, pickAdv, type Adverb } from '../../grammar/adverbs';
 import { ST, lvl, mastered, save } from '../../store/state';
 import { SES, recordVerb, sesDone, sesReset } from '../../engine/session';
-import { getCourseDay, pickVerb, resetLastKey, setCourseDay } from '../../engine/pick';
+import { advanceStage, getCourseDay, isAhead, pickVerb, resetLastKey, setCourseDay } from '../../engine/pick';
+import { toast } from '../toast';
 import { dvEnd } from '../../engine/course';
 import { speak } from '../speech';
 import { renderSesBar, summaryHTML } from '../components/lesson';
@@ -56,9 +57,14 @@ const MK: Record<'pc' | 'al', [string, string][]> = {
   al: [['Demain','明日'],['Ce soir','今夜'],['Ce week-end','今週末'],['La semaine prochaine','来週'],['Plus tard','後で']],
 };
 
+/** set when an answer finishes the stage; the next question moves on to the next stage */
+let stageJustCleared = false;
+
 /** Record an answer and refresh the lesson bar and progress. */
 export function rec(f: string, ok: boolean, key: string | null, noSes?: boolean) {
+  const before = mastered(ST.stage);
   recordVerb(f, ok, key, noSes);
+  if (ok && !getCourseDay() && before < 20 && mastered(ST.stage) === 20) stageJustCleared = true;
   if (!noSes && SES.on) renderSesBar();
   renderProgress();
 }
@@ -92,7 +98,7 @@ export function renderProgress() {
   $('#streak').textContent = `解いた数 ${ST.total}　連続正解 ${ST.streak}（最高 ${ST.best}）`;
 }
 
-const vtag = (v: VerbEx) => `<p class="vtag">${v.idx + 1}. <b>${esc(v.key)}</b>　例文${(v.exi || 0) + 1}/${v.ex.length}${v.stage < ST.stage ? '　復習' : ''}</p>`;
+const vtag = (v: VerbEx) => `<p class="vtag">${v.idx + 1}. <b>${esc(v.key)}</b>　例文${(v.exi || 0) + 1}/${v.ex.length}${isAhead(v) ? '　先取り' : !getCourseDay() && v.stage < ST.stage ? '　復習' : ''}</p>`;
 
 /* ---------- drill ---------- */
 type Mode = 'choice' | 'compose' | 'transform' | 'neg';
@@ -105,6 +111,11 @@ export function nextDrill() {
     $('#again').onclick = () => { sesReset('drill'); nextDrill(); };
     renderSesBar(); renderProgress();
     return;
+  }
+  if (stageJustCleared) {
+    stageJustCleared = false;
+    const done = ST.stage, next = advanceStage();
+    if (next != null) { save(); resetLastKey(); renderProgress(); toast(`ステージ${done + 1} 習得！ ステージ${next + 1}へ進みます`); }
   }
   ({ choice: renderChoice, compose: renderCompose, transform: renderTransform, neg: renderNegDrill })[mode]();
   renderSesBar();
