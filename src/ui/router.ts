@@ -9,6 +9,8 @@ export function onShow(tab: Tab, fn: () => void) { handlers[tab] = fn; }
 export function go(tab: Tab) {
   $$('nav.tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
   $$('section.tab').forEach(s => s.classList.toggle('on', s.id === 't-' + tab));
+  const foot = document.getElementById('foot');
+  if (foot) foot.hidden = tab !== 'home';
   window.scrollTo(0, 0);
   handlers[tab]?.();
 }

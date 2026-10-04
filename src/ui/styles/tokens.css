@@ -1,42 +1,49 @@
-/* Design tokens (light / dark), base typography and the time-axis colour classes. */
+/* Design tokens (light / dark), base typography and the time-axis colour classes.
+   Soft learning-app look: warm paper background, white cards with a light shadow,
+   rounded corners, chunky buttons. The form colours (pc / vd / al) are unchanged. */
 :root{
-  --bg:#EDF0F3; --surface:#FFFFFF; --ink:#1A2230; --muted:#5B6676; --line:#D3DAE2;
-  --pc:#3949A3; --vd:#0E7F74; --al:#A86D12; --ok:#2F7D4A; --ng:#B23A3A;
-  --pc-soft:#E4E7F6; --vd-soft:#DDF1EE; --al-soft:#F6EBD6;
+  --bg:#F6F4EF; --surface:#FFFFFF; --ink:#1F2633; --muted:#667080; --line:#E4E1D8;
+  --pc:#3949A3; --vd:#0E7F74; --al:#A86D12; --ok:#2F8A4F; --ng:#C04040;
+  --pc-soft:#E6E9F8; --vd-soft:#DCF2EE; --al-soft:#F8EDD8; --ok-soft:#E0F2E6; --ng-soft:#FBE5E5;
+  --shadow:0 1px 2px rgba(31,38,51,.05),0 4px 14px rgba(31,38,51,.06);
+  --press:color-mix(in srgb,var(--ink) 75%,#000);
+  --r-card:18px; --r-btn:14px;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#12161C; --surface:#1B2129; --ink:#E7ECF2; --muted:#9AA5B4; --line:#2C3440;
+    --bg:#121519; --surface:#1C2128; --ink:#E9EDF2; --muted:#9AA4B2; --line:#2E353F;
     --pc:#9AA5F0; --vd:#5CCABD; --al:#E6B865; --ok:#6CC38A; --ng:#EE8080;
-    --pc-soft:#252B48; --vd-soft:#17332F; --al-soft:#3A2F1A;
+    --pc-soft:#252B48; --vd-soft:#17332F; --al-soft:#3A2F1A; --ok-soft:#1A3324; --ng-soft:#3D2022;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+    --press:color-mix(in srgb,var(--ink) 55%,#000);
   }
 }
 :root[data-theme="dark"]{
-  --bg:#12161C; --surface:#1B2129; --ink:#E7ECF2; --muted:#9AA5B4; --line:#2C3440;
+  --bg:#121519; --surface:#1C2128; --ink:#E9EDF2; --muted:#9AA4B2; --line:#2E353F;
   --pc:#9AA5F0; --vd:#5CCABD; --al:#E6B865; --ok:#6CC38A; --ng:#EE8080;
-  --pc-soft:#252B48; --vd-soft:#17332F; --al-soft:#3A2F1A;
+  --pc-soft:#252B48; --vd-soft:#17332F; --al-soft:#3A2F1A; --ok-soft:#1A3324; --ng-soft:#3D2022;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+  --press:color-mix(in srgb,var(--ink) 55%,#000);
 }
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-tap-highlight-color:transparent}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);
-  font-family:'Zen Kaku Gothic New','Hiragino Sans','Noto Sans JP','Yu Gothic',system-ui,sans-serif;
+  font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN','Hiragino Sans','Noto Sans JP','Yu Gothic',system-ui,sans-serif;
   font-size:16px;line-height:1.75;-webkit-text-size-adjust:100%}
 .fr{font-family:'Literata',Georgia,'Times New Roman',serif;line-height:1.5}
-main{max-width:720px;margin:0 auto;padding:20px 18px 120px}
-h1{font-family:'Literata',Georgia,serif;font-weight:600;font-size:clamp(26px,7vw,40px);line-height:1.15;margin:8px 0 4px;letter-spacing:-.01em}
-h1,.h1{font-family:'Literata',Georgia,serif;font-weight:600;font-size:clamp(26px,7vw,40px);line-height:1.15;margin:8px 0 4px;letter-spacing:-.01em}
-h2{font-size:19px;margin:40px 0 10px;font-weight:700}
+main{max-width:720px;margin:0 auto;padding:16px 16px 132px}
+h1,.h1{font-family:'Literata',Georgia,serif;font-weight:600;font-size:clamp(28px,8vw,40px);line-height:1.15;margin:8px 0 10px;letter-spacing:-.01em}
+h2{font-size:18px;margin:32px 0 10px;font-weight:700}
 h3{font-size:16px;margin:0 0 4px;font-weight:700}
 p{margin:0 0 12px}
 .muted{color:var(--muted)}
 .small{font-size:14px}
 button{font:inherit;color:inherit;cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--pc);outline-offset:2px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--pc);outline-offset:2px}
 section.tab{display:none}
 section.tab.on{display:block}
 .k-pc{--c:var(--pc);--cs:var(--pc-soft)}
 .k-vd{--c:var(--vd);--cs:var(--vd-soft)}
 .k-al{--c:var(--al);--cs:var(--al-soft)}
-.badge{display:inline-block;font-size:12.5px;font-weight:700;padding:1px 9px;border-radius:999px;background:var(--cs);color:var(--c);white-space:nowrap}
-
+.badge{display:inline-block;font-size:12.5px;font-weight:700;padding:1px 10px;border-radius:999px;background:var(--cs);color:var(--c);white-space:nowrap}

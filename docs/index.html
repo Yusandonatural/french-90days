@@ -90,13 +90,14 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"90日フランス語","url":"https://yusandonatural.github.io/french-90days/","applicationCategory":"EducationalApplication","operatingSystem":"Web","inLanguage":"ja","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"publisher":{"@id":"https://yusando.com/#organization"}}
 </script>
-<meta name="theme-color" content="#1A2230">
+<meta name="theme-color" content="#F6F4EF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121519" media="(prefers-color-scheme: dark)">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="./assets/index-CqOxEVlj.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DOHgC8IO.css">
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="./assets/index-eiJiSI-C.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-B1UiqyWM.css">
 </head>
 <body>
 <main>
@@ -104,18 +105,18 @@
 <section class="tab on" id="t-home" aria-label="ホーム">
   <div id="dx" hidden></div>
   <div id="homeMain">
-  <h1 class="fr">Bonjour !</h1>
+  <header class="topbar"><h1 class="fr">Bonjour !</h1><div class="pills" id="hStats"></div></header>
   <div id="course"></div>
-  <div class="stats3" id="hStats"></div>
-  <div class="panel"><div id="hGoal"></div><div class="week" id="hWeek"></div></div>
-  <h2>続きから</h2>
-  <div id="hNext"></div>
+  <h2>今日のXP</h2>
+  <div class="panel"><div id="hGoal"></div><div class="week" id="hWeek"></div>
+    <p class="label" style="margin-top:14px">1日の目標</p>
+    <div class="seg" id="hGoalSeg" role="group" aria-label="1日の目標"></div></div>
+  <h2>自由に練習</h2>
+  <div class="tiles" id="hNext"></div>
   <h2>進み具合</h2>
   <div class="panel" id="hProg"></div>
   <h2>バッジ</h2>
   <div class="badges" id="hBadges"></div>
-  <h2>1日の目標</h2>
-  <div class="seg" id="hGoalSeg" role="group" aria-label="1日の目標"></div>
   </div>
 </section>
 
@@ -235,20 +236,23 @@
     <div class="nm" id="stName"></div>
     <button class="arrow" id="stNext" aria-label="次のステージ">›</button>
   </div>
-  <p class="small" style="margin:0 0 6px"><button class="linkbtn" data-go="conj">活用表を見る</button></p>
   <div id="stClear"></div>
-  <div class="grid" id="grid" aria-label="200語の習得状況"></div>
-  <div class="legend"><span><i style="background:var(--line)"></i>未習</span><span><i style="background:color-mix(in srgb,var(--ink) 35%,var(--line))"></i>練習中</span><span><i style="background:var(--ink)"></i>習得（3回正解）</span><span>マスをタップで動詞を表示</span></div>
-  <div class="meter" id="meter"></div>
-  <p class="streak" id="streak"></p>
-  <div class="seg" id="modeSeg" role="group" aria-label="練習の種類">
-    <button data-m="choice" aria-pressed="true">場面で選ぶ</button>
-    <button data-m="compose" aria-pressed="false">訳して書く</button>
-    <button data-m="transform" aria-pressed="false">形を変える</button>
-    <button data-m="neg" aria-pressed="false">否定にする</button>
+  <div class="modes" id="modeSeg" role="group" aria-label="練習の種類">
+    <button data-m="choice" aria-pressed="true"><span>🎯</span>場面で選ぶ</button>
+    <button data-m="compose" aria-pressed="false"><span>✍️</span>訳して書く</button>
+    <button data-m="transform" aria-pressed="false"><span>🔄</span>形を変える</button>
+    <button data-m="neg" aria-pressed="false"><span>🚫</span>否定にする</button>
   </div>
   <div class="ses" id="sesBar"></div>
   <div class="panel" id="drill"></div>
+  <details class="panel fold" id="progFold">
+    <summary><b>200語の習得状況と正答率</b></summary>
+    <div class="grid" id="grid" aria-label="200語の習得状況"></div>
+    <div class="legend"><span><i style="background:var(--line)"></i>未習</span><span><i style="background:color-mix(in srgb,var(--ink) 35%,var(--line))"></i>練習中</span><span><i style="background:var(--ink)"></i>習得（3回正解）</span><span>マスをタップで動詞を表示</span></div>
+    <div class="meter" id="meter"></div>
+    <p class="streak" id="streak"></p>
+  </details>
+  <p class="small" style="margin:12px 0 0;text-align:center"><button class="linkbtn" data-go="conj">活用表を見る</button></p>
 </section>
 
 <section class="tab" id="t-words" aria-label="単語">
@@ -279,7 +283,7 @@
   <div id="lisPlayer">
     <p class="muted small">1つの例文を je で4つの形に：現在形 → 複合過去 → venir de → aller。流しっぱなしで聞き、間のあいだに声に出してまねしてください。</p>
     <p class="label">範囲</p>
-    <div class="chips" id="plRange"></div>
+    <div class="chips scroll" id="plRange"></div>
     <div class="panel" id="player"></div>
   </div>
   <div id="lisQuiz" hidden>
@@ -288,16 +292,16 @@
   </div>
 </section>
 
-<p class="foot">音声は端末のフランス語読み上げを使います。成績はこの端末（このブラウザ）に保存されます。<br><button class="linkbtn" id="bkCopy">進み具合をコピー</button>　<button class="linkbtn" id="bkPaste">進み具合を貼り付けて復元</button>　<button class="linkbtn" id="reset">成績をリセット</button></p>
+<p class="foot" id="foot">音声は端末のフランス語読み上げを使います。成績はこの端末（このブラウザ）に保存されます。<br><button class="linkbtn" id="bkCopy">進み具合をコピー</button>　<button class="linkbtn" id="bkPaste">進み具合を貼り付けて復元</button>　<button class="linkbtn" id="reset">成績をリセット</button></p>
 </main>
 
 <div id="dayBar" hidden></div><div id="toast" hidden></div>
 <nav class="tabs" role="tablist">
-  <button role="tab" data-tab="home" aria-selected="true">ホーム</button>
-  <button role="tab" data-tab="drill" aria-selected="false">動詞</button>
-  <button role="tab" data-tab="words" aria-selected="false">単語</button>
-  <button role="tab" data-tab="listen" aria-selected="false">聞く</button>
-  <button role="tab" data-tab="speak" aria-selected="false">話す</button>
+  <button role="tab" data-tab="home" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg><span>ホーム</span></button>
+  <button role="tab" data-tab="drill" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11l3 3v13H5z"/><path d="M9 10h6M9 14h6M9 18h3"/></svg><span>動詞</span></button>
+  <button role="tab" data-tab="words" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M8 7h6"/></svg><span>単語</span></button>
+  <button role="tab" data-tab="listen" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></svg><span>聞く</span></button>
+  <button role="tab" data-tab="speak" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>話す</span></button>
 </nav>
 
 </body>

@@ -40,7 +40,7 @@ export function renderCourse() {
   const el = $('#course'); const c = C();
   if (!c) {
     el.innerHTML = `<div class="hero"><div class="hero-n">90</div><div><b>1日1時間 × 90日で、フランス語で話せるようになる</b><p class="small" style="margin:6px 0 0">90レッスンで終わるコースです。3ヶ月後のゴールは、ネイティブと10〜15分、自分のことと日常の話ができること（A2前後）。まず20〜30分の診断で、あなた専用の90日プランを作ります。</p></div></div>
-   <div class="actions"><button class="btn" id="dxGo">Day 0 診断を始める</button></div>`;
+   <button class="btn contbtn" id="dxGo">▶ Day 0 診断を始める（20〜30分）</button>`;
     $('#dxGo').onclick = () => dxStart(false);
     return;
   }
@@ -54,23 +54,35 @@ export function renderCourse() {
   }).join('');
   const blocks = BLOCKS.map(b => {
     const s = o.t[b.k], ok = blockDone(o, b), on = timer.act && timer.act.k === b.k;
-    return `<div class="blk${ok ? ' ok' : ''}${on ? ' on' : ''}"><span class="be2">${ok ? '✓' : b.emo}</span><span class="bb"><b>${b.t}　${b.min}分</b><span class="small muted">${b.d}</span><span class="bar"><i style="width:${Math.min(100, s / (b.min * 60) * 100)}%;background:${ok ? 'var(--ok)' : 'var(--al)'}"></i></span><span class="small muted">${fmt(s)} / ${b.min}:00</span></span><span class="bbtns">${blockBtns(b.k)}</span></div>`;
+    return `<div class="blk${ok ? ' ok' : ''}${on ? ' on' : ''}"><div class="blk-top"><span class="be2">${ok ? '✓' : b.emo}</span><b>${b.t}<span class="small">${b.min}分</span></b></div>
+      <span class="bb-desc">${b.d}</span><span class="bar"><i style="width:${Math.min(100, s / (b.min * 60) * 100)}%;background:${ok ? 'var(--ok)' : 'var(--al)'}"></i></span><span class="small muted">${fmt(s)} / ${b.min}:00</span><span class="bbtns">${blockBtns(b.k)}</span></div>`;
   }).join('');
   const prev = c.days[d - 1] && c.days[d - 1].memo;
   const total = BLOCKS.reduce((a, b) => a + Math.min(o.t[b.k], b.min * 60), 0);
-  el.innerHTML = `<div class="dayhead"><div class="dh-n"><span>Day</span><b>${allDone ? 90 : d}</b><span>/ 90</span></div>
-     <div class="dh-r"><div class="small"><b>${m.t}</b>：${esc(m.g)}</div><div class="bar thick" style="margin:8px 0 4px"><i style="width:${done / NDAYS * 100}%;background:var(--ok)"></i></div>
-     <div class="small muted">完了 ${done} / 90 ・ 残り ${NDAYS - done} レッスン ・ 毎日続ければ ${fin.getMonth() + 1}/${fin.getDate()} に修了${behind > 1 ? ` ・ <span style="color:var(--ng)">予定より${behind - 1}日遅れ</span>` : ''}</div></div></div>
-   ${allDone ? `<div class="clear"><span><b>90レッスン修了！</b> Day 90 のふり返り診断で、Day 0 と比べましょう。</span><button class="btn" id="dx90">ふり返り診断</button></div><div id="finalBox"></div>` : `
-   <div class="panel"><div class="goalrow"><span>今日のレッスン（目安60分）</span><b>${Math.round(total / 60)} / 60 分</b></div>
-     <p class="small muted" style="margin:0 0 6px">新しい動詞：${dayVerbs(d).map(v => esc(v.key)).join('、')}　／　新しい単語：${dayWords(d).length}語　／　フレーズ：${MEAN.filter(x => x.day === d).length}個</p>
-     ${(c.profile && c.profile.tm === 'four') ? '<p class="small muted" style="margin:0 0 6px">15分×4回に分けてOK。ブロックごとに時間がたまります。</p>' : ''}
-     ${blocks}
-     ${prev ? `<p class="small" style="margin:10px 0 0"><b>前日に言えなかったこと</b>：${esc(prev)}</p>` : ''}
+  const allBlocks = BLOCKS.every(b => blockDone(o, b));
+  // the one big button: next unfinished block, or finishing the Day
+  const next = BLOCKS.find(b => !blockDone(o, b));
+  const NEXT_LABEL: Record<BlockKey, string> = { rev: '復習（単語）', lis: '聞く・まねる', spk: '話す', memo: 'メモを書く' };
+  const cont = next
+    ? `<button class="btn contbtn" data-blk="${next.k}"${next.k === 'rev' ? ' data-a="words"' : ''}>▶ ${total ? '続きから' : '始める'}：${next.emo} ${NEXT_LABEL[next.k]}</button>`
+    : `<button class="btn contbtn" id="dayDone">✓ Day ${d} を完了する（+50 XP）</button>`;
+  el.innerHTML = `<div class="daycard">
+   <div class="dayhead"><div class="dh-n" style="--p:${done / NDAYS * 100}" role="img" aria-label="Day ${allDone ? 90 : d} / 90、完了 ${done}"><span>Day</span><b>${allDone ? 90 : d}</b><span>/ 90</span></div>
+     <div class="dh-r"><div class="small"><b>${m.t}</b>：${esc(m.g)}</div>
+     <div class="small muted">完了 ${done} / 90 ・ 残り ${NDAYS - done} ・ 毎日続ければ ${fin.getMonth() + 1}/${fin.getDate()} に修了${behind > 1 ? ` ・ <span style="color:var(--ng)">予定より${behind - 1}日遅れ</span>` : ''}</div></div></div>
+   ${allDone ? `<div class="clear"><span><b>90レッスン修了！</b> Day 90 のふり返り診断で、Day 0 と比べましょう。</span><button class="btn" id="dx90">ふり返り診断</button></div></div><div id="finalBox"></div>` : `
+   <div class="todaybar"><div class="goalrow"><span>今日のレッスン（目安60分）</span><b>${Math.round(total / 60)} / 60 分</b></div><div class="bar thick"><i style="width:${total / 36}%;background:${allBlocks ? 'var(--ok)' : 'var(--al)'}"></i></div></div>
+   ${cont}
+   <p class="small muted newstuff">新しい動詞：${dayVerbs(d).map(v => esc(v.key)).join('、')}　／　単語：${dayWords(d).length}語　／　フレーズ：${MEAN.filter(x => x.day === d).length}個</p>
+   ${(c.profile && c.profile.tm === 'four') ? '<p class="small muted" style="margin:4px 0 0">15分×4回に分けてOK。ブロックごとに時間がたまります。</p>' : ''}
+   </div>
+   <div class="blkgrid">${blocks}</div>
+   <div class="panel"><b>📝 今日のメモ</b>
+     ${prev ? `<p class="small" style="margin:6px 0 0"><b>前日に言えなかったこと</b>：${esc(prev)}</p>` : ''}
      <textarea id="memoBox" class="memo" placeholder="今日フランス語で言えなかったこと・聞き取れなかったこと">${esc(o.memo || '')}</textarea>
-     <div class="actions"><button class="btn" id="dayDone" ${BLOCKS.every(b => blockDone(o, b)) ? '' : 'data-early="1"'}>Day ${d} を完了する</button></div></div>`}
-   <div class="cal">${cells}</div>
-   <details class="panel" id="planCard"><summary><b>あなたの90日プラン</b></summary>
+     ${allBlocks ? '' : `<div class="actions"><button class="btn ghost" id="dayDone" data-early="1">Day ${d} を完了する</button></div>`}</div>`}
+   <div class="panel" style="margin-top:12px"><div class="goalrow" style="margin-top:0"><b>90日カレンダー</b><span class="small muted">完了 ${done} / 90</span></div><div class="cal">${cells}</div></div>
+   <details class="panel" id="planCard" style="margin-top:12px"><summary><b>あなたの90日プラン</b></summary>
      <p class="small">開始地点：Day ${c.startDay}${c.startDay > 1 ? `（診断の結果、Day 1〜${c.startDay - 1}は復習扱い）` : ''}<br>
      90日後にできること：<b>フランス語で、自分のことと日常の話を10〜15分続けられる（A2前後）</b><br>
      重点カテゴリ：${focusCats().join('・')}<br>
