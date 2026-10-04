@@ -1,7 +1,7 @@
 // The 90-day course panel on Home: Day ring, today's 4 blocks, calendar, plan.
 import { $, $$, esc } from '../../util/dom';
 import { MEAN } from '../../data';
-import { save, type BlockKey } from '../../store/state';
+import { save, vMastered, wLearned, type BlockKey } from '../../store/state';
 import { addXP } from '../../engine/session';
 import { setCourseDay } from '../../engine/pick';
 import {
@@ -60,12 +60,15 @@ export function renderCourse() {
   const prev = c.days[d - 1] && c.days[d - 1].memo;
   const total = BLOCKS.reduce((a, b) => a + Math.min(o.t[b.k], b.min * 60), 0);
   const allBlocks = BLOCKS.every(b => blockDone(o, b));
+  // learned everything new today: no need to wait for the timers
+  const learnedToday = dayVerbs(d).every(v => vMastered(v.key)) && dayWords(d).every(w => wLearned(w.id));
+  const canFinish = allBlocks || learnedToday;
   // the one big button: next unfinished block, or finishing the Day
   const next = BLOCKS.find(b => !blockDone(o, b));
   const NEXT_LABEL: Record<BlockKey, string> = { rev: '復習（単語）', lis: '聞く・まねる', spk: '話す', memo: 'メモを書く' };
-  const cont = next
+  const cont = !canFinish && next
     ? `<button class="btn contbtn" data-blk="${next.k}"${next.k === 'rev' ? ' data-a="words"' : ''}>▶ ${total ? '続きから' : '始める'}：${next.emo} ${NEXT_LABEL[next.k]}</button>`
-    : `<button class="btn contbtn" id="dayDone">✓ Day ${d} を完了する（+50 XP）</button>`;
+    : `${learnedToday && !allBlocks ? '<p class="small" style="margin:0 0 8px;color:var(--ok);font-weight:700">今日の新しい動詞と単語はすべて習得済みです。先へ進めます。</p>' : ''}<button class="btn contbtn" id="dayDone">✓ Day ${d} を完了して次へ（+50 XP）</button>`;
   el.innerHTML = `<div class="daycard">
    <div class="dayhead"><div class="dh-n" style="--p:${done / NDAYS * 100}" role="img" aria-label="Day ${allDone ? 90 : d} / 90、完了 ${done}"><span>Day</span><b>${allDone ? 90 : d}</b><span>/ 90</span></div>
      <div class="dh-r"><div class="small"><b>${m.t}</b>：${esc(m.g)}</div>
@@ -80,7 +83,7 @@ export function renderCourse() {
    <div class="panel"><b>📝 今日のメモ</b>
      ${prev ? `<p class="small" style="margin:6px 0 0"><b>前日に言えなかったこと</b>：${esc(prev)}</p>` : ''}
      <textarea id="memoBox" class="memo" placeholder="今日フランス語で言えなかったこと・聞き取れなかったこと">${esc(o.memo || '')}</textarea>
-     ${allBlocks ? '' : `<div class="actions"><button class="btn ghost" id="dayDone" data-early="1">Day ${d} を完了する</button></div>`}</div>`}
+     ${canFinish ? '' : `<div class="actions"><button class="btn ghost" id="dayDone" data-early="1">Day ${d} を完了する</button></div>`}</div>`}
    <div class="panel" style="margin-top:12px"><div class="goalrow" style="margin-top:0"><b>90日カレンダー</b><span class="small muted">完了 ${done} / 90</span></div><div class="cal">${cells}</div></div>
    <details class="panel" id="planCard" style="margin-top:12px"><summary><b>あなたの90日プラン</b></summary>
      <p class="small">開始地点：Day ${c.startDay}${c.startDay > 1 ? `（診断の結果、Day 1〜${c.startDay - 1}は復習扱い）` : ''}<br>

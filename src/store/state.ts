@@ -57,15 +57,19 @@ export function resetState() { ST = blank(); ST.epoch = Date.now(); save(); }
 /** Replace the whole state (after merging with another device). Does not notify listeners. */
 export function replaceState(s: State) { ST = s; write(); }
 
+/** correct answers needed before a verb / word counts as learned and stops being asked */
+export const VERB_MASTER = 1, WORD_MASTER = 1;
+
 /* ---------- verbs ---------- */
 export const vc = (k: string) => (ST.v[k] || [0, 0])[0];
-/** 0 = not yet, 1 = practising, 2 = mastered (3 correct) */
-export const lvl = (k: string) => { const c = vc(k), n = (ST.v[k] || [0, 0])[1]; return c >= 3 ? 2 : (n > 0 ? 1 : 0); };
-export const mastered = (i: number) => stageVerbs(i).filter(v => vc(v.key) >= 3).length;
-export const masteredVerbs = () => VERBS.filter(v => vc(v.key) >= 3).length;
+/** 0 = not yet, 1 = practising, 2 = mastered */
+export const lvl = (k: string) => { const c = vc(k), n = (ST.v[k] || [0, 0])[1]; return c >= VERB_MASTER ? 2 : (n > 0 ? 1 : 0); };
+export const vMastered = (k: string) => vc(k) >= VERB_MASTER;
+export const mastered = (i: number) => stageVerbs(i).filter(v => vMastered(v.key)).length;
+export const masteredVerbs = () => VERBS.filter(v => vMastered(v.key)).length;
 
 /* ---------- words ---------- */
 export const wc = (id: string): Tally => (ST.wd[id] || [0, 0]);
-export const wLearned = (id: string) => wc(id)[0] >= 2;
+export const wLearned = (id: string) => wc(id)[0] >= WORD_MASTER;
 export const wSeen = (id: string) => wc(id)[1] > 0;
 export const learnedCount = () => WORDS.filter(w => wLearned(w.id)).length;

@@ -188,6 +188,21 @@
     <div class="k-al"><h3 class="col-al">aller と一緒に</h3><span class="fr">demain, ce soir, ce week-end, plus tard, la semaine prochaine</span></div>
   </div>
 
+  <h2>副詞の位置</h2>
+  <p class="small">例文にはいつも、会話でよく使う副詞が1つ入ります。置き場所は3つだけです。</p>
+  <div class="panel">
+    <p class="small muted" style="margin-bottom:6px"><b>助動詞のすぐ後ろ</b>（déjà, vraiment, enfin, bien, souvent, peut-être …）</p>
+    <div class="ex"><button class="say" data-say="J'ai déjà mangé." aria-label="発音">▶</button><span class="fr col-pc">J'ai <b>déjà</b> mangé.</span><span class="muted small">もう食べた</span></div>
+    <div class="ex"><button class="say" data-say="Je viens juste d'arriver." aria-label="発音">▶</button><span class="fr col-vd">Je viens <b>juste</b> d'arriver.</span><span class="muted small">ちょうど着いたばかり</span></div>
+    <div class="ex"><button class="say" data-say="Je vais vraiment partir." aria-label="発音">▶</button><span class="fr col-al">Je vais <b>vraiment</b> partir.</span><span class="muted small">本当に出発する</span></div>
+    <p class="small muted" style="margin:12px 0 6px"><b>文の頭</b>（heureusement, en fait, d'abord, franchement …）と <b>文の終わり</b>（tôt, ici, ensemble, tout de suite …）</p>
+    <div class="ex"><button class="say" data-say="Heureusement, j'ai fini." aria-label="発音">▶</button><span class="fr col-pc"><b>Heureusement</b>, j'ai fini.</span><span class="muted small">幸い、終わった</span></div>
+    <div class="ex"><button class="say" data-say="Je vais partir tout de suite." aria-label="発音">▶</button><span class="fr col-al">Je vais partir <b>tout de suite</b>.</span><span class="muted small">すぐに出発する</span></div>
+    <p class="small muted" style="margin:12px 0 6px"><b>否定では形が変わるもの</b>：déjà → pas encore、vraiment → pas vraiment、jamais・plus は pas の代わりに入ります。</p>
+    <div class="ex"><button class="say" data-say="Je n'ai pas encore mangé." aria-label="発音">▶</button><span class="fr col-pc">Je n'ai <b>pas encore</b> mangé.</span><span class="muted small">まだ食べていない</span></div>
+    <div class="ex"><button class="say" data-say="Je ne vais jamais partir." aria-label="発音">▶</button><span class="fr col-al">Je ne vais <b>jamais</b> partir.</span><span class="muted small">決して出発しない</span></div>
+  </div>
+
   <h2>否定と疑問</h2>
   <p class="small">不定冠詞・部分冠詞（un, une, des, du, de la）は、否定文では de に変わります：J'ai acheté du pain. → Je n'ai pas acheté de pain.</p>
   <div class="panel">
@@ -202,7 +217,7 @@
   </div>
 
   <h2>200の動詞を、よく使う順に</h2>
-  <p class="small">動詞は20語ずつ10ステージに分かれています。1つの動詞で3回正解すると「習得」。ステージの20語をすべて習得したら次へ進みます。練習の4回に1回は、前のステージの苦手な動詞が復習として出ます。</p>
+  <p class="small">動詞は20語ずつ10ステージに分かれています。1つの動詞で1回正解すると「習得」になり、それ以降は出題されません。ステージの20語をすべて習得したら次へ進みます。前のステージにまだ正解していない動詞があれば、ときどき復習として出ます。</p>
   <p class="small muted">ステージ1〜5は会話での使用頻度が高い順、6は再帰動詞、7〜10は暮らしの場面でよく使う動詞です。</p>
   <p class="small">各動詞には場面の違う例文が5つずつ、合計1000文あります。練習ではその中から毎回ランダムに出題されます。「聞く」タブでは、各例文を je の現在形・複合過去・venir de・aller の4つの形で連続再生できます。</p>
   <div class="actions" style="margin-top:20px"><button class="btn" data-goto="drill">練習を始める</button><button class="btn ghost" data-goto="conj">動詞を見る</button></div>
@@ -247,7 +262,7 @@
   <details class="panel fold" id="progFold">
     <summary><b>200語の習得状況と正答率</b></summary>
     <div class="grid" id="grid" aria-label="200語の習得状況"></div>
-    <div class="legend"><span><i style="background:var(--line)"></i>未習</span><span><i style="background:color-mix(in srgb,var(--ink) 35%,var(--line))"></i>練習中</span><span><i style="background:var(--ink)"></i>習得（3回正解）</span><span>マスをタップで動詞を表示</span></div>
+    <div class="legend"><span><i style="background:var(--line)"></i>未習</span><span><i style="background:color-mix(in srgb,var(--ink) 35%,var(--line))"></i>練習中</span><span><i style="background:var(--ink)"></i>習得（1回正解）</span><span>マスをタップで動詞を表示</span></div>
     <div class="meter" id="meter"></div>
     <p class="streak" id="streak"></p>
   </details>
@@ -257,7 +272,7 @@
 <section class="tab" id="t-words" aria-label="単語">
   <div id="wUnits">
     <div class="fr h1" role="heading" aria-level="2">Les mots.</div>
-    <p class="muted small">よく使う単語を約3000語、テーマ別に並べました。1レッスン10問で、新しい単語7つと復習3つが出ます。2回正解すると「習得」。例文つきのテーマでは、単語を動詞の文（否定を含む）に入れて練習します。</p>
+    <p class="muted small">よく使う単語を約3000語、テーマ別に並べました。1レッスン10問で、まだ正解していない単語が出ます。1回正解すると「習得」になり、それ以降は出題されません（間違えた単語はレッスンの最後にもう一度出ます）。例文つきのテーマでは、単語を動詞の文（否定を含む）に入れて練習します。</p>
     <div id="wHead"></div>
     <div id="wList"></div>
   </div>

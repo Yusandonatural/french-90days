@@ -3,10 +3,12 @@ import { $, $$, esc, rnd, shuffle, focusInView } from '../../util/dom';
 import { THEMES, WORDS, type Theme, type Word } from '../../data';
 import { FORMS, allowed, build, buildNeg, type FormKey } from '../../grammar/conjugate';
 import { jaNegOf, jaOf } from '../../grammar/ja';
+import { advForm, pickAdv } from '../../grammar/adverbs';
 import { FRAMES, applyPrep, wordVerb, type Frame } from '../../grammar/frames';
 import { learnedCount, wLearned, wSeen, wc } from '../../store/state';
 import { SES, recordWord, sesDone, sesReset } from '../../engine/session';
-import { PLANW, dayWords, dwStart } from '../../engine/course';
+import { PLANW, dayWords, dwEnd, dwStart } from '../../engine/course';
+import { toast } from '../toast';
 import { speak } from '../speech';
 import { renderSesBar, summaryHTML } from '../components/lesson';
 import { onShow } from '../router';
@@ -43,28 +45,38 @@ function openLesson(title: string) {
   nextWordQ();
 }
 
-/** 7 new words + 3 review */
+/** 10 words not answered correctly yet. A learned theme moves on to the next one;
+ *  a theme with fewer than 10 left is topped up from the following themes. */
 export function startWordLesson(ti: number) {
-  WDAY = 0; const t = THEMES[ti]; WT = t;
-  const fresh = t.words.filter(w => !wLearned(w.id));
-  const nw = fresh.slice(0, 7);
-  let pool = t.words.filter(w => wLearned(w.id) && !nw.includes(w));
-  if (pool.length < 3) pool = WORDS.filter(w => wLearned(w.id) && !nw.includes(w));
-  if (!pool.length) pool = t.words.filter(w => !nw.includes(w));
-  WQ = [...nw, ...shuffle(pool).slice(0, 10 - nw.length)];
+  WDAY = 0;
+  if (!THEMES[ti].words.some(w => !wLearned(w.id))) {
+    const next = nextThemeIndex();
+    if (next >= 0 && next !== ti) { toast(`${THEMES[ti].title} は習得済み。${THEMES[next].title} へ進みます`); ti = next; }
+  }
+  const t = THEMES[ti]; WT = t;
+  const nw = t.words.filter(w => !wLearned(w.id)).slice(0, 10);
+  const following = [...THEMES.slice(ti + 1), ...THEMES.slice(0, ti)].flatMap(x => x.words);
+  let pool = following.filter(w => !wLearned(w.id)).slice(0, 10 - nw.length);
+  if (!nw.length && !pool.length) pool = shuffle(t.words).slice(0, 10);
+  WQ = [...nw, ...pool];
   while (WQ.length < 10) WQ.push(rnd(t.words));
   WQ = shuffle(WQ);
   openLesson(t.emo + ' ' + t.title);
 }
 
-/** Day N's words: up to 7 new + review of weak words from earlier days */
+/** Day N's words not answered correctly yet, then earlier days' words still not learned,
+ *  then later days' words brought forward. */
 export function startDayWords(d: number) {
   WDAY = d;
-  const today = dayWords(d), nw = today.filter(w => !wLearned(w.id)).slice(0, 7);
-  let pool = PLANW.slice(0, dwStart(d)).filter(w => wSeen(w.id) && !nw.includes(w));
-  pool = pool.sort((a, b) => wc(a.id)[0] - wc(b.id)[0]).slice(0, 30);
-  if (pool.length < 3) pool = today.filter(w => !nw.includes(w));
-  WQ = shuffle([...nw, ...shuffle(pool).slice(0, 10 - nw.length)]);
+  const today = dayWords(d), nw = today.filter(w => !wLearned(w.id)).slice(0, 10);
+  // earlier words: ones already tried (and missed) first
+  let pool = PLANW.slice(0, dwStart(d)).filter(w => !wLearned(w.id) && !nw.includes(w));
+  pool = pool.sort((a, b) => wc(b.id)[1] - wc(a.id)[1]).slice(0, 10 - nw.length);
+  // still room: the next days' words, in order (繰り上げ)
+  const ahead = [...PLANW.slice(dwEnd(d)), ...WORDS.filter(w => !PLANW.includes(w))].filter(w => !wLearned(w.id)).slice(0, 10 - nw.length - pool.length);
+  pool = [...pool, ...ahead];
+  if (!nw.length && !pool.length) pool = shuffle(today);
+  WQ = shuffle([...nw, ...pool.slice(0, 10 - nw.length)]);
   while (WQ.length < 10) WQ.push(rnd(today));
   WT = today[0].th;
   openLesson(`Day ${d} の単語（${today.filter(w => wLearned(w.id)).length}/${today.length} 習得）`);
@@ -117,8 +129,11 @@ function wordC(w: Word, frs: Frame[]) {
   const cands: string[] = [];
   al.forEach(f => { cands.push(f); cands.push(f + 'n'); });
   let f = rnd(cands), sent: string | undefined, ja: string | null = null;
-  if (f.endsWith('n')) { const b = f.slice(0, -1) as 'pc' | 'al'; ja = jaNegOf(s, dv, b); if (!ja) f = b; else sent = buildNeg(s, dv, b); }
-  if (!sent) { sent = build(s, dv, f as FormKey); ja = jaOf(s, dv, f as FormKey); }
+  if (f.endsWith('n')) {
+    const b = f.slice(0, -1) as 'pc' | 'al', adv = pickAdv(advForm(b), { neg: true, subj: s });
+    ja = jaNegOf(s, dv, b, adv); if (!ja) f = b; else sent = buildNeg(s, dv, b, { adv });
+  }
+  if (!sent) { const adv = pickAdv(advForm(f), { subj: s }); sent = build(s, dv, f as FormKey, { adv }); ja = jaOf(s, dv, f as FormKey, undefined, adv); }
   const i = sent.indexOf(phrase); if (i < 0) return false;
   const others = distract(w, 3, x => applyPrep(frm[1], x.fr)).map(x => applyPrep(frm[1], x.fr));
   const opts = shuffle([phrase, ...others]);

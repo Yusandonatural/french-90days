@@ -1,13 +1,14 @@
 // Japanese generation: affirmative / negative translations of the three forms.
 import type { VerbEx, Word } from '../data';
 import { SJ, subj0, type FormKey, type Subj } from './conjugate';
+import { advForm, jaWithAdv, type Adverb } from './adverbs';
 
-/** mk = optional time word (昨日 …) */
-export function jaOf(s: Subj, v: VerbEx, f: FormKey, mk?: string) {
-  const S = v.I ? '' : SJ[s];
-  if (f === 'pc') return (mk ? mk + '、' : '') + S + v.ta + '。';
-  if (f === 'vd') return S + (mk || '') + v.ta + 'ばかりだ。';
-  return mk ? mk + '、' + S + v.ru + '。' : S + 'これから' + v.ru + '。';
+/** mk = optional time word (昨日 …); adv = adverb in the French sentence */
+export function jaOf(s: Subj, v: VerbEx, f: FormKey, mk?: string, adv?: Adverb) {
+  const S = v.I ? '' : SJ[s], a = advForm(f);
+  if (f === 'pc') return (mk ? mk + '、' : '') + jaWithAdv(S, v.ta, adv, a) + '。';
+  if (f === 'vd') return jaWithAdv(S, (mk || '') + v.ta + 'ばかりだ', adv, a) + '。';
+  return mk ? mk + '、' + jaWithAdv(S, v.ru, adv, a) + '。' : jaWithAdv(S, 'これから' + v.ru, adv, a) + '。';
 }
 
 /** true when ru and ta are the same predicate (食べる/食べた), not 病気になる/病気だった */
@@ -54,16 +55,33 @@ export function jNegPast(t: string, r: string): string | null {
   return n ? n.slice(0, -2) + 'なかった' : null;
 }
 
-export function jaNegOf(s: Subj, v: VerbEx, f: FormKey): string | null {
-  const S = v.I ? '' : SJ[s];
-  if (f === 'pc') { const n = jNegPast(v.ta, v.ru); return n ? S + n + '。' : null; }
+/** 食べた → 食べていない (for まだ〜ていない). null for adjectives / だった. */
+export function teinai(t: string): string | null {
+  if (!t || /(かった|だった|ていた|でいた)$/.test(t)) return null;
+  if (/た$/.test(t)) return t.slice(0, -1) + 'ていない';
+  if (/だ$/.test(t)) return t.slice(0, -1) + 'でいない';
+  return null;
+}
+/** a "mid" adverb in a negative sentence is replaced by its negative partner */
+export const negAdv = (adv?: Adverb) => adv && adv.pos === 'mid' ? adv.neg : adv;
+
+export function jaNegOf(s: Subj, v: VerbEx, f: FormKey, adv?: Adverb): string | null {
+  const S = v.I ? '' : SJ[s], ad = negAdv(adv);
+  if (f === 'pc') { const n = (ad && ad.teinai && teinai(v.ta)) || jNegPast(v.ta, v.ru); return n ? jaWithAdv(S, n, ad, 'p') + '。' : null; }
   const n = jNeg(v.ru, v.ta);
-  return n ? S + 'これから' + n + '。' : null;
+  return n ? jaWithAdv(S, 'これから' + n, ad, 'a') + '。' : null;
 }
 
-export function presJa(v: VerbEx) {
+/** present tense, for my own sentences (subject 私 / 彼) */
+export function presJa(v: VerbEx, adv?: Adverb) {
   const S = v.I ? '' : (subj0(v) === 'il' ? '彼は' : '私は');
-  return S + (v.now || v.ru) + '。';
+  return jaWithAdv(S, v.now || v.ru, adv, 'r') + '。';
+}
+/** present negative; null when it can't be converted */
+export function presNegJa(v: VerbEx, adv?: Adverb) {
+  const S = v.I ? '' : (subj0(v) === 'il' ? '彼は' : '私は');
+  const n = jNeg(v.now || v.ru, v.ta);
+  return n ? jaWithAdv(S, n, negAdv(adv), 'r') + '。' : null;
 }
 
 /** adjective word → { ru: 〜くなる / 〜になる, ta: 〜かった / 〜だった } */

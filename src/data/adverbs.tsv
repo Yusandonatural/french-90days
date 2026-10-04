@@ -1,0 +1,112 @@
+fr	ja	pos	forms	neg	flags
+déjà	もう	mid	pr	pas encore	
+encore	また	mid	pa		
+enfin	やっと	mid	pva		
+vraiment	本当に	mid	par	pas vraiment	
+bien	よく	mid	pa	pas bien	
+beaucoup	たくさん	mid	par	pas beaucoup	
+souvent	よく	mid	pr	pas souvent	
+toujours	いつも	mid	r	pas toujours	
+peut-être	たぶん	mid	par	peut-être pas	
+sûrement	きっと	mid	par	sûrement pas	
+probablement	おそらく	mid	par	probablement pas	
+certainement	きっと	mid	pa		
+sans doute	たぶん	mid	par		
+aussi	も	mid	par	pas … non plus	mo
+juste	ちょうど	mid	v		
+tout juste	ちょうど	mid	v		
+presque	ほとんど	mid	p		
+assez	十分に	mid	pa	pas assez	
+vite	急いで	mid	pa		
+absolument	絶対に	mid	a	absolument pas	
+complètement	すっかり	mid	pa	pas complètement	
+finalement	結局	mid	pa		
+longtemps	長い間	mid	p		
+tellement	すごく	mid	pr		
+plutôt	わりと	mid	r		
+seulement	ただ	mid	pa		
+simplement	ただ	mid	a		
+surtout	特に	mid	par		
+forcément	必ず	mid	ar	pas forcément	
+carrément	思い切って	mid	pa		
+vachement	すごく	mid	pr		
+justement	ちょうど	mid	p		
+facilement	簡単に	mid	pa		
+rapidement	すばやく	mid	pa		
+énormément	ものすごく	mid	pr		
+mieux	前よりよく	mid	pa		
+quand même	それでも	mid	pa		
+réellement	本当に	mid	pa		
+tôt	早く	end	par		
+tard	遅く	end	par		
+ensemble	一緒に	end	par		on
+ici	ここで	end	par		
+là-bas	あそこで	end	pa		
+dehors	外で	end	pa		
+ailleurs	よそで	end	pa		
+lentement	ゆっくり	end	par		
+doucement	そっと	end	pa		
+tranquillement	のんびり	end	pa		
+sérieusement	真剣に	end	pa		
+régulièrement	定期的に	end	ar		
+immédiatement	すぐに	end	pa		
+tout de suite	すぐに	end	a	pas … tout de suite	
+bientôt	もうすぐ	end	a		
+directement	まっすぐ	end	pa		
+exprès	わざと	end	p		
+volontiers	喜んで	end	a		
+encore une fois	もう一度	end	pa		
+de nouveau	また	end	pa		
+tous les jours	毎日	end	ar		
+de temps en temps	時々	end	pr		
+tout le temps	いつも	end	r		
+en même temps	同時に	end	pa		
+récemment	最近	end	p		
+à l'instant	たった今	end	v		
+aujourd'hui	今日	end	par		
+maintenant	今	end	ar		
+d'abord	まず	start	pa		
+ensuite	次に	start	pa		
+puis	それから	start	pa		
+après	そのあと	start	pa		
+heureusement	幸い	start	pvar		
+malheureusement	残念ながら	start	pvar		
+franchement	正直に言うと	start	pvar		
+honnêtement	正直なところ	start	pvar		
+normalement	ふつうは	start	ar		
+d'habitude	いつもは	start	r		
+en fait	実は	start	pvar		
+bref	要するに	start	pvar		
+alors	じゃあ	start	a		
+du coup	それで	start	pva		
+donc	だから	start	pvar		
+tout à coup	突然	start	p		
+soudain	急に	start	p		
+évidemment	もちろん	start	pvar		
+bien sûr	もちろん	start	par		
+apparemment	どうやら	start	pvar		
+pourtant	それでも	start	pa		
+au fait	ところで	start	var		
+parfois	時々	start	pr		
+désormais	これからは	start	r		
+pas encore	まだ	neg	pr		teinai
+toujours pas	まだ	neg	pr		teinai
+jamais	p=一度も;a=決して;r=決して	neg	par		
+plus	もう	neg	ar		
+plus jamais	二度と	neg	ar		
+pas vraiment	あまり	neg	par		
+pas beaucoup	あまり	neg	par		
+pas souvent	あまり	neg	pr		
+pas du tout	全然	neg	par		
+pas bien	よく	neg	pa		
+pas assez	十分に	neg	pa		
+pas trop	あまり	neg	par		
+absolument pas	全く	neg	par		
+peut-être pas	たぶん	neg	par		
+sûrement pas	きっと	neg	par		
+probablement pas	おそらく	neg	par		
+pas forcément	必ずしも	neg	ar		
+pas complètement	完全には	neg	pa		
+pas toujours	いつも	neg	r		
+pas … non plus	も	neg	par		mo
+pas … tout de suite	すぐには	neg	a		

@@ -3,6 +3,7 @@ import { $, $$, esc, shuffle } from '../../util/dom';
 import { MEAN, withEx } from '../../data';
 import { allowed, build, buildNeg, subj0, type FormKey } from '../../grammar/conjugate';
 import { jaNegOf, jaOf } from '../../grammar/ja';
+import { advForm, pickAdv } from '../../grammar/adverbs';
 import { C, ROLES, curDay, dayVerbs, focusCats, monthOf, personal } from '../../engine/course';
 import { REC_OK, playBlob, recToggle } from '../recorder';
 import { speak } from '../speech';
@@ -29,8 +30,14 @@ export function renderSpeak() {
     const al = allowed(v); const [f, m, mj] = mk[i % 3]; const b = f.replace('n', '') as FormKey;
     if (!al.includes(b)) return [];
     const s = subj0(v);
-    if (f.endsWith('n')) { const ja = jaNegOf(s, v, b); if (!ja) return []; return [[mj + '、' + ja, m + ', ' + buildNeg(s, v, b as 'pc', { sentence: false }) + '.']]; }
-    return [[jaOf(s, v, b, mj), m + ', ' + build(s, v, b, { sentence: false }) + '.']];
+    // Hier / Demain already start the sentence, so the adverb goes in the middle or at the end
+    if (f.endsWith('n')) {
+      const adv = pickAdv(advForm(b), { neg: true, subj: s, pos: ['neg', 'end'] });
+      const ja = jaNegOf(s, v, b, adv); if (!ja) return [];
+      return [[mj + '、' + ja, m + ', ' + buildNeg(s, v, b as 'pc', { sentence: false, adv }) + '.']];
+    }
+    const adv = pickAdv(advForm(b), { subj: s, pos: ['mid', 'end'] });
+    return [[jaOf(s, v, b, mj, adv), m + ', ' + build(s, v, b, { sentence: false, adv }) + '.']];
   });
   const mon = monthOf(d);
   const role = mon === 2 ? ROLES[(d - 61) % ROLES.length] : null;

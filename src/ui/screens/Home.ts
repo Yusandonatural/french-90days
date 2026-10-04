@@ -24,8 +24,8 @@ export function renderHome() {
     + tile('word', nextT.emo, '単語レッスン', esc(nextT.title))
     + tile('listen', '🎧', 'je で連続再生', '流して聞く・まねする')
     + tile('learn', '📖', '文法の説明', '3つの形・否定・être動詞');
-  $('#hProg').innerHTML = `<div class="prow"><span>動詞（3回正解で習得）</span><b>${mv} / 200</b></div><div class="bar thick"><i style="width:${mv / 2}%;background:var(--pc)"></i></div>
-   <div class="prow"><span>単語（2回正解で習得）</span><b>${l} / ${WORDS.length}</b></div><div class="bar thick"><i style="width:${l / WORDS.length * 100}%;background:var(--vd)"></i></div>
+  $('#hProg').innerHTML = `<div class="prow"><span>動詞（1回正解で習得）</span><b>${mv} / 200</b></div><div class="bar thick"><i style="width:${mv / 2}%;background:var(--pc)"></i></div>
+   <div class="prow"><span>単語（1回正解で習得）</span><b>${l} / ${WORDS.length}</b></div><div class="bar thick"><i style="width:${l / WORDS.length * 100}%;background:var(--vd)"></i></div>
    <div class="prow"><span>例文</span><b>1000文</b></div><p class="small muted" style="margin:0">レッスン完了 ${ST.lessons || 0} 回</p>`;
   $('#hBadges').innerHTML = badges().map(([e, n, d, ok]) => `<div class="bdg${ok ? ' got' : ''}" title="${esc(d)}"><span class="be">${e}</span><b>${esc(n)}</b><span>${esc(d)}</span></div>`).join('');
   $('#hGoalSeg').innerHTML = [20, 50, 100, 200].map(v => `<button data-g="${v}" aria-pressed="${g === v}">${v} XP</button>`).join('');
