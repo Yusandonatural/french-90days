@@ -1,7 +1,7 @@
 # 90日フランス語
 
 1日1時間 × 90日で、フランス語で自分のことと日常の話ができるようになる学習アプリ。
-公開先：https://french.yusando.com （GitHub Pages、`docs/` フォルダ）
+公開先：https://yusandonatural.github.io/french-90days/ （GitHub Pages、`docs/` フォルダ。手順は `README_DEPLOY.md`）
 
 仕様は `DESIGN_HANDOFF.md`、元の単一HTML版は `reference/trois-formes.html`（迷ったらこれが正解）。
 
