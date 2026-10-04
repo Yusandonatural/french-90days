@@ -7,7 +7,7 @@
 | `index.html` | アプリの骨組み（GA4・SEO・OGP・構造化データ入り） |
 | `public/og.jpg` | SNSで共有したときに出る画像（1200×630） |
 | `public/404.html`・`robots.txt`・`sitemap.xml` | 検索エンジン向けの土台 |
-| `public/CNAME` | 独自ドメイン `french.yusando.com`（変えるならこの1行と `google-ids.json`・`public/sitemap.xml`・`index.html` 内のURLを置換） |
+| `public/CNAME` | （いまは置いていない）独自ドメイン `french.yusando.com` を使うときに `french.yusando.com` の1行で作る。ドメインを変えるなら `google-ids.json`・`public/sitemap.xml`・`index.html` 内のURLも置換 |
 | `google-ids.json` | GA4（G-9JG1FFTL1B・全サービス共通）と広告IDの設定 |
 
 ## 1. GitHub に置く
@@ -21,7 +21,7 @@ gh repo create Yusandonatural/french-90days --public --source=. --push
 
 GitHub のリポジトリで **Settings → Pages**：
 - Source：`Deploy from a branch` ／ Branch：`main` ／ Folder：`/docs`
-- Custom domain：`french.yusando.com`（CNAME ファイルがあるので自動で入ります）
+- Custom domain：`french.yusando.com`（`public/CNAME` を作ってビルドすると自動で入ります。いまは CNAME を外しているので `https://yusandonatural.github.io/french-90days/` で公開されます）
 - DNS が通ったら **Enforce HTTPS** にチェック
 
 ## 2. DNS（Route 53）に CNAME を足す
@@ -56,7 +56,8 @@ aws route53 change-resource-record-sets --hosted-zone-id "$HZ" --change-batch '{
 - [ ] `npm test` が通り、`npm run build` で作り直した `docs/` をコミットした
 - [x] gtag は1本だけ（本番ドメイン以外では送信しない）
 - [x] title / description / canonical / OGP / JSON-LD（WebSite＋Organization＋WebApplication）
-- [x] robots.txt・sitemap.xml・404.html・CNAME・.nojekyll
+- [x] robots.txt・sitemap.xml・404.html・.nojekyll
+- [ ] 独自ドメインを使うなら `public/CNAME` を作って再ビルド
 - [x] 成果イベント3つ（tutorial_complete / day_complete / lesson_complete）
 - [ ] Search Console 登録と sitemap 送信
 - [ ] GA4 リアルタイムで page_view と成果イベントの到達確認
