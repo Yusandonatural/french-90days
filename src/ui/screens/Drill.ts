@@ -6,6 +6,7 @@ import {
   type CheckResult, type FormKey, type Subj,
 } from '../../grammar/conjugate';
 import { jaNegOf, jaOf } from '../../grammar/ja';
+import { advCandidates, advForm, pickAdv, type Adverb } from '../../grammar/adverbs';
 import { ST, lvl, mastered, save } from '../../store/state';
 import { SES, recordVerb, sesDone, sesReset } from '../../engine/session';
 import { getCourseDay, pickVerb, resetLastKey, setCourseDay } from '../../engine/pick';
@@ -38,6 +39,14 @@ const SIT: Sit[] = [
  {t:"Demain, ___ à six heures.",s:'je',v:'se lever',f:'al',ja:'明日、私は6時に起きる。',why:'demain は未来。再帰動詞は je vais me lever。'},
  {t:"Hier, ___ dans la forêt.",s:'on',v:'se promener',f:'pc',ja:'昨日、私たちは森を散歩した。',why:"hier は過去。再帰動詞は être：on s'est promené(s)。"},
  {t:"Tu as l'air fatigué. ___ ?",s:'tu',v:'se coucher',f:'pc',ja:'疲れてるみたい。ちゃんと寝た？',why:"昨夜のことを聞くので複合過去。tu t'es couché ?"}];
+/** Start adverb in front of a choice sentence: "Heureusement, hier, ___ …" */
+function withStartAdv(t: string, ja: string, f: FormKey, s: Subj) {
+  const adv = pickAdv(advForm(f), { pos: ['start'], subj: s });
+  if (!adv) return { t, ja };
+  return { t: cap(adv.fr) + ', ' + t.charAt(0).toLowerCase() + t.slice(1), ja: adv.ja[advForm(f)] + '、' + ja };
+}
+/** The adverb shown as a hint above the answer box */
+const advHint = (adv?: Adverb) => adv ? `<span class="badge k-pr">副詞：${esc(adv.fr)}</span>` : '';
 const capAt = (t: string) => { const i = t.indexOf('___'); return i === 0 || /[.?!]\s*$/.test(t.slice(0, i)); };
 const fillT = (t: string, c: string) => t.replace('___', capAt(t) ? cap(c) : c);
 
@@ -103,11 +112,14 @@ export function nextDrill() {
 
 function renderNegDrill() {
   const v = exOf(pickVerb()), s = rnd(subjFor(v)), al = allowed(v).filter(f => f !== 'vd') as ('pc' | 'al')[], base = rnd(al);
-  const src = build(s, v, base), acc = acceptedNeg(s, v, base), f = (base + 'n') as 'pcn' | 'aln';
+  // an adverb that survives negation: start / end ones, or mid ones with a negative partner (déjà → pas encore)
+  const fa = advForm(base);
+  const adv = rnd(advCandidates(fa, { subj: s }).filter(a => a.pos !== 'mid' || (a.neg && a.neg.forms.includes(fa))));
+  const src = build(s, v, base, { adv }), acc = acceptedNeg(s, v, base, adv), f = (base + 'n') as 'pcn' | 'aln';
   $('#drill').innerHTML = `${vtag(v)}<p class="label">この文を否定文にしてください</p>
    <p class="q fr ${FORMS[base].cls}" style="color:var(--c)">${esc(src)} <button class="say" data-say="${esc(src)}" aria-label="発音">▶</button></p>
    <p><span class="badge ${FORMS[f].cls}">${FORMS[f].ja}　${FORMS[f].hint}</span></p>${inputBlock()}`;
-  const ja = jaNegOf(s, v, base);
+  const ja = jaNegOf(s, v, base, adv);
   const tip = `${ja ? `<p class="small muted" style="margin:0">${esc(ja)}</p>` : ''}<p class="small muted" style="margin:4px 0 0">会話では ne を省くことも多い：${esc(colloq(acc[0]))}</p>`;
   wireAnswer(acc, f, v.key, tip);
 }
@@ -127,11 +139,13 @@ function genChoice(): ChoiceItem {
     why = f === 'pc' ? `${m}（${mj}）は過去の時点なので複合過去。` : `${m}（${mj}）はこれからのことなので aller ＋ 不定詞。`;
   }
   if (f === 'pc' && v.etre) why += v.R ? ' 再帰動詞は être を使います。' : ' この動詞は être を使います。';
+  ({ t, ja } = withStartAdv(t, ja, f, s));
   return { t, ja, why, f, alt, v, chunks: Object.fromEntries(FKEYS.map(g => [g, chunk(g)])) as Record<FormKey, string> };
 }
 function curatedChoice(): ChoiceItem {
   const it = rnd(SIT), v = V[it.v];
-  return { t: it.t, ja: it.ja, why: it.why, f: it.f, alt: it.alt || [], v, chunks: Object.fromEntries(FKEYS.map(g => [g, build(it.s, v, g, { obj: false, sentence: false, noSubj: it.noSubj })])) as Record<FormKey, string> };
+  const { t, ja } = withStartAdv(it.t, it.ja, it.f, it.s);
+  return { t, ja, why: it.why, f: it.f, alt: it.alt || [], v, chunks: Object.fromEntries(FKEYS.map(g => [g, build(it.s, v, g, { obj: false, sentence: false, noSubj: it.noSubj })])) as Record<FormKey, string> };
 }
 function renderChoice() {
   const it = (Math.random() < .2 && ST.stage <= 5) ? curatedChoice() : genChoice();
@@ -193,21 +207,27 @@ function showResult(res: CheckResult | 'giveup', acc: string[], f: string, key: 
 function renderCompose() {
   const v = exOf(pickVerb()), s = rnd(subjFor(v));
   const base = rnd(allowed(v));
-  let f: string = base, acc: string[] | undefined, ja = '';
-  if (base !== 'vd' && Math.random() < .3) { const jn = jaNegOf(s, v, base); if (jn) { ja = jn; acc = acceptedNeg(s, v, base); f = base + 'n'; } }
-  if (!acc) { acc = accepted(s, v, base); ja = jaOf(s, v, base); }
+  let f: string = base, acc: string[] | undefined, ja = '', adv: Adverb | undefined;
+  if (base !== 'vd' && Math.random() < .3) {
+    adv = pickAdv(advForm(base), { neg: true, subj: s });
+    const jn = jaNegOf(s, v, base, adv); if (jn) { ja = jn; acc = acceptedNeg(s, v, base, adv); f = base + 'n'; }
+  }
+  if (!acc) { adv = pickAdv(advForm(base), { subj: s }); acc = accepted(s, v, base, { adv }); ja = jaOf(s, v, base, undefined, adv); }
   $('#drill').innerHTML = `${vtag(v)}<p class="label">フランス語で書いてください${f.endsWith('n') ? '　<span class="badge k-pr">否定</span>' : ''}</p>
-   <p class="prompt-ja"><span class="subj-hint">${s}</span>${esc(ja)}</p>${inputBlock()}`;
+   <p class="prompt-ja"><span class="subj-hint">${s}</span>${esc(ja)}</p><p style="margin:0">${advHint(adv)}</p>${inputBlock()}`;
   const tip = notesOf(v).length ? `<p class="small muted" style="margin:6px 0 0">${esc(notesOf(v)[0])}</p>` : '';
   wireAnswer(acc, f, v.key, tip);
 }
 function renderTransform() {
   const v = exOf(pickVerb(x => allowed(x).length >= 2)), s = rnd(subjFor(v)), al = allowed(v);
-  const from = rnd(al), to = rnd(al.filter(x => x !== from)), src = build(s, v, from), acc = accepted(s, v, to);
+  const from = rnd(al), to = rnd(al.filter(x => x !== from));
+  // the same adverb has to fit both forms
+  const adv = rnd(advCandidates(advForm(from), { subj: s }).filter(a => a.forms.includes(advForm(to))));
+  const src = build(s, v, from, { adv }), acc = accepted(s, v, to, { adv });
   $('#drill').innerHTML = `${vtag(v)}<p class="label">この文を別の形に変えてください</p>
    <p class="q fr ${FORMS[from].cls}" style="color:var(--c)">${esc(src)} <button class="say" data-say="${esc(src)}" aria-label="発音">▶</button></p>
    <p><span class="badge ${FORMS[to].cls}">${FORMS[to].ja}　${FORMS[to].hint}</span> に変える</p>${inputBlock()}`;
-  const tip = `<p class="small muted" style="margin:0">${esc(jaOf(s, v, to))}</p>`;
+  const tip = `<p class="small muted" style="margin:0">${esc(jaOf(s, v, to, undefined, adv))}</p>`;
   wireAnswer(acc, to, v.key, tip);
 }
 

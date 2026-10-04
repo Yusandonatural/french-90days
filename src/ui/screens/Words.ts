@@ -3,6 +3,7 @@ import { $, $$, esc, rnd, shuffle, focusInView } from '../../util/dom';
 import { THEMES, WORDS, type Theme, type Word } from '../../data';
 import { FORMS, allowed, build, buildNeg, type FormKey } from '../../grammar/conjugate';
 import { jaNegOf, jaOf } from '../../grammar/ja';
+import { advForm, pickAdv } from '../../grammar/adverbs';
 import { FRAMES, applyPrep, wordVerb, type Frame } from '../../grammar/frames';
 import { learnedCount, wLearned, wSeen, wc } from '../../store/state';
 import { SES, recordWord, sesDone, sesReset } from '../../engine/session';
@@ -117,8 +118,11 @@ function wordC(w: Word, frs: Frame[]) {
   const cands: string[] = [];
   al.forEach(f => { cands.push(f); cands.push(f + 'n'); });
   let f = rnd(cands), sent: string | undefined, ja: string | null = null;
-  if (f.endsWith('n')) { const b = f.slice(0, -1) as 'pc' | 'al'; ja = jaNegOf(s, dv, b); if (!ja) f = b; else sent = buildNeg(s, dv, b); }
-  if (!sent) { sent = build(s, dv, f as FormKey); ja = jaOf(s, dv, f as FormKey); }
+  if (f.endsWith('n')) {
+    const b = f.slice(0, -1) as 'pc' | 'al', adv = pickAdv(advForm(b), { neg: true, subj: s });
+    ja = jaNegOf(s, dv, b, adv); if (!ja) f = b; else sent = buildNeg(s, dv, b, { adv });
+  }
+  if (!sent) { const adv = pickAdv(advForm(f), { subj: s }); sent = build(s, dv, f as FormKey, { adv }); ja = jaOf(s, dv, f as FormKey, undefined, adv); }
   const i = sent.indexOf(phrase); if (i < 0) return false;
   const others = distract(w, 3, x => applyPrep(frm[1], x.fr)).map(x => applyPrep(frm[1], x.fr));
   const opts = shuffle([phrase, ...others]);

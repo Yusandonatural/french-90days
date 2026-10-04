@@ -2,6 +2,7 @@
 // present tense for je, and negation.
 import { VOW, type Verb, type VerbEx } from '../data';
 import { cap } from '../util/dom';
+import { placeAdv, placeNegAdv, type Adverb } from './adverbs';
 
 export type Subj = 'je' | 'tu' | 'il' | 'elle' | 'on' | 'nous' | 'vous' | 'ils' | 'elles';
 /** pc = passé composé, vd = venir de, al = aller + inf */
@@ -43,7 +44,7 @@ export function refl(s: Subj, next: string) {
 }
 export function agree(pp: string, a: string) { if (pp.endsWith('s') && a.startsWith('s')) a = a.slice(1); return pp + a; }
 
-export interface BuildOpts { obj?: false; sentence?: false; noSubj?: boolean | number; agr?: string | null }
+export interface BuildOpts { obj?: false; sentence?: false; noSubj?: boolean | number; agr?: string | null; adv?: Adverb }
 
 export function build(s: Subj, v: VerbEx, f: FormKey, o: BuildOpts = {}) {
   const obj = (o.obj === false || !v.obj) ? '' : ' ' + v.obj;
@@ -52,23 +53,28 @@ export function build(s: Subj, v: VerbEx, f: FormKey, o: BuildOpts = {}) {
     const w = CONJ[v.etre ? 'etre' : 'avoir'][s];
     const part = agree(v.pp, v.etre ? (o.agr != null ? o.agr : AGR[s]) : '');
     const core = v.R ? (o.noSubj ? '' : s + ' ') + refl(s, w) : (o.noSubj ? w : subjWord(s, w));
-    t = core + ' ' + part + obj;
+    t = placeAdv(core, part + obj, o.adv);
   } else {
     const aux = f === 'vd' ? 'venir' : 'aller', w = CONJ[aux][s];
     const h = o.noSubj ? w : subjWord(s, w);
     const inf = v.R ? refl(s, v.inf) : v.inf;
     // venir de + reflexive keeps "de" (de m'asseoir)
     const de = f === 'vd' ? (v.R ? 'de ' : (VOW.test(v.inf) ? "d'" : 'de ')) : '';
-    t = h + ' ' + de + inf + obj;
+    t = placeAdv(h, de + inf + obj, o.adv);
   }
   return o.sentence === false ? t : cap(t) + '.';
 }
 
-/** All correct answers (every agreement variant for être verbs). */
+/** A start adverb may also go at the end, and an end adverb at the start. */
+export function advAlts(adv?: Adverb): (Adverb | undefined)[] {
+  if (!adv || (adv.pos !== 'start' && adv.pos !== 'end')) return [adv];
+  return [adv, { ...adv, pos: adv.pos === 'start' ? 'end' : 'start' }];
+}
+
+/** All correct answers (every agreement variant for être verbs, both places for start / end adverbs). */
 export function accepted(s: Subj, v: VerbEx, f: FormKey, o: BuildOpts = {}) {
-  const opts = Object.assign({}, o);
-  if (f === 'pc' && v.etre) return AGR_ALL[s].map(a => build(s, v, f, Object.assign({}, opts, { agr: a })));
-  return [build(s, v, f, opts)];
+  const agrs = (f === 'pc' && v.etre) ? AGR_ALL[s] : [o.agr];
+  return advAlts(o.adv).flatMap(adv => agrs.map(a => build(s, v, f, Object.assign({}, o, { agr: a, adv }))));
 }
 
 export function notesOf(v: Verb) {
@@ -95,10 +101,10 @@ export function presWord(v: Verb) {
   if (k.endsWith('ir')) return k.slice(0, -2) + 'is';
   return k;
 }
-export function presFr(v: VerbEx) {
+export function presFr(v: VerbEx, adv?: Adverb) {
   const s = subj0(v), w = presWord(v);
   const core = v.R ? s + ' ' + refl(s, w) : subjWord(s, w);
-  return cap(core + (v.obj ? ' ' + v.obj : '')) + '.';
+  return cap(placeAdv(core, v.obj || '', adv)) + '.';
 }
 
 /* ---------- negation ---------- */
@@ -128,20 +134,22 @@ export function buildNeg(s: Subj, v: VerbEx, f: 'pc' | 'al' | 'pr', o: BuildOpts
     const w = presWord(v);
     t = s + ' ' + (v.R ? 'ne ' + refl(s, w) : neW(w)) + ' pas' + obj;
   }
+  // a "mid" adverb becomes its negative partner (déjà → pas encore)
+  t = placeNegAdv(t, o.adv && o.adv.pos === 'mid' ? o.adv.neg : o.adv);
   return o.sentence === false ? t : cap(t) + '.';
 }
 /** spoken style without "ne" (J'ai pas fini.) */
 export function colloq(t: string) {
   return t.replace(/\bne /, '').replace(/\bn'/, '').replace(/^(je|Je) ([aeéèêiîoôuh])/, (_m, a: string, b: string) => (a[0] === 'J' ? "J'" : "j'") + b);
 }
-export function acceptedNeg(s: Subj, v: VerbEx, f: 'pc' | 'al' | 'pr') {
+export function acceptedNeg(s: Subj, v: VerbEx, f: 'pc' | 'al' | 'pr', adv?: Adverb) {
   const vs = (f === 'pc' && v.etre) ? AGR_ALL[s] : [null];
-  const l = vs.map(a => buildNeg(s, v, f, { agr: a }));
+  const l = advAlts(adv).flatMap(ad => vs.map(a => buildNeg(s, v, f, { agr: a, adv: ad })));
   return [...l, ...l.map(colloq)];
 }
 
 /* ---------- answer checking ---------- */
-export const norm = (s: string) => s.toLowerCase().replace(/[’`´]/g, "'").replace(/\s*'\s*/g, "'").replace(/[.!?。]+\s*$/, '').replace(/\s+/g, ' ').trim();
+export const norm = (s: string) => s.toLowerCase().replace(/[’`´]/g, "'").replace(/\s*,\s*/g, ' ').replace(/\s*'\s*/g, "'").replace(/[.!?。]+\s*$/, '').replace(/\s+/g, ' ').trim();
 export const deacc = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '');
 export type CheckResult = 'empty' | 'ok' | 'accent' | 'ng';
 export function check(input: string, acc: string[]): CheckResult {

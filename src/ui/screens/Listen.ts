@@ -2,7 +2,8 @@
 import { $, $$, esc, rnd, focusInView } from '../../util/dom';
 import { NST, VERBS, exOf, stageVerbs, withEx, type VerbEx } from '../../data';
 import { FKEYS, FORMS, allowed, build, buildNeg, presFr, subj0, subjFor } from '../../grammar/conjugate';
-import { jNeg, jNegPast, jaOf, presJa } from '../../grammar/ja';
+import { jaNegOf, jaOf, presJa, presNegJa } from '../../grammar/ja';
+import { ADVERBS, advForm, pickAdv, seeded } from '../../grammar/adverbs';
 import { PLAYER_KEY, ST } from '../../store/state';
 import { pickVerb } from '../../engine/pick';
 import { curDay, dayVerbs, dvStart } from '../../engine/course';
@@ -25,15 +26,18 @@ const savePl = () => {
 /** The lines spoken for one example, per the 肯定・否定 setting. ok = false: rarely used, skipped. */
 function lines(v: VerbEx): Line[] {
   const s = subj0(v), al = allowed(v);
-  const aff: Line[] = PFORMS.map(p => p.f === 'pr' ? { ...p, fr: presFr(v), jp: presJa(v), ok: true } : { ...p, fr: build(s, v, p.f), jp: jaOf(s, v, p.f), ok: al.includes(p.f) });
+  // every line has an adverb; the same one each time this example is shown
+  const adv = (f: string, k: number) => pickAdv(advForm(f), { subj: s, neg: f.endsWith('n'), rand: seeded(v.idx * 1000 + (v.exi || 0) * 10 + k) });
+  const aff: Line[] = PFORMS.map((p, k) => {
+    const a = adv(p.f, k);
+    return p.f === 'pr' ? { ...p, fr: presFr(v, a), jp: presJa(v, a), ok: true } : { ...p, fr: build(s, v, p.f, { adv: a }), jp: jaOf(s, v, p.f, undefined, a), ok: al.includes(p.f) };
+  });
   if (P.neg === 'aff') return aff;
-  const S = v.I ? '' : (s === 'il' ? '彼は' : '私は');
-  const nj = (n: string | null, fb: string) => n ? S + n + '。' : '（否定）' + fb;
-  const an = jNeg(v.ru, v.ta);
+  const [a1, a2, a3] = [adv('prn', 4), adv('pcn', 5), adv('aln', 6)];
   const neg: Line[] = [
-    { f: 'prn', ja: '現在形の否定', cls: 'k-pr', fr: buildNeg(s, v, 'pr'), jp: nj(jNeg(v.now || v.ru, v.ta), presJa(v)), ok: true },
-    { f: 'pcn', ja: '複合過去の否定', cls: 'k-pc', fr: buildNeg(s, v, 'pc'), jp: nj(jNegPast(v.ta, v.ru), jaOf(s, v, 'pc')), ok: al.includes('pc') },
-    { f: 'aln', ja: '近接未来の否定', cls: 'k-al', fr: buildNeg(s, v, 'al'), jp: an ? S + 'これから' + an + '。' : '（否定）' + jaOf(s, v, 'al'), ok: al.includes('al') },
+    { f: 'prn', ja: '現在形の否定', cls: 'k-pr', fr: buildNeg(s, v, 'pr', { adv: a1 }), jp: presNegJa(v, a1) || '（否定）' + presJa(v), ok: true },
+    { f: 'pcn', ja: '複合過去の否定', cls: 'k-pc', fr: buildNeg(s, v, 'pc', { adv: a2 }), jp: jaNegOf(s, v, 'pc', a2) || '（否定）' + jaOf(s, v, 'pc'), ok: al.includes('pc') },
+    { f: 'aln', ja: '近接未来の否定', cls: 'k-al', fr: buildNeg(s, v, 'al', { adv: a3 }), jp: jaNegOf(s, v, 'al', a3) || '（否定）' + jaOf(s, v, 'al'), ok: al.includes('al') },
   ];
   return P.neg === 'neg' ? neg : [...aff, ...neg];
 }
@@ -107,7 +111,10 @@ export function renderPlayer() {
 let lmode: 'player' | 'quiz' = 'player';
 
 function newListen() {
-  const v = exOf(pickVerb()), s = rnd(subjFor(v)), f = rnd(allowed(v)), fr = build(s, v, f);
+  const v = exOf(pickVerb()), s = rnd(subjFor(v)), f = rnd(allowed(v));
+  // a start adverb that fits all three forms, so it doesn't give the answer away
+  const adv = rnd(ADVERBS.filter(a => a.pos === 'start' && ['p', 'v', 'a'].every(x => a.forms.includes(x as 'p'))));
+  const fr = build(s, v, f, { adv });
   $('#listen').innerHTML = `${hasTTS() ? '' : '<p class="small" style="color:var(--ng)">この端末では読み上げが使えません。別のブラウザでお試しください。</p>'}
    <p class="vtag">ステージ${ST.stage + 1} の動詞から出題</p>
    <button class="big-play" id="play">▶ 再生する</button>
@@ -124,7 +131,7 @@ function newListen() {
     const cue = { pc: (v.etre ? 'être' : 'avoir') + ' の活用＋過去分詞', vd: 'viens / vient / venons… ＋ de', al: 'vais / va / allons… ＋ 不定詞' }[f];
     $('#lfb').innerHTML = `<div class="fb ${ok ? 'good' : 'bad'}"><span class="verdict">${ok ? '正解' : 'もう一歩'}</span>
       <p class="fr" style="font-size:19px;margin:6px 0">${esc(fr)} <button class="say" data-say="${esc(fr)}" aria-label="発音">▶</button></p>
-      <p class="small" style="margin:0">${esc(jaOf(s, v, f))}　聞き分けの手がかり：${esc(cue)}</p></div>
+      <p class="small" style="margin:0">${esc(jaOf(s, v, f, undefined, adv))}　聞き分けの手がかり：${esc(cue)}</p></div>
       <div class="actions"><button class="btn" id="lnx">次へ</button></div>`;
     $('#lnx').onclick = () => { newListen(); $('#play').click(); }; focusInView($('#lnx'));
   });
