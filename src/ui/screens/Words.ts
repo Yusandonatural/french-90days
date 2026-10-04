@@ -44,13 +44,11 @@ function openLesson(title: string) {
   nextWordQ();
 }
 
-/** 7 new words + 3 review */
+/** 10 words not answered correctly yet (from other themes when this one runs out) */
 export function startWordLesson(ti: number) {
   WDAY = 0; const t = THEMES[ti]; WT = t;
-  const fresh = t.words.filter(w => !wLearned(w.id));
-  const nw = fresh.slice(0, 7);
-  let pool = t.words.filter(w => wLearned(w.id) && !nw.includes(w));
-  if (pool.length < 3) pool = WORDS.filter(w => wLearned(w.id) && !nw.includes(w));
+  const nw = t.words.filter(w => !wLearned(w.id)).slice(0, 10);
+  let pool = WORDS.filter(w => !wLearned(w.id) && !nw.includes(w));
   if (!pool.length) pool = t.words.filter(w => !nw.includes(w));
   WQ = [...nw, ...shuffle(pool).slice(0, 10 - nw.length)];
   while (WQ.length < 10) WQ.push(rnd(t.words));
@@ -58,13 +56,14 @@ export function startWordLesson(ti: number) {
   openLesson(t.emo + ' ' + t.title);
 }
 
-/** Day N's words: up to 7 new + review of weak words from earlier days */
+/** Day N's words not answered correctly yet, then earlier days' words still not learned */
 export function startDayWords(d: number) {
   WDAY = d;
-  const today = dayWords(d), nw = today.filter(w => !wLearned(w.id)).slice(0, 7);
-  let pool = PLANW.slice(0, dwStart(d)).filter(w => wSeen(w.id) && !nw.includes(w));
-  pool = pool.sort((a, b) => wc(a.id)[0] - wc(b.id)[0]).slice(0, 30);
-  if (pool.length < 3) pool = today.filter(w => !nw.includes(w));
+  const today = dayWords(d), nw = today.filter(w => !wLearned(w.id)).slice(0, 10);
+  // earlier words: ones already tried (and missed) first
+  let pool = PLANW.slice(0, dwStart(d)).filter(w => !wLearned(w.id) && !nw.includes(w));
+  pool = pool.sort((a, b) => wc(b.id)[1] - wc(a.id)[1]).slice(0, 30);
+  if (!pool.length) pool = today.filter(w => !nw.includes(w));
   WQ = shuffle([...nw, ...shuffle(pool).slice(0, 10 - nw.length)]);
   while (WQ.length < 10) WQ.push(rnd(today));
   WT = today[0].th;

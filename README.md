@@ -49,3 +49,8 @@ tests/                reference.ts が reference を jsdom で動かし、内部
 - 動詞：問題を先に出し、200マスの習得状況は折りたたみ。
 
 トークンは `src/ui/styles/tokens.css` にまとまっている。
+
+## 学習ルール（変更点）
+
+- 動詞・単語とも **1回正解で習得**。習得したものは出題しない（範囲内がすべて習得済みのときだけ、練習用にもう一度出す）。間違えた単語はレッスンの最後にもう一度出る。しきい値は `src/store/state.ts` の `VERB_MASTER` / `WORD_MASTER`。
+- 例文には毎回、よく使う副詞を1つ入れる（`src/data/adverbs.tsv`・`src/grammar/adverbs.ts`）。活用表だけは副詞なし。
