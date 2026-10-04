@@ -1,5 +1,5 @@
 // 単語: 34 theme units and 10-question word lessons (A: fr→ja, B: ja→fr, C: fill the blank in a sentence).
-import { $, $$, esc, rnd, shuffle } from '../../util/dom';
+import { $, $$, esc, rnd, shuffle, focusInView } from '../../util/dom';
 import { THEMES, WORDS, type Theme, type Word } from '../../data';
 import { FORMS, allowed, build, buildNeg, type FormKey } from '../../grammar/conjugate';
 import { jaNegOf, jaOf } from '../../grammar/ja';
@@ -142,7 +142,7 @@ function wAnswer(w: Word, b: HTMLElement, ok: boolean, sayText: string, label: s
   $('#wfb').innerHTML = `<div class="fb ${ok ? 'good' : 'bad'}"><span class="verdict">${ok ? '正解' : 'もう一度あとで出ます'}</span>
     <p class="fr" style="font-size:18px;margin:6px 0">${esc(label)} <button class="say" data-say="${esc(sayText)}" aria-label="発音">▶</button></p></div>
     <div class="actions"><button class="btn" id="wnx">次へ</button></div>`;
-  speak(sayText); $('#wnx').onclick = nextWordQ; $('#wnx').focus();
+  speak(sayText); $('#wnx').onclick = nextWordQ; focusInView($('#wnx'));
 }
 
 export function initWords() {

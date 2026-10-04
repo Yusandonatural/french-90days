@@ -1,5 +1,5 @@
 // 動詞: stage / mastery grid / accuracy meters and the four 10-question drill modes.
-import { $, $$, cap, esc, rnd, shuffle } from '../../util/dom';
+import { $, $$, cap, esc, rnd, shuffle, focusInView } from '../../util/dom';
 import { NST, V, exOf, stageVerbs, type VerbEx } from '../../data';
 import {
   FKEYS, FORMS, accepted, acceptedNeg, allowed, build, check, colloq, notesOf, subjFor,
@@ -153,7 +153,7 @@ function renderChoice() {
       <p class="fr" style="font-size:19px;margin:6px 0">${esc(full)} <button class="say" data-say="${esc(full)}" aria-label="発音">▶</button></p>
       <p class="small" style="margin:0">${esc(it.why)}</p></div>
       <div class="actions"><button class="btn" id="nx">次へ</button></div>`;
-    speak(full); $('#nx').onclick = nextDrill; $('#nx').focus();
+    speak(full); $('#nx').onclick = nextDrill; focusInView($('#nx'));
   });
 }
 
@@ -187,7 +187,7 @@ function showResult(res: CheckResult | 'giveup', acc: string[], f: string, key: 
     ${extra || ''}</div>
     <div class="actions"><button class="btn" id="nx">次へ</button></div>`;
   $<HTMLButtonElement>('#chk').disabled = true; $<HTMLButtonElement>('#give').disabled = true; $<HTMLInputElement>('#ans').readOnly = true;
-  speak(ans); $('#nx').onclick = nextDrill; $('#nx').focus();
+  speak(ans); $('#nx').onclick = nextDrill; focusInView($('#nx'));
 }
 
 function renderCompose() {

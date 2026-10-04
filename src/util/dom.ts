@@ -9,3 +9,5 @@ export const shuffle = <T>(a: readonly T[]): T[] => {
   return b;
 };
 export const cap = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
+/** Focus a button and bring it above the fixed tab bar (html has scroll-padding-bottom). */
+export const focusInView = (el: HTMLElement) => { el.focus({ preventScroll: true }); el.scrollIntoView({ block: 'nearest' }); };

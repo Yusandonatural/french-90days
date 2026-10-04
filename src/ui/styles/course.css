@@ -41,3 +41,5 @@ input.answer.sm{font-size:17px;min-height:46px;padding:8px 12px;margin-top:4px}
 .spc{background:var(--surface);border-radius:var(--r-card);padding:14px 16px;margin:10px 0;box-shadow:var(--shadow)}
 .spj{font-size:17px;font-weight:700}.spf{font-size:20px;color:var(--vd);margin-top:6px}
 .rec-on{background:var(--ng)!important;color:#fff!important;border-color:var(--ng)!important;box-shadow:none!important}
+.spc .actions{gap:6px;flex-wrap:nowrap}
+.spc .btn.sm{padding:6px 9px;font-size:13.5px;white-space:nowrap}

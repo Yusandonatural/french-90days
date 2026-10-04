@@ -1,5 +1,5 @@
 // 聞く: the je player (present → passé composé → venir de → aller) and the form quiz.
-import { $, $$, esc, rnd } from '../../util/dom';
+import { $, $$, esc, rnd, focusInView } from '../../util/dom';
 import { NST, VERBS, exOf, stageVerbs, withEx, type VerbEx } from '../../data';
 import { FKEYS, FORMS, allowed, build, buildNeg, presFr, subj0, subjFor } from '../../grammar/conjugate';
 import { jNeg, jNegPast, jaOf, presJa } from '../../grammar/ja';
@@ -126,7 +126,7 @@ function newListen() {
       <p class="fr" style="font-size:19px;margin:6px 0">${esc(fr)} <button class="say" data-say="${esc(fr)}" aria-label="発音">▶</button></p>
       <p class="small" style="margin:0">${esc(jaOf(s, v, f))}　聞き分けの手がかり：${esc(cue)}</p></div>
       <div class="actions"><button class="btn" id="lnx">次へ</button></div>`;
-    $('#lnx').onclick = () => { newListen(); $('#play').click(); }; $('#lnx').focus();
+    $('#lnx').onclick = () => { newListen(); $('#play').click(); }; focusInView($('#lnx'));
   });
 }
 
