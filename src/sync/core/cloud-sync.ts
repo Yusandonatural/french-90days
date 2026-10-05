@@ -32,7 +32,13 @@ export interface CloudSyncOptions<S> {
   emulator?: boolean;
   /** delay before pushing after a save (default 20 s) */
   pushDelayMs?: number;
+  /** how to load Firebase. Default: import('firebase/…') (bundled apps). Apps without a build
+   *  step pass a loader that imports from the CDN — see SYNC_HANDOFF.md. */
+  loadFirebase?: () => Promise<FirebaseModules>;
 }
+
+export type FirebaseModules = [typeof import('firebase/app'), typeof import('firebase/auth'), typeof import('firebase/firestore/lite')];
+const defaultLoad = (): Promise<FirebaseModules> => Promise.all([import('firebase/app'), import('firebase/auth'), import('firebase/firestore/lite')]);
 
 export interface CloudSync {
   available: boolean;
@@ -40,7 +46,8 @@ export interface CloudSync {
   syncNow(): Promise<void>;
   signIn(): Promise<void>;
   signOut(): Promise<void>;
-  onStatus(fn: (s: SyncStatus) => void): void;
+  /** call fn now and on every change; returns a function that stops it */
+  onStatus(fn: (s: SyncStatus) => void): () => void;
 }
 
 type Fb = {
@@ -54,7 +61,8 @@ export function createCloudSync<S>(o: CloudSyncOptions<S>): CloudSync {
   const config = o.emulator ? { apiKey: 'demo-key', projectId: 'demo-french', authDomain: 'localhost' } : o.config;
   const status: SyncStatus = { user: null, state: 'idle', ready: false };
   const watchers: ((s: SyncStatus) => void)[] = [];
-  const emit = (p: Partial<SyncStatus>) => { Object.assign(status, p); watchers.forEach(f => f(status)); };
+  // copy: a watcher may unsubscribe itself while we loop
+  const emit = (p: Partial<SyncStatus>) => { Object.assign(status, p); watchers.slice().forEach(f => f(status)); };
   let fb: Fb | null = null, uid: string | null = null;
   let pushTimer: ReturnType<typeof setTimeout> | undefined;
   let chain: Promise<void> = Promise.resolve();
@@ -85,12 +93,12 @@ export function createCloudSync<S>(o: CloudSyncOptions<S>): CloudSync {
 
   return {
     available: !!config,
-    onStatus(fn) { watchers.push(fn); fn(status); },
+    onStatus(fn) { watchers.push(fn); fn(status); return () => { const i = watchers.indexOf(fn); if (i >= 0) watchers.splice(i, 1); }; },
     syncNow,
     async init() {
       if (!config) return;
       try {
-        const [{ initializeApp, getApps }, authMod, fs] = await Promise.all([import('firebase/app'), import('firebase/auth'), import('firebase/firestore/lite')]);
+        const [{ initializeApp, getApps }, authMod, fs] = await (o.loadFirebase || defaultLoad)();
         const app = getApps()[0] || initializeApp(config);
         fb = { auth: authMod.getAuth(app), authMod, db: fs.getFirestore(app), fs };
         if (o.emulator) {

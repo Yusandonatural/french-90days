@@ -9,7 +9,12 @@
 // the side saved more recently. A newer `epoch` (set when progress is reset) wins outright.
 // Both sides should carry `updatedAt` (ms) — set it on every save.
 
-export interface MergeOptions { newer?: string[] }
+export interface MergeOptions {
+  /** keys (any depth) whose value comes from the side saved more recently */
+  newer?: string[];
+  /** keys (any depth) with their own rule: (value here, value there, here is newer) → merged */
+  resolve?: Record<string, (x: unknown, y: unknown, xIsNewer: boolean) => unknown>;
+}
 type J = unknown;
 const isObj = (x: J): x is Record<string, J> => !!x && typeof x === 'object' && !Array.isArray(x);
 
@@ -23,6 +28,7 @@ export function mergeDeep<T>(a: T, b: T, opts: MergeOptions = {}): T {
     if (x === undefined) return y;
     if (y === undefined) return x;
     const [n, o] = aNewer ? [x, y] : [y, x];
+    if (opts.resolve && Object.prototype.hasOwnProperty.call(opts.resolve, key)) return opts.resolve[key](x, y, aNewer);
     if (newer.has(key)) return n;
     if (typeof x === 'number' && typeof y === 'number') return Math.max(x, y);
     if (typeof x === 'boolean' && typeof y === 'boolean') return x || y;

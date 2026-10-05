@@ -3,9 +3,11 @@
 90日フランス語で使っている「Google でログイン → 進み具合を iPhone と Web で同期」の仕組みを、
 別のアプリ（例：中国語を学ぶアプリ）でそのまま使うための資料です。
 
-**Claude Code への最初の指示の例**（中国語アプリのリポジトリで）：
-「`SYNC_HANDOFF.md` を読んで、Yusandonatural/french-90days の `src/sync/core/` をこのアプリに入れ、
-コレクション `progress-zh` で Google ログインと記録の同期を付けて。Firebase の設定値は同じものを使うこと。」
+**組み込み済み**：中国語（Yusandonatural/idea- の `docs/sync/`）。ビルドのない静的サイトへの組み込み例として参考にしてください（§7）。
+
+**Claude Code への最初の指示の例**（新しい言語アプリのリポジトリで）：
+「`SYNC_HANDOFF.md` を読んで、Yusandonatural/french-90days の同期の部品をこのアプリに入れ、
+コレクション `progress-<言語コード>` で Google ログインと記録の同期を付けて。Firebase の設定値は同じものを使うこと。」
 
 ---
 
@@ -98,3 +100,17 @@ sync.init();
 - 手元：`npx firebase-tools emulators:start --only auth,firestore --project demo-french` を起動し、`VITE_FIREBASE_EMULATOR=1 npm run dev`。エミュレーターではコンソールで `__testSignIn('me@example.com')` を呼ぶとログインできます。
 - 本番：iPhone と パソコンで同じ Google アカウントでログインし、片方で1問解いて、もう片方で「今すぐ同期」。
 - Firebase コンソール → Firestore Database → データ に `progress-zh` が現れ、自分のユーザーIDの記録が入っていれば成功です。
+
+## 7. ビルドのない静的サイトの場合（中国語版のやり方）
+
+Vite などを使わず `<script>` で読み込むだけのサイトでは、TypeScript の部品をそのまま使えません。次のようにします。
+
+1. このリポジトリで `npm run build:sync-core` → `sync-core-js/` に素の JavaScript（ES モジュール）ができます（コミット済み）。これを相手の `docs/sync/core/` にコピー。
+2. Firebase は npm パッケージ `firebase` に入っているブラウザ用ファイル（`firebase-app.js`・`firebase-auth.js`・`firebase-firestore-lite.js`）を `docs/vendor/firebase/` に置き、
+   中の `https://www.gstatic.com/firebasejs/<版>/firebase-app.js` を `./firebase-app.js` に置き換えます（オフラインでも動き、外部 CDN に頼らない）。
+3. `createCloudSync({ …, loadFirebase: () => Promise.all([import('../vendor/firebase/firebase-app.js'), import('../vendor/firebase/firebase-auth.js'), import('../vendor/firebase/firebase-firestore-lite.js')]) })` のように読み込み方を渡します。
+4. アプリ本体（IIFE など）からは `window.LANG90 = { code, get, replace, onSaved, mountSync }` のようなつなぎ口を出し、`<script type="module" src="sync/app.js">` で同期を読み込みます。
+5. サービスワーカーがあるなら、キャッシュするファイルに `sync/…` と `vendor/firebase/…` を足し、キャッシュ名の版を上げます。
+
+中国語版の実装：`docs/sync/app.js`（間隔反復のカードは「箱」が進んでいる方を丸ごと、メモは id でまとめる、という独自の合わせ方を `resolve` で指定）。
+部品を直したら、`npm run build:sync-core` してから各アプリの `docs/sync/core/` に入れ直してください。

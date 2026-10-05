@@ -1,0 +1,16 @@
+{
+  "//": "Compiles src/sync/core/ to plain JavaScript for apps without a build step (npm run build:sync-core).",
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM"],
+    "types": [],
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "sync-core-js",
+    "rootDir": "src/sync/core",
+    "removeComments": false
+  },
+  "files": ["src/sync/core/cloud-sync.ts", "src/sync/core/merge-deep.ts", "src/sync/core/sync-card.ts"]
+}

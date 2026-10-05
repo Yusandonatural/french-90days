@@ -18,23 +18,31 @@ export const SYNC_CARD_JA: SyncCardText = {
 const esc = (s: unknown) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 const time = (t: number) => new Date(t).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
 
-/** Show the sign-in / status card in el (nothing when sync is off). */
-export function mountSyncCard(el: HTMLElement, sync: CloudSync, t: SyncCardText = SYNC_CARD_JA) {
+/** CSS classes used by the card, so it fits another app's styles */
+export interface SyncCardClasses { panel: string; btn: string; ghost: string; actions: string; heading: string }
+export const SYNC_CARD_CLASSES: SyncCardClasses = { panel: 'panel sync', btn: 'btn', ghost: 'btn ghost', actions: 'actions', heading: 'h2' };
+
+/** Show the sign-in / status card in el (nothing when sync is off). Stops updating when el leaves the page. */
+export function mountSyncCard(el: HTMLElement, sync: CloudSync, t: SyncCardText = SYNC_CARD_JA, c: SyncCardClasses = SYNC_CARD_CLASSES) {
   if (!sync.available) return;
-  sync.onStatus((s: SyncStatus) => {
+  const head = c.heading === 'h2' ? `<h2>${esc(t.heading)}</h2>` : '';
+  const title = (x: string) => c.heading === 'h2' ? `<b>${esc(x)}</b>` : `<b>${esc(t.heading)}</b><br><span>${esc(x)}</span>`;
+  const stop = sync.onStatus((s: SyncStatus) => {
+    if (!el.isConnected && el.dataset.mounted) { stop?.(); return; }
+    el.dataset.mounted = '1';
     if (!s.ready) { el.innerHTML = ''; return; }
     const msg = s.state === 'error' ? `<p class="small" style="color:var(--ng);margin:8px 0 0">${esc(s.msg || '')}</p>` : '';
     if (!s.user) {
-      el.innerHTML = `<h2>${esc(t.heading)}</h2><div class="panel sync">
-        <b>${esc(t.offTitle)}</b>
+      el.innerHTML = `${head}<div class="${c.panel}">
+        ${title(t.offTitle)}
         <p class="small muted" style="margin:6px 0 0">${esc(t.offBody)}</p>${msg}
-        <div class="actions"><button class="btn" data-sync="in">${esc(t.signIn)}</button></div></div>`;
+        <div class="${c.actions}"><button class="${c.btn}" data-sync="in">${esc(t.signIn)}</button></div></div>`;
     } else {
       const st = s.state === 'syncing' ? t.syncing : s.state === 'ok' && s.at ? `${t.last} ${time(s.at)}` : '';
-      el.innerHTML = `<h2>${esc(t.heading)}</h2><div class="panel sync">
-        <div class="goalrow" style="margin:0"><b>${esc(t.onTitle)}</b><span class="small muted">${esc(st)}</span></div>
+      el.innerHTML = `${head}<div class="${c.panel}">
+        <div class="goalrow" style="margin:0;display:flex;justify-content:space-between;gap:8px">${title(t.onTitle)}<span class="small muted">${esc(st)}</span></div>
         <p class="small muted" style="margin:4px 0 0">${esc(s.user.name)}${s.user.email ? `（${esc(s.user.email)}）` : ''}</p>${msg}
-        <div class="actions"><button class="btn ghost" data-sync="now">${esc(t.syncNow)}</button><button class="btn ghost" data-sync="out">${esc(t.signOut)}</button></div></div>`;
+        <div class="${c.actions}"><button class="${c.ghost}" data-sync="now">${esc(t.syncNow)}</button><button class="${c.ghost}" data-sync="out">${esc(t.signOut)}</button></div></div>`;
     }
   });
   el.addEventListener('click', e => {
