@@ -27,7 +27,8 @@ src/
   engine/             pick.ts（出題の重み）, session.ts（10問・XP・連続日数・バッジ）,
                       course.ts（Day 割り当て・タイマー・診断採点・自分専用フレーズ）
   store/              state.ts（ST と移行）, merge.ts（端末どうしの記録の合わせ方）, rec.ts（IndexedDB の録音）
-  sync/               cloud.ts（Firebase：Google ログインと同期）, firebase-config.ts（設定値）
+  sync/               core/（ほかのアプリでも使える同期の部品：cloud-sync・merge-deep・sync-card）,
+                      app.ts（このアプリへのつなぎ込み）, firebase-config.ts（設定値）。引き継ぎは SYNC_HANDOFF.md
   ui/                 styles/（tokens.css ほか。読み込み順＝元の CSS の順）, speech.ts, router.ts,
                       components/lesson.ts, screens/（Home, Course, Diagnosis, Drill, Conj, Words,
                       Listen, Speak, Learn, DayBar, Footer）

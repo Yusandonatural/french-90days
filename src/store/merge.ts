@@ -2,6 +2,7 @@
 // larger value of each counter wins; settings come from the more recently updated side.
 // A newer reset (epoch) replaces the other side completely.
 import { migrate, type Course, type CourseDay, type State, type Tally } from './state';
+import { sameDeep } from '../sync/core/merge-deep';
 
 const maxTally = (a?: Tally, b?: Tally): Tally => [Math.max(a?.[0] || 0, b?.[0] || 0), Math.max(a?.[1] || 0, b?.[1] || 0)];
 function mergeTallies(a: Record<string, Tally>, b: Record<string, Tally>) {
@@ -56,12 +57,5 @@ export function mergeStates(x: Partial<State>, y: Partial<State>): State {
   return s;
 }
 
-/** JSON with sorted keys, so equal data gives equal text whatever the key order */
-function canon(x: unknown): string {
-  if (Array.isArray(x)) return '[' + x.map(canon).join(',') + ']';
-  if (x && typeof x === 'object') return '{' + Object.keys(x).sort().filter(k => (x as Record<string, unknown>)[k] !== undefined).map(k => JSON.stringify(k) + ':' + canon((x as Record<string, unknown>)[k])).join(',') + '}';
-  return JSON.stringify(x);
-}
 /** true when two states hold the same progress (ignores updatedAt) */
-export const sameProgress = (a: Partial<State>, b: Partial<State>) =>
-  canon({ ...migrate(a), updatedAt: 0 }) === canon({ ...migrate(b), updatedAt: 0 });
+export const sameProgress = (a: Partial<State>, b: Partial<State>) => sameDeep(migrate(a), migrate(b));
