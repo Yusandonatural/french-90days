@@ -50,3 +50,6 @@
 .gtag{font-size:12px;border:1.5px solid var(--line);border-radius:999px;padding:0 8px;color:var(--muted)}
 .bigprog{margin:6px 0 10px}.bigprog b{font-size:22px}
 .lesson-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+/* link to the shared entry page (language picker) */
+.hub-link{margin:0;font-size:13px}
+.hub-link a{color:var(--muted);text-decoration:none;display:inline-block;padding:6px 0}
