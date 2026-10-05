@@ -1,9 +1,12 @@
-// 90日フランス語: each signed-in user can read and write only their own progress document.
+// Each signed-in user can read and write only their own progress document,
+// in any app's collection: progress (90日フランス語), progress-zh (中国語), progress-xx …
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /progress/{uid} {
-      allow read, write: if request.auth != null && request.auth.uid == uid;
+    match /{collection}/{uid} {
+      allow read, write: if request.auth != null
+        && request.auth.uid == uid
+        && collection.matches('progress(-[a-z]+)?');
     }
   }
 }
