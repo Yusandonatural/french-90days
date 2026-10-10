@@ -160,7 +160,7 @@ export function widget(cfg) {
   }
   // 説明文の URL だけリンクにする（それ以外は文字のまま）
   function linkify(p, text) {
-    const parts = text.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').split(/(https?:\/\/[^\s<>"]+)/g);
+    const parts = text.replace(/#写真[:：]\S+/g, '').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').split(/(https?:\/\/[^\s<>"]+)/g);
     for (const part of parts) {
       if (/^https?:\/\//.test(part)) {
         const a = el('a', null, part);
@@ -223,90 +223,12 @@ export function widget(cfg) {
     ];
   };
 
-  // Instagram などに載せる縦長の画像（1080×1350）をブラウザで描く
-  function wrap(ctx, text, maxW) {
-    const lines = [];
-    let line = '';
-    for (const ch of text) {
-      if (ch === '\n' || ctx.measureText(line + ch).width > maxW) { lines.push(line); line = ch === '\n' ? '' : ch; }
-      else line += ch;
-    }
-    if (line) lines.push(line);
-    return lines;
-  }
-  // 悠三堂の印章ロゴ（worker の /brand/ から。読めなければロゴなしで描く）
-  const EN = { farm: 'OPEN FARM', cafe: 'CAFÉ', stay: 'STAY', closed: 'CLOSED', event: 'EVENT' };
-  let stampP = null;
-  const stamp = () => stampP || (stampP = new Promise((res) => {
-    if (!cfg.brand) return res(null);
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => res(img);
-    img.onerror = () => res(null);
-    img.src = cfg.brand;
-  }));
-  // ロゴの形だけを使って好きな色で描く
-  function tinted(img, color, w, h) {
-    const t = document.createElement('canvas');
-    t.width = w; t.height = h;
-    const g = t.getContext('2d');
-    g.drawImage(img, 0, 0, w, h);
-    g.globalCompositeOperation = 'source-in';
-    g.fillStyle = color; g.fillRect(0, 0, w, h);
-    return t;
-  }
-
+  // Instagram などに載せる縦長の画像（1080×1350）は worker が作る（日時・場所・写真入り）
+  const posterUrl = (ev) => cfg.share.replace(/\/e\/$/, `/poster/${ev.id}.png`);
   async function poster(ev) {
-    const W = 1080, H = 1350, L = 104, c = document.createElement('canvas');
-    c.width = W; c.height = H;
-    const x = c.getContext('2d');
-    const serif = (getComputedStyle(document.querySelector('.yse') || document.body).getPropertyValue('--serif') || 'serif').trim();
-    const logo = await stamp();
-    const text = (t, size, color, spacing, px, py, align) => {
-      x.font = `500 ${size}px ${serif}`; x.fillStyle = color; x.letterSpacing = `${spacing}px`;
-      x.textAlign = align || 'left'; x.fillText(t, px, py);
-    };
-
-    x.fillStyle = '#F7F5EF'; x.fillRect(0, 0, W, H);
-    x.fillStyle = wash(ev.category); x.fillRect(0, 0, W, 540);
-    if (logo) {
-      x.globalAlpha = 0.11;
-      x.drawImage(tinted(logo, ink(ev.category), 660, 664), W - 470, -70);
-      x.globalAlpha = 1;
-      x.drawImage(tinted(logo, '#8EA14E', 76, 76), L, 104);
-    }
-    x.strokeStyle = 'rgba(51,51,38,.14)'; x.lineWidth = 1.5; x.strokeRect(40, 40, W - 80, H - 80);
-    const bx = logo ? L + 100 : L;
-    text('悠三堂', 40, '#333326', 14, bx, 146);
-    text('YUSANDO', 18, '#7A7768', 8, bx, 178);
-    text(EN[ev.category] || 'EVENT', 26, ink(ev.category), 9, L, 352);
-    text(label(ev.category), 54, '#333326', 6, L, 432);
-    x.fillStyle = ink(ev.category); x.fillRect(L, 472, 72, 3);
-
-    let y = 680;
-    x.font = `500 80px ${serif}`; x.letterSpacing = '3px';
-    for (const l of wrap(x, ev.title, W - L * 2).slice(0, 3)) { text(l, 80, '#333326', 3, L, y); y += 108; }
-    y += 18;
-    x.font = `500 42px ${serif}`; x.letterSpacing = '2px';
-    for (const l of wrap(x, whenText(ev).replace(' 〜 ', '〜'), W - L * 2).slice(0, 2)) { text(l, 42, '#494932', 2, L, y); y += 62; }
-    if (ev.location) {
-      x.font = `500 34px ${serif}`; x.letterSpacing = '2px';
-      for (const l of wrap(x, ev.location, W - L * 2).slice(0, 2)) { text(l, 34, '#7A7768', 2, L, y + 8); y += 52; }
-    }
-    const desc = (ev.description || '').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').replace(/https?:\/\/\S+/g, '').trim();
-    if (desc) {
-      y += 44;
-      x.font = `500 32px ${serif}`; x.letterSpacing = '1px';
-      const lines = wrap(x, desc, W - L * 2).filter((l) => l.trim());
-      const room = Math.max(0, Math.floor((H - 250 - y) / 52));
-      lines.slice(0, room).forEach((l, i) => {
-        text(i === room - 1 && lines.length > room ? l.slice(0, -1) + '…' : l, 32, '#5E5B4C', 1, L, y); y += 52;
-      });
-    }
-    x.fillStyle = 'rgba(51,51,38,.16)'; x.fillRect(L, H - 196, W - L * 2, 1.5);
-    text('EVENT CALENDAR', 22, '#7A7768', 8, L, H - 124);
-    text('yusando.com', 26, '#7A7768', 5, W - L, H - 124, 'right');
-    return new Promise((res) => c.toBlob(res, 'image/png'));
+    const res = await fetch(posterUrl(ev));
+    if (!res.ok) throw new Error(`poster ${res.status}`);
+    return res.blob();
   }
 
   function shareBox(ev) {
@@ -335,7 +257,9 @@ export function widget(cfg) {
     const img = el('button', 'yse-sbtn'); img.type = 'button';
     img.append(svg('image'), document.createTextNode('画像で投稿（Instagram など）'));
     img.onclick = async () => {
-      const blob = await poster(ev);
+      say('画像を作っています…');
+      let blob;
+      try { blob = await poster(ev); } catch (e) { say('画像を作れませんでした。時間をおいてお試しください'); return; }
       const file = new File([blob], `yusando-${ev.id}.png`, { type: 'image/png' });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         navigator.share({ files: [file], text: `${shareText(ev)}\n${shareUrl(ev)}` }).catch(() => {});

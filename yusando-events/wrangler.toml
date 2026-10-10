@@ -10,6 +10,7 @@ keep_names = false
 # シェア時のカード画像（public/og/*.png）
 [assets]
 directory = "./public"
+binding = "ASSETS"
 
 [vars]
 # yusando.com でカレンダーを貼ったページ。シェアされたリンクを開いた人をここへ案内する

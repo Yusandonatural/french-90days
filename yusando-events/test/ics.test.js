@@ -84,3 +84,22 @@ test('シェアページに OGP が入り、文字はエスケープされる', 
   assert.match(html, /location.replace\("https:\/\/yusando.com\/pages\/events#e=20261018-[0-9a-f]{8}"\)/);
   assert.ok(!sharePage(farm, { shareUrl: 'a', imageUrl: 'b', calendarUrl: '' }).includes('location.replace'));
 });
+
+import { cardText, photoFor } from '../src/card-text.js';
+
+test('シェア画像の文字：日時と場所、写真の選び方', () => {
+  const farm = oct.find((e) => e.category === 'farm');
+  const t = cardText(farm);
+  assert.equal(t.title, 'オープンファームデー');
+  assert.equal(t.when, '10月18日（日） 終日');
+  assert.equal(t.place, '奈良県山辺郡山添村');
+  assert.equal(t.desc, '茶畑を歩きます　お申込み');
+  assert.equal(photoFor(farm), 'field');
+  const cafe = oct.find((e) => e.start === '2026-10-24T13:00');
+  assert.equal(cardText(cafe).when, '10月24日（土） 13:00〜17:00');
+  assert.equal(cardText(cafe).place, '');
+  assert.equal(photoFor(cafe), 'interior');
+  assert.equal(photoFor({ ...farm, description: '#写真:matcha 新茶の会' }), 'matcha');
+  assert.equal(photoFor({ ...farm, description: '#写真:nothing' }), 'field');
+  assert.equal(cardText({ ...farm, description: '#写真:matcha 新茶の会' }).desc, '新茶の会');
+});

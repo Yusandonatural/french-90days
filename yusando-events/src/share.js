@@ -3,7 +3,7 @@
 import { whenText, categoryLabel } from './ics.js';
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
-const plain = (s) => s.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+const plain = (s) => s.replace(/#写真[:：]\S+/g, '').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 
 export function sharePage(ev, { shareUrl, imageUrl, calendarUrl, logoUrl }) {
   const when = whenText(ev);
