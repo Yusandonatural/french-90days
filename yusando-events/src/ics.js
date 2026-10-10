@@ -183,6 +183,20 @@ function monthDays(base, r, s) {
   return out.sort((a, b) => a - b);
 }
 
+// シェア用の短い ID："20261018-1a2b3c4d"（日付＋UID のハッシュ）。日付から月がわかる
+export function eventId(uid, startMs) {
+  let h = 0x811c9dc5;
+  for (const ch of uid || '') { h ^= ch.codePointAt(0); h = Math.imul(h, 0x01000193) >>> 0; }
+  return `${new Date(startMs).toISOString().slice(0, 10).replace(/-/g, '')}-${h.toString(16).padStart(8, '0')}`;
+}
+export const ID_RE = /^(\d{4})(\d{2})\d{2}-[0-9a-f]{8}$/;
+
+export function findEvent(events, id) {
+  const m = id.match(ID_RE);
+  if (!m) return null;
+  return eventsForMonth(events, `${m[1]}-${m[2]}`).find((e) => e.id === id) || null;
+}
+
 function fmt(ms, allDay) {
   const iso = new Date(ms).toISOString();
   return allDay ? iso.slice(0, 10) : iso.slice(0, 16);
@@ -211,7 +225,7 @@ export function eventsForMonth(events, month) {
     if (!(startMs < to && (endMs > from || (dur === 0 && startMs >= from)))) return;
     const title = ev.title || '';
     out.push({
-      id: `${ev.uid}|${startMs}`,
+      id: eventId(ev.uid, startMs),
       title: cleanTitle(title),
       category: categorize(title),
       allDay,
@@ -238,4 +252,20 @@ export function eventsForMonth(events, month) {
 
   out.sort((a, b) => (a.start < b.start ? -1 : a.start > b.start ? 1 : a.title.localeCompare(b.title)));
   return out;
+}
+
+const WD_JA = ['日', '月', '火', '水', '木', '金', '土'];
+function jpDate(s) {
+  const d = new Date(s.slice(0, 10) + 'T00:00:00Z');
+  return `${d.getUTCMonth() + 1}月${d.getUTCDate()}日（${WD_JA[d.getUTCDay()]}）`;
+}
+// 「10月18日（日）終日」「10月3日（土）11:00〜16:00」「10月29日（木）〜11月2日（月）」
+export function whenText(ev) {
+  const sd = ev.start.slice(0, 10), ed = ev.end.slice(0, 10);
+  if (ev.allDay) return sd === ed ? `${jpDate(sd)} 終日` : `${jpDate(sd)}〜${jpDate(ed)}`;
+  if (sd === ed) return `${jpDate(sd)} ${ev.start.slice(11)}〜${ev.end.slice(11)}`;
+  return `${jpDate(sd)} ${ev.start.slice(11)}〜${jpDate(ed)} ${ev.end.slice(11)}`;
+}
+export function categoryLabel(id) {
+  return (CATEGORIES.find((c) => c.id === id) || OTHER).label;
 }

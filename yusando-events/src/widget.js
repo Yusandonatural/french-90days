@@ -21,7 +21,7 @@ export function widget(cfg) {
   --serif:"Shippori Mincho","Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
   color:var(--ink);max-width:1040px;margin:0 auto;line-height:1.6;font-feature-settings:"palt";-webkit-font-smoothing:antialiased}
 .yse *{box-sizing:border-box}
-.yse button{font:inherit;color:inherit}
+.yse button{font-family:inherit;line-height:inherit;color:inherit}
 .yse :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 .yse-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:0 0 20px}
@@ -98,6 +98,7 @@ export function widget(cfg) {
   border-radius:20px;padding:28px 28px 24px;box-shadow:0 24px 60px -20px rgba(0,0,0,.35);transform:translateY(8px);
   transition:transform .25s;color:var(--ink);line-height:1.7}
 .yse-scrim.on .yse-dlg{transform:none}
+.yse-dlg:focus{outline:none}
 .yse-close{position:absolute;top:12px;right:12px;border:0;background:none}
 .yse-tag{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;letter-spacing:.12em;padding:4px 12px;border-radius:999px}
 .yse-dlg h3{margin:14px 0 6px;font-family:var(--serif);font-weight:500;font-size:1.45rem;line-height:1.4}
@@ -111,6 +112,16 @@ export function widget(cfg) {
 .yse-add svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;flex:none}
 .yse-add:hover{background:var(--soft)}
 
+.yse-share{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.yse-share-h{margin:0 0 10px;font-size:.72rem;letter-spacing:.24em;color:var(--sub)}
+.yse-share-row{display:flex;flex-wrap:wrap;gap:8px}
+.yse-sbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:0 16px;border-radius:999px;
+  border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;text-decoration:none;font-size:.8rem;letter-spacing:.04em;white-space:nowrap}
+.yse-sbtn:hover{background:var(--soft)}
+.yse-sbtn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5}
+.yse-sbtn.main{background:var(--ink);border-color:var(--ink);color:#fff}
+.yse-sbtn.main:hover{background:#000}
+.yse-toast{margin:10px 0 0;font-size:.75rem;color:var(--accent);min-height:1.2em}
 @media (max-width:680px){
   .yse-head{align-items:center;margin-bottom:16px}
   .yse-en{display:none}
@@ -129,6 +140,9 @@ export function widget(cfg) {
     close: '<path d="M6 6l12 12M18 6L6 18"/>',
     clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
     pin: '<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0113 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
+    share: '<path d="M12 15V4M8 8l4-4 4 4"/><path d="M6 12v6.5A1.5 1.5 0 007.5 20h9a1.5 1.5 0 001.5-1.5V12"/>',
+    link: '<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/>',
+    image: '<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9.5" r="1.6"/><path d="M20 15l-4.5-4.5L6 20"/>',
     plus: '<rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 9.5h16M8 3v4M16 3v4M12 12.5v5M9.5 15h5"/>',
   };
   function svg(name) {
@@ -197,6 +211,117 @@ export function widget(cfg) {
     return map;
   }
 
+  // ---- SNS シェア ----
+  const shareUrl = (ev) => `${cfg.share}${ev.id}`;
+  const shareText = (ev) => `${ev.title}\n${whenText(ev)}\n#悠三堂`;
+  const intents = (ev) => {
+    const u = encodeURIComponent(shareUrl(ev)), t = encodeURIComponent(shareText(ev));
+    return [
+      ['X', `https://twitter.com/intent/tweet?text=${t}&url=${u}`],
+      ['Facebook', `https://www.facebook.com/sharer/sharer.php?u=${u}`],
+      ['LINE', `https://social-plugins.line.me/lineit/share?url=${u}&text=${t}`],
+    ];
+  };
+
+  // Instagram などに載せる縦長の画像（1080×1350）をブラウザで描く
+  function wrap(ctx, text, maxW) {
+    const lines = [];
+    let line = '';
+    for (const ch of text) {
+      if (ch === '\n' || ctx.measureText(line + ch).width > maxW) { lines.push(line); line = ch === '\n' ? '' : ch; }
+      else line += ch;
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+  function poster(ev) {
+    const W = 1080, H = 1350, c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    const x = c.getContext('2d');
+    const serif = getComputedStyle(document.querySelector('.yse') || document.body).getPropertyValue('--serif') || 'serif';
+    x.fillStyle = '#FAF7F2'; x.fillRect(0, 0, W, H);
+    x.fillStyle = wash(ev.category); x.fillRect(0, 0, W, 420);
+    x.fillStyle = ink(ev.category);
+    x.font = `500 30px ${serif}`;
+    x.letterSpacing = '12px';
+    x.fillText('YUSANDO EVENTS', 96, 150);
+    x.font = `500 44px ${serif}`;
+    x.letterSpacing = '6px';
+    x.fillText(label(ev.category), 96, 300);
+    x.fillRect(96, 340, 72, 3);
+    x.fillStyle = '#2B2722';
+    x.font = `500 84px ${serif}`;
+    x.letterSpacing = '2px';
+    let y = 560;
+    for (const l of wrap(x, ev.title, W - 192).slice(0, 4)) { x.fillText(l, 96, y); y += 112; }
+    x.fillStyle = '#5E574E';
+    x.font = `500 44px ${serif}`;
+    y += 24;
+    for (const l of wrap(x, whenText(ev).replace(' 〜 ', '〜'), W - 192).slice(0, 2)) { x.fillText(l, 96, y); y += 64; }
+    if (ev.location) {
+      x.font = `500 36px ${serif}`; x.fillStyle = '#8B8378';
+      for (const l of wrap(x, ev.location, W - 192).slice(0, 2)) { x.fillText(l, 96, y + 12); y += 54; }
+    }
+    const desc = (ev.description || '').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').replace(/https?:\/\/\S+/g, '').trim();
+    if (desc) {
+      x.font = `500 34px ${serif}`; x.fillStyle = '#5E574E'; x.letterSpacing = '1px';
+      y += 40;
+      const lines = wrap(x, desc, W - 192).filter((l) => l.trim());
+      const room = Math.max(0, Math.floor((H - 260 - y) / 54));
+      lines.slice(0, room).forEach((l, i) => {
+        x.fillText(i === room - 1 && lines.length > room ? l.slice(0, -1) + '…' : l, 96, y); y += 54;
+      });
+    }
+    x.fillStyle = '#ECE6DC'; x.fillRect(96, H - 200, W - 192, 2);
+    x.fillStyle = '#2B2722'; x.font = `500 46px ${serif}`; x.letterSpacing = '14px';
+    x.fillText('悠三堂', 96, H - 110);
+    x.fillStyle = '#8B8378'; x.font = `500 30px ${serif}`; x.letterSpacing = '6px';
+    x.textAlign = 'right'; x.fillText('yusando.com', W - 96, H - 112);
+    return new Promise((res) => c.toBlob(res, 'image/png'));
+  }
+
+  function shareBox(ev) {
+    const box = el('div', 'yse-share');
+    box.append(el('p', 'yse-share-h', 'この予定をシェア'));
+    const row = el('div', 'yse-share-row');
+    const toast = el('p', 'yse-toast');
+    const say = (t) => { toast.textContent = t; setTimeout(() => { if (toast.textContent === t) toast.textContent = ''; }, 2500); };
+    if (navigator.share) {
+      const b = el('button', 'yse-sbtn main'); b.type = 'button';
+      b.append(svg('share'), document.createTextNode('シェア'));
+      b.onclick = () => navigator.share({ title: ev.title, text: shareText(ev), url: shareUrl(ev) }).catch(() => {});
+      row.append(b);
+    }
+    for (const [name, href] of intents(ev)) {
+      const a = el('a', 'yse-sbtn', name); a.href = href; a.target = '_blank'; a.rel = 'noopener';
+      a.setAttribute('aria-label', `${name}でシェア`);
+      row.append(a);
+    }
+    const copy = el('button', 'yse-sbtn'); copy.type = 'button';
+    copy.append(svg('link'), document.createTextNode('リンクをコピー'));
+    copy.onclick = async () => {
+      try { await navigator.clipboard.writeText(shareUrl(ev)); say('リンクをコピーしました'); }
+      catch (e) { window.prompt('このリンクをコピーしてください', shareUrl(ev)); }
+    };
+    const img = el('button', 'yse-sbtn'); img.type = 'button';
+    img.append(svg('image'), document.createTextNode('画像で投稿（Instagram など）'));
+    img.onclick = async () => {
+      const blob = await poster(ev);
+      const file = new File([blob], `yusando-${ev.id}.png`, { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], text: `${shareText(ev)}\n${shareUrl(ev)}` }).catch(() => {});
+      } else {
+        const a = el('a'); a.href = URL.createObjectURL(blob); a.download = file.name;
+        document.body.append(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        say('画像を保存しました');
+      }
+    };
+    row.append(copy, img);
+    box.append(row, toast);
+    return box;
+  }
+
   function openDialog(ev) {
     const scrim = el('div', 'yse-scrim yse');
     const dlg = el('div', 'yse-dlg');
@@ -220,12 +345,15 @@ export function widget(cfg) {
     if (ev.description) { const p = el('div', 'yse-desc'); linkify(p, ev.description); dlg.append(p); }
     const add = el('a', 'yse-add'); add.href = gcalLink(ev); add.target = '_blank'; add.rel = 'noopener';
     add.append(svg('plus'), document.createTextNode('Googleカレンダーに追加'));
-    dlg.append(add);
+    dlg.append(add, shareBox(ev));
     scrim.append(dlg);
 
     const prevFocus = document.activeElement;
     const prevOverflow = document.body.style.overflow;
+    const prevHash = location.hash;
+    try { history.replaceState(null, '', `#e=${ev.id}`); } catch (e) { /* noop */ }
     const done = () => {
+      try { history.replaceState(null, '', location.pathname + location.search + (prevHash.startsWith('#e=') ? '' : prevHash)); } catch (e) { /* noop */ }
       scrim.classList.remove('on');
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = prevOverflow;
@@ -239,7 +367,8 @@ export function widget(cfg) {
     document.body.style.overflow = 'hidden';
     document.body.append(scrim);
     requestAnimationFrame(() => scrim.classList.add('on'));
-    close.focus();
+    dlg.tabIndex = -1;
+    dlg.focus({ preventScroll: true });
   }
 
   function mount(root) {
@@ -276,7 +405,10 @@ export function widget(cfg) {
     const msg = el('p', 'yse-msg'); msg.hidden = true;
     root.replaceChildren(head, chips, board, msg);
 
-    const start = (root.dataset.month || todayJST().slice(0, 7)).split('-').map(Number);
+    // シェアされたリンク（#e=20261018-xxxxxxxx）から来たら、その月を開いて予定を表示する
+    const deep = (location.hash.match(/^#e=((\d{4})(\d{2})\d{2}-[0-9a-f]{8})$/) || []);
+    let pendingOpen = deep[1] || null;
+    const start = (deep[1] ? `${deep[2]}-${deep[3]}` : (root.dataset.month || todayJST().slice(0, 7))).split('-').map(Number);
     let y = start[0], m = start[1];
     let events = [];
 
@@ -400,6 +532,11 @@ export function widget(cfg) {
       }
       root.classList.remove('loading');
       render();
+      if (pendingOpen) {
+        const ev = events.find((e) => e.id === pendingOpen);
+        pendingOpen = null;
+        if (ev) { root.scrollIntoView({ block: 'start' }); openDialog(ev); }
+      }
     }
     const move = (k) => { m += k; if (m < 1) { m = 12; y--; } if (m > 12) { m = 1; y++; } load(); };
     prev.onclick = () => move(-1);

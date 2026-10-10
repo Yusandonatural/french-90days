@@ -55,3 +55,32 @@ test('毎月第1日曜（回数指定）', () => {
 test('widget は外の変数を使わずに文字列化できる', () => {
   assert.doesNotThrow(() => new Function(`return (${widget.toString()})`)());
 });
+
+import { findEvent, ID_RE } from '../src/ics.js';
+import { sharePage } from '../src/share.js';
+
+test('シェア用 ID は短く、月をまたいでも同じ予定を引ける', () => {
+  const farm = oct.find((e) => e.category === 'farm');
+  assert.match(farm.id, ID_RE);
+  assert.ok(farm.id.startsWith('20261018-'));
+  assert.equal(findEvent(events, farm.id).title, 'オープンファームデー');
+  const stay = eventsForMonth(events, '2026-11').find((e) => e.category === 'stay');
+  assert.equal(stay.id, oct.find((e) => e.category === 'stay').id);
+  assert.equal(findEvent(events, stay.id).title, '宿泊可能');
+  assert.equal(findEvent(events, '20261018-00000000'), null);
+  assert.equal(findEvent(events, '../etc'), null);
+  // 毎週の予定は回ごとに別の ID
+  const cafe = oct.filter((e) => e.category === 'cafe').map((e) => e.id);
+  assert.equal(new Set(cafe).size, cafe.length);
+});
+
+test('シェアページに OGP が入り、文字はエスケープされる', () => {
+  const farm = { ...oct.find((e) => e.category === 'farm'), title: '<script>"x"</script>' };
+  const html = sharePage(farm, { shareUrl: 'https://w.dev/e/1', imageUrl: 'https://w.dev/og/farm.png', calendarUrl: 'https://yusando.com/pages/events' });
+  assert.match(html, /<meta property="og:image" content="https:\/\/w.dev\/og\/farm.png">/);
+  assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
+  assert.match(html, /og:description" content="10月18日（日） 終日・オープンファーム　茶畑を歩きます/);
+  assert.ok(!html.includes('<script>"x"'));
+  assert.match(html, /location.replace\("https:\/\/yusando.com\/pages\/events#e=20261018-[0-9a-f]{8}"\)/);
+  assert.ok(!sharePage(farm, { shareUrl: 'a', imageUrl: 'b', calendarUrl: '' }).includes('location.replace'));
+});
