@@ -47,7 +47,7 @@ yusando.com（Shopify）のページに貼った <div id="yusando-events">
 
 - ID は「開始日＋予定ごとの番号」なので、予定のタイトルや時間を直してもリンクは変わらない（日付を動かすと変わる）。
 - 終わった予定・消した予定のリンクはカレンダーページへ案内する。
-- カード画像を作り直すときは `node scripts/og-images.mjs`（中の説明を参照）。
+- カード画像を作り直すときは `node scripts/og-images.mjs`（中の説明を参照）。ロゴは `public/brand/`（印章ロゴ）、書体は yusando.com の見出しと同じ Shippori Mincho。
 - シェア URL を `events.yusando.com` のような自分のドメインにしたいときは、Cloudflare で Worker にそのドメインを割り当て、`PUBLIC_BASE_URL` に入れる。
 
 ## 最初の設定（1回だけ）

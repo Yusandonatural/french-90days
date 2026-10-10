@@ -16,7 +16,7 @@ export default {
     if (request.method === 'OPTIONS') return new Response(null, { headers: cors() });
     if (url.pathname === '/widget.js') {
       const api = `${url.origin}/events`;
-      const cfg = { api, share: `${base(url, env)}/e/`, categories: [...CATEGORIES, OTHER].map(({ id, label }) => ({ id, label })) };
+      const cfg = { api, share: `${base(url, env)}/e/`, brand: `${url.origin}/brand/logo-stamp.png`, categories: [...CATEGORIES, OTHER].map(({ id, label }) => ({ id, label })) };
       // ビルド時に関数名を残すための __name(...) が入っても動くようにしておく
       const body = `(function(){var __name=function(f){return f};(${widget.toString()})(${JSON.stringify(cfg)});})();`;
       return new Response(body, {
@@ -69,6 +69,7 @@ async function shared(id, url, env, ctx) {
     shareUrl: `${base(url, env)}/e/${id}`,
     imageUrl: `${base(url, env)}/og/${ev.category}.png`,
     calendarUrl: env.CALENDAR_PAGE_URL || '',
+    logoUrl: `${base(url, env)}/brand/logo-stamp.png`,
   });
   const out = new Response(html, {
     headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': `public, max-age=${CACHE_SECONDS}` },

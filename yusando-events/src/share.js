@@ -5,7 +5,7 @@ import { whenText, categoryLabel } from './ics.js';
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const plain = (s) => s.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 
-export function sharePage(ev, { shareUrl, imageUrl, calendarUrl }) {
+export function sharePage(ev, { shareUrl, imageUrl, calendarUrl, logoUrl }) {
   const when = whenText(ev);
   const label = categoryLabel(ev.category);
   const title = `${ev.title}｜悠三堂`;
@@ -36,17 +36,19 @@ export function sharePage(ev, { shareUrl, imageUrl, calendarUrl }) {
 <meta name="twitter:description" content="${esc(desc)}">
 <meta name="twitter:image" content="${esc(imageUrl)}">
 <style>
-body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#FAF7F2;color:#2B2722;
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#F7F5EF;color:#333326;
   font-family:"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.7}
-main{max-width:480px;width:100%;background:#fff;border:1px solid #ECE6DC;border-radius:20px;padding:28px}
-p{margin:0}.l{font-size:.75rem;letter-spacing:.2em;color:#8B8378}
+main{box-sizing:border-box;max-width:480px;width:100%;background:#fff;border:1px solid #ECE6DC;border-radius:20px;padding:28px}
+p{margin:0}.b{display:flex;align-items:center;gap:10px;margin-bottom:22px;font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;letter-spacing:.3em}
+.b img{width:36px;height:36px}.l{font-size:.75rem;letter-spacing:.2em;color:#8B8378}
 h1{margin:10px 0 6px;font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-weight:500;font-size:1.5rem;line-height:1.4}
 .w{color:#8B8378;font-size:.9rem}
-a{display:inline-flex;align-items:center;min-height:44px;margin-top:20px;padding:0 20px;border-radius:999px;background:#2B2722;color:#fff;text-decoration:none;font-size:.9rem}
+a{display:inline-flex;align-items:center;min-height:44px;margin-top:20px;padding:0 20px;border-radius:999px;background:#333326;color:#fff;text-decoration:none;font-size:.9rem}
 </style>
 </head>
 <body>
 <main>
+${logoUrl ? `<p class="b"><img src="${esc(logoUrl)}" alt="">悠三堂</p>` : ''}
 <p class="l">YUSANDO EVENTS・${esc(label)}</p>
 <h1>${esc(ev.title)}</h1>
 <p class="w">${esc(when)}${ev.location ? `<br>${esc(ev.location)}` : ''}</p>
