@@ -1,53 +1,143 @@
 // yusando.com に貼る月カレンダー。worker が `(widget)(設定)` の形で配信する。
 // この関数は文字列にしてブラウザで動かすので、外の変数は使わないこと。
 export function widget(cfg) {
+  // 抹茶・ほうじ茶・藍・灰・葡萄。文字色（濃）と面の色（淡）の組
   const COLORS = {
-    farm: '#4E7A3A', cafe: '#B5793B', stay: '#3F6E8C', closed: '#9A948A', event: '#8A4F7D',
+    farm: ['#4F6B3C', '#E7EDDF'],
+    cafe: ['#8A5A2E', '#F3E8DA'],
+    stay: ['#3E5A70', '#E1E9EF'],
+    closed: ['#76716A', '#ECEAE6'],
+    event: ['#7A4766', '#F1E4EC'],
   };
   const WD = ['日', '月', '火', '水', '木', '金', '土'];
+  const MONTH_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const DAY = 86400000;
   const label = (id) => (cfg.categories.find((c) => c.id === id) || {}).label || '';
+  const ink = (id) => (COLORS[id] || COLORS.event)[0];
+  const wash = (id) => (COLORS[id] || COLORS.event)[1];
 
   const css = `
-.yse{--yse-line:#E4DED3;--yse-bg:#fff;--yse-sub:#7A7368;--yse-ink:#2F2A24;--yse-today:#F6F1E6;
-  font-family:inherit;color:var(--yse-ink);max-width:960px;margin:0 auto;line-height:1.5}
+.yse{--ink:#2B2722;--sub:#8B8378;--faint:#B9B1A5;--line:#ECE6DC;--paper:#FFFFFF;--soft:#FAF7F2;--accent:#4F6B3C;
+  --serif:"Shippori Mincho","Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
+  color:var(--ink);max-width:1040px;margin:0 auto;line-height:1.6;font-feature-settings:"palt";-webkit-font-smoothing:antialiased}
 .yse *{box-sizing:border-box}
-.yse-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 12px}
-.yse-title{font-size:1.4em;font-weight:600;margin:0;letter-spacing:.05em}
-.yse-nav{display:flex;gap:6px}
-.yse-btn{min-width:44px;min-height:44px;padding:0 12px;border:1px solid var(--yse-line);background:var(--yse-bg);
-  color:inherit;border-radius:10px;font:inherit;cursor:pointer;white-space:nowrap}
-.yse-btn:hover{background:var(--yse-today)}
-.yse-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 12px;padding:0;list-style:none;font-size:.85em;color:var(--yse-sub)}
-.yse-legend li{display:flex;align-items:center;gap:6px}
-.yse-dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
-.yse-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-top:1px solid var(--yse-line);border-left:1px solid var(--yse-line)}
-.yse-wd,.yse-cell{border-right:1px solid var(--yse-line);border-bottom:1px solid var(--yse-line)}
-.yse-wd{padding:6px 4px;text-align:center;font-size:.8em;color:var(--yse-sub);background:var(--yse-today)}
-.yse-wd.sun,.yse-cell.sun .yse-num{color:#B04A3A}.yse-wd.sat,.yse-cell.sat .yse-num{color:#3F6E8C}
-.yse-cell{min-height:96px;padding:4px;background:var(--yse-bg);overflow:hidden}
-.yse-cell.out{background:#FAF8F4}.yse-cell.out .yse-num{opacity:.35}
-.yse-cell.today{background:var(--yse-today)}
-.yse-num{font-size:.8em;display:block;margin-bottom:2px}
-.yse-ev{display:block;width:100%;text-align:left;border:0;border-radius:6px;padding:2px 6px;margin:0 0 3px;
-  font:inherit;font-size:.75em;color:#fff;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.yse button{font:inherit;color:inherit}
+.yse :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.yse-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:0 0 20px}
+.yse-eyebrow{margin:0 0 6px;font-size:.72rem;letter-spacing:.32em;color:var(--sub)}
+.yse-title{margin:0;display:flex;align-items:baseline;gap:14px;font-family:var(--serif);font-weight:500;line-height:1}
+.yse-m{font-size:clamp(2.4rem,6vw,3.4rem);letter-spacing:.02em}
+.yse-m small{font-size:.42em;margin-left:.12em}
+.yse-en{font-size:.85rem;letter-spacing:.24em;color:var(--sub);font-family:var(--serif)}
+.yse-nav{display:flex;align-items:center;gap:4px}
+.yse-icon{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--paper);cursor:pointer;
+  display:grid;place-items:center;transition:background .2s,border-color .2s}
+.yse-icon:hover{background:var(--soft);border-color:var(--faint)}
+.yse-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+.yse-today{height:44px;padding:0 16px;border-radius:999px;border:0;background:none;cursor:pointer;font-size:.85rem;
+  letter-spacing:.1em;color:var(--sub);white-space:nowrap}
+.yse-today:hover{color:var(--ink)}
+
+.yse-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}
+.yse-chip{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px 0 12px;border-radius:999px;
+  border:1px solid var(--line);background:var(--paper);cursor:pointer;font-size:.8rem;letter-spacing:.06em;transition:all .2s}
+.yse-chip i{width:8px;height:8px;border-radius:50%;flex:none}
+.yse-chip[aria-pressed="false"]{color:var(--faint);background:var(--soft)}
+.yse-chip[aria-pressed="false"] i{background:var(--faint)!important}
+
+.yse-board{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  box-shadow:0 1px 2px rgba(43,39,34,.03),0 12px 32px -18px rgba(43,39,34,.18)}
+.yse-wds,.yse-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.yse-wds{border-bottom:1px solid var(--line)}
+.yse-wd{padding:12px 0 10px;text-align:center;font-size:.72rem;letter-spacing:.2em;color:var(--sub)}
+.yse-wd.sun{color:#A8584A}.yse-wd.sat{color:#4F6F86}
+.yse-week{border-bottom:1px solid var(--line)}.yse-week:last-child{border-bottom:0}
+.yse-cell{min-height:118px;padding:8px 0 10px;border-right:1px solid var(--line);min-width:0}
+.yse-cell:last-child{border-right:0}
+.yse-cell.out{background:var(--soft)}.yse-cell.out .yse-n{color:var(--faint)}
+.yse-n{display:inline-grid;place-items:center;width:28px;height:28px;margin:0 0 4px 8px;border-radius:50%;
+  font-family:var(--serif);font-size:.95rem;line-height:1}
+.yse-cell.sun .yse-n{color:#A8584A}.yse-cell.sat .yse-n{color:#4F6F86}
+.yse-cell.today .yse-n{background:var(--ink);color:#fff}
+.yse-ev{display:block;width:calc(100% - 12px);margin:0 6px 4px;padding:4px 8px;border:0;
+  border-radius:6px;cursor:pointer;text-align:left;font-size:.74rem;line-height:1.4;white-space:nowrap;overflow:hidden;
+  transition:filter .15s,transform .15s}
+.yse-ev:hover{filter:brightness(.97);transform:translateY(-1px)}
+.yse-ev b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.yse-ev em{display:block;font-style:normal;font-size:.66rem;opacity:.75;font-variant-numeric:tabular-nums;letter-spacing:.03em}
+.yse-ev.cl{margin-left:0;border-top-left-radius:0;border-bottom-left-radius:0;width:calc(100% - 6px)}
+.yse-ev.cr{margin-right:0;border-top-right-radius:0;border-bottom-right-radius:0;width:calc(100% - 6px)}
+.yse-ev.cr{margin-right:-1px;width:calc(100% - 5px)}
+.yse-ev.cl.cr{width:calc(100% + 1px)}
+.yse-ev.cl b{visibility:hidden}.yse-ev.cl.wk b{visibility:visible}
+.yse-ev.ghost{visibility:hidden;pointer-events:none}
+.yse-more{display:block;margin:0 10px;font-size:.7rem;color:var(--sub)}
+
 .yse-list{display:none;margin:0;padding:0;list-style:none}
-.yse-day{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--yse-line)}
-.yse-date{flex:none;width:3.6em;text-align:center}
-.yse-date b{display:block;font-size:1.3em;line-height:1.1}.yse-date span{font-size:.75em;color:var(--yse-sub)}
-.yse-items{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
-.yse-item{display:flex;gap:8px;align-items:flex-start;text-align:left;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:pointer}
-.yse-item .yse-dot{margin-top:.45em}
-.yse-time{font-size:.8em;color:var(--yse-sub)}
-.yse-empty{padding:24px 0;text-align:center;color:var(--yse-sub)}
-.yse-detail{margin-top:14px;padding:14px 16px;border:1px solid var(--yse-line);border-radius:12px;background:var(--yse-bg)}
-.yse-detail h3{margin:0 0 4px;font-size:1.1em}
-.yse-detail p{margin:6px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
-.yse-detail a{color:inherit}
-.yse-tag{display:inline-block;font-size:.75em;color:#fff;border-radius:999px;padding:1px 10px;margin-bottom:6px}
-.yse-msg{font-size:.85em;color:var(--yse-sub);margin-top:8px}
-@media (max-width:640px){.yse-grid,.yse-wide{display:none}.yse-list{display:block}.yse-title{font-size:1.2em}}
+.yse-day{display:grid;grid-template-columns:56px 1fr;gap:14px;padding:16px 4px;border-bottom:1px solid var(--line)}
+.yse-day:last-child{border-bottom:0}
+.yse-date{text-align:center;padding-top:2px}
+.yse-date b{display:block;font-family:var(--serif);font-weight:500;font-size:1.7rem;line-height:1}
+.yse-date span{display:block;margin-top:6px;font-size:.7rem;letter-spacing:.15em;color:var(--sub)}
+.yse-date.sun span{color:#A8584A}.yse-date.sat span{color:#4F6F86}
+.yse-date.today b{color:var(--accent)}
+.yse-items{display:flex;flex-direction:column;gap:8px;min-width:0}
+.yse-item{display:block;width:100%;text-align:left;border:0;border-radius:12px;padding:11px 14px;cursor:pointer}
+.yse-item b{display:block;font-weight:600;font-size:.92rem;color:var(--ink)}
+.yse-item span{font-size:.75rem;letter-spacing:.04em}
+
+.yse-empty{padding:48px 16px;text-align:center;color:var(--sub);font-size:.85rem;letter-spacing:.08em}
+.yse-msg{margin:12px 0 0;font-size:.8rem;color:var(--sub);text-align:center}
+.yse.loading .yse-board{opacity:.55;transition:opacity .2s}
+
+.yse-scrim{max-width:none;margin:0;position:fixed;inset:0;z-index:2147483000;background:rgba(30,27,23,.38);display:grid;place-items:center;padding:16px;
+  opacity:0;transition:opacity .2s;backdrop-filter:blur(2px)}
+.yse-scrim.on{opacity:1}
+.yse-dlg{position:relative;width:min(520px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--paper);
+  border-radius:20px;padding:28px 28px 24px;box-shadow:0 24px 60px -20px rgba(0,0,0,.35);transform:translateY(8px);
+  transition:transform .25s;color:var(--ink);line-height:1.7}
+.yse-scrim.on .yse-dlg{transform:none}
+.yse-close{position:absolute;top:12px;right:12px;border:0;background:none}
+.yse-tag{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;letter-spacing:.12em;padding:4px 12px;border-radius:999px}
+.yse-dlg h3{margin:14px 0 6px;font-family:var(--serif);font-weight:500;font-size:1.45rem;line-height:1.4}
+.yse-when{margin:0;font-size:.85rem;color:var(--sub);letter-spacing:.04em}
+.yse-row{display:flex;gap:10px;margin:14px 0 0;font-size:.88rem}
+.yse-row svg{flex:none;width:18px;height:18px;margin-top:3px;stroke:var(--sub);fill:none;stroke-width:1.5}
+.yse-desc{margin:18px 0 0;padding-top:16px;border-top:1px solid var(--line);white-space:pre-wrap;overflow-wrap:anywhere;font-size:.9rem}
+.yse-desc a,.yse-row a{color:var(--accent)}
+.yse-add{display:inline-flex;align-items:center;gap:8px;margin-top:22px;min-height:44px;padding:0 18px;border-radius:999px;
+  border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:.82rem;letter-spacing:.06em;white-space:nowrap}
+.yse-add svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;flex:none}
+.yse-add:hover{background:var(--soft)}
+
+@media (max-width:680px){
+  .yse-head{align-items:center;margin-bottom:16px}
+  .yse-en{display:none}
+  .yse-eyebrow{letter-spacing:.2em;white-space:nowrap}
+  .yse-board{border-radius:16px;padding:0 12px}
+  .yse-wds,.yse-week{display:none}.yse-list{display:block}
+  .yse-scrim{place-items:end center;padding:0}
+  .yse-dlg{border-radius:20px 20px 0 0;padding:24px 20px calc(20px + env(safe-area-inset-bottom));transform:translateY(24px)}
+}
+@media (prefers-reduced-motion:reduce){.yse *{transition:none!important}}
 `;
 
+  const ICON = {
+    prev: '<path d="M15 5l-7 7 7 7"/>',
+    next: '<path d="M9 5l7 7-7 7"/>',
+    close: '<path d="M6 6l12 12M18 6L6 18"/>',
+    clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+    pin: '<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0113 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
+    plus: '<rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 9.5h16M8 3v4M16 3v4M12 12.5v5M9.5 15h5"/>',
+  };
+  function svg(name) {
+    const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    s.setAttribute('viewBox', '0 0 24 24');
+    s.setAttribute('aria-hidden', 'true');
+    s.innerHTML = ICON[name];
+    return s;
+  }
   function el(tag, cls, text) {
     const e = document.createElement(tag);
     if (cls) e.className = cls;
@@ -56,7 +146,7 @@ export function widget(cfg) {
   }
   // 説明文の URL だけリンクにする（それ以外は文字のまま）
   function linkify(p, text) {
-    const parts = text.replace(/<[^>]+>/g, '').split(/(https?:\/\/[^\s<>"]+)/g);
+    const parts = text.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').split(/(https?:\/\/[^\s<>"]+)/g);
     for (const part of parts) {
       if (/^https?:\/\//.test(part)) {
         const a = el('a', null, part);
@@ -67,131 +157,249 @@ export function widget(cfg) {
   }
   const pad = (n) => String(n).padStart(2, '0');
   const ymd = (d) => `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;
+  const dateOf = (s) => new Date(s.slice(0, 10) + 'T00:00:00Z');
   const todayJST = () => new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
-  const timeOf = (ev) => (ev.allDay ? '' : `${ev.start.slice(11)}〜${ev.end.slice(11)}`);
+  const timeOf = (ev) => (ev.allDay ? '' : `${ev.start.slice(11)} – ${ev.end.slice(11)}`);
+  const lastDay = (ev) => (ev.end.slice(0, 10) < ev.start.slice(0, 10) ? ev.start.slice(0, 10) : ev.end.slice(0, 10));
+  const multi = (ev) => lastDay(ev) > ev.start.slice(0, 10);
+  const shortDate = (s) => { const d = dateOf(s); return `${d.getUTCMonth() + 1}/${d.getUTCDate()}（${WD[d.getUTCDay()]}）`; };
+  const jpDate = (s) => { const d = dateOf(s); return `${d.getUTCMonth() + 1}月${d.getUTCDate()}日（${WD[d.getUTCDay()]}）`; };
 
-  // 予定を日ごとに振り分ける（複数日の予定は各日に出す）
+  function whenText(ev) {
+    const a = jpDate(ev.start), b = jpDate(ev.end);
+    if (ev.allDay) return multi(ev) ? `${a} 〜 ${b}` : `${a} 終日`;
+    return ev.start.slice(0, 10) === ev.end.slice(0, 10) ? `${a} ${timeOf(ev)}` : `${a} ${ev.start.slice(11)} 〜 ${b} ${ev.end.slice(11)}`;
+  }
+  // Google カレンダーに追加するリンク
+  function gcalLink(ev) {
+    const compact = (s) => s.replace(/[-:]/g, '');
+    let dates;
+    if (ev.allDay) {
+      const end = new Date(dateOf(ev.end).getTime() + DAY);
+      dates = `${compact(ev.start)}/${compact(ymd(end))}`;
+    } else dates = `${compact(ev.start)}00/${compact(ev.end)}00`;
+    const q = new URLSearchParams({ action: 'TEMPLATE', text: ev.title, dates, ctz: 'Asia/Tokyo' });
+    if (ev.location) q.set('location', ev.location);
+    if (ev.description) q.set('details', ev.description.replace(/<[^>]+>/g, ''));
+    return `https://calendar.google.com/calendar/render?${q}`;
+  }
+
+  // 予定を日ごとに振り分ける。複数日の予定を先に、同じ並びで置く（帯がそろうように）
   function byDay(events) {
+    const sorted = [...events].sort((a, b) => (multi(b) - multi(a)) || (a.start < b.start ? -1 : a.start > b.start ? 1 : 0));
     const map = {};
-    for (const ev of events) {
-      let d = new Date(ev.start.slice(0, 10) + 'T00:00:00Z');
-      const last = ev.end.slice(0, 10) < ev.start.slice(0, 10) ? ev.start.slice(0, 10) : ev.end.slice(0, 10);
-      for (let i = 0; i < 62 && ymd(d) <= last; i++, d = new Date(d.getTime() + 86400000)) {
+    for (const ev of sorted) {
+      const last = lastDay(ev);
+      for (let d = dateOf(ev.start), i = 0; i < 62 && ymd(d) <= last; i++, d = new Date(d.getTime() + DAY)) {
         (map[ymd(d)] = map[ymd(d)] || []).push(ev);
       }
     }
     return map;
   }
 
+  function openDialog(ev) {
+    const scrim = el('div', 'yse-scrim yse');
+    const dlg = el('div', 'yse-dlg');
+    dlg.setAttribute('role', 'dialog');
+    dlg.setAttribute('aria-modal', 'true');
+    const close = el('button', 'yse-icon yse-close'); close.type = 'button'; close.setAttribute('aria-label', '閉じる');
+    close.append(svg('close'));
+    const tag = el('span', 'yse-tag', label(ev.category));
+    tag.style.color = ink(ev.category); tag.style.background = wash(ev.category);
+    const h = el('h3', null, ev.title); h.id = 'yse-dlg-title'; dlg.setAttribute('aria-labelledby', h.id);
+    const when = el('div', 'yse-row'); when.append(svg('clock'), el('span', null, whenText(ev)));
+    dlg.append(close, tag, h, when);
+    if (ev.location) {
+      const row = el('div', 'yse-row');
+      const a = el('a', null, ev.location);
+      a.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.location)}`;
+      a.target = '_blank'; a.rel = 'noopener';
+      row.append(svg('pin'), a);
+      dlg.append(row);
+    }
+    if (ev.description) { const p = el('div', 'yse-desc'); linkify(p, ev.description); dlg.append(p); }
+    const add = el('a', 'yse-add'); add.href = gcalLink(ev); add.target = '_blank'; add.rel = 'noopener';
+    add.append(svg('plus'), document.createTextNode('Googleカレンダーに追加'));
+    dlg.append(add);
+    scrim.append(dlg);
+
+    const prevFocus = document.activeElement;
+    const prevOverflow = document.body.style.overflow;
+    const done = () => {
+      scrim.classList.remove('on');
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+      setTimeout(() => scrim.remove(), 200);
+      if (prevFocus && prevFocus.focus) prevFocus.focus();
+    };
+    const onKey = (e) => { if (e.key === 'Escape') done(); };
+    close.onclick = done;
+    scrim.onclick = (e) => { if (e.target === scrim) done(); };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    document.body.append(scrim);
+    requestAnimationFrame(() => scrim.classList.add('on'));
+    close.focus();
+  }
+
   function mount(root) {
     root.classList.add('yse');
     const head = el('div', 'yse-head');
+    const titleWrap = el('div');
+    const eyebrow = el('p', 'yse-eyebrow');
     const title = el('h2', 'yse-title');
+    titleWrap.append(eyebrow, title);
     const nav = el('div', 'yse-nav');
-    const prev = el('button', 'yse-btn', '‹');
-    const today = el('button', 'yse-btn', '今月');
-    const next = el('button', 'yse-btn', '›');
-    prev.append(el('span', 'yse-wide', ' 前の月')); prev.setAttribute('aria-label', '前の月');
-    next.prepend(el('span', 'yse-wide', '次の月 ')); next.setAttribute('aria-label', '次の月');
+    const prev = el('button', 'yse-icon'); prev.append(svg('prev')); prev.setAttribute('aria-label', '前の月');
+    const today = el('button', 'yse-today', '今月');
+    const next = el('button', 'yse-icon'); next.append(svg('next')); next.setAttribute('aria-label', '次の月');
     [prev, today, next].forEach((b) => { b.type = 'button'; nav.append(b); });
-    head.append(title, nav);
+    head.append(titleWrap, nav);
 
-    const legend = el('ul', 'yse-legend');
+    // 種類の絞り込み
+    const hidden = new Set();
+    const chips = el('ul', 'yse-chips');
     for (const c of cfg.categories) {
       const li = el('li');
-      const dot = el('span', 'yse-dot'); dot.style.background = COLORS[c.id];
-      li.append(dot, document.createTextNode(c.label));
-      legend.append(li);
+      const b = el('button', 'yse-chip'); b.type = 'button'; b.setAttribute('aria-pressed', 'true');
+      const dot = el('i'); dot.style.background = ink(c.id);
+      b.append(dot, document.createTextNode(c.label));
+      b.onclick = () => {
+        hidden.has(c.id) ? hidden.delete(c.id) : hidden.add(c.id);
+        b.setAttribute('aria-pressed', String(!hidden.has(c.id)));
+        render();
+      };
+      li.append(b); chips.append(li);
     }
-    const grid = el('div', 'yse-grid');
-    const list = el('ul', 'yse-list');
-    const detail = el('div', 'yse-detail'); detail.hidden = true;
+
+    const board = el('div', 'yse-board');
     const msg = el('p', 'yse-msg'); msg.hidden = true;
-    root.replaceChildren(head, legend, grid, list, detail, msg);
+    root.replaceChildren(head, chips, board, msg);
 
     const start = (root.dataset.month || todayJST().slice(0, 7)).split('-').map(Number);
     let y = start[0], m = start[1];
+    let events = [];
 
-    function show(ev) {
-      detail.replaceChildren();
-      const tag = el('span', 'yse-tag', label(ev.category)); tag.style.background = COLORS[ev.category];
-      const sd = ev.start.slice(0, 10).replace(/-/g, '/');
-      const ed = ev.end.slice(0, 10).replace(/-/g, '/');
-      const when = (sd === ed ? sd : `${sd}〜${ed}`) + (ev.allDay ? '' : ` ${timeOf(ev)}`);
-      detail.append(tag, el('h3', null, ev.title), el('div', 'yse-time', when));
-      if (ev.location) detail.append(el('p', null, `📍 ${ev.location}`));
-      if (ev.description) { const p = el('p'); linkify(p, ev.description); detail.append(p); }
-      detail.hidden = false;
-      detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    function evButton(ev, key, weekStart, weekEnd) {
+      const b = el('button', 'yse-ev'); b.type = 'button';
+      b.style.color = ink(ev.category); b.style.background = wash(ev.category);
+      if (multi(ev)) {
+        if (key > ev.start.slice(0, 10)) b.classList.add('cl');
+        if (key < lastDay(ev)) b.classList.add('cr');
+        if (key === weekStart || (key.slice(8) === '01')) b.classList.add('wk');
+        if (key === weekEnd) b.classList.remove('cr');
+      }
+      b.append(el('b', null, ev.title));
+      if (!ev.allDay) b.append(el('em', null, timeOf(ev)));
+      b.title = `${ev.title}　${whenText(ev)}`;
+      b.onclick = () => openDialog(ev);
+      return b;
     }
 
-    function render(events) {
-      title.textContent = `${y}年${m}月の予定`;
-      const days = byDay(events);
+    function render() {
+      eyebrow.textContent = `YUSANDO EVENTS · ${y}`;
+      title.replaceChildren();
+      const mm = el('span', 'yse-m', String(m)); mm.append(el('small', null, '月'));
+      title.append(mm, el('span', 'yse-en', MONTH_EN[m - 1]));
+
+      const shown = events.filter((e) => !hidden.has(e.category));
+      const days = byDay(shown);
       const first = new Date(Date.UTC(y, m - 1, 1));
-      const gridStart = new Date(first.getTime() - first.getUTCDay() * 86400000);
+      const gridStart = new Date(first.getTime() - first.getUTCDay() * DAY);
       const t = todayJST();
 
-      grid.replaceChildren(...WD.map((w, i) => el('div', `yse-wd${i === 0 ? ' sun' : i === 6 ? ' sat' : ''}`, w)));
-      for (let i = 0; i < 42; i++) {
-        const d = new Date(gridStart.getTime() + i * 86400000);
-        if (i >= 35 && d.getUTCMonth() !== m - 1) break;
-        const key = ymd(d);
-        const cell = el('div', 'yse-cell');
-        if (d.getUTCMonth() !== m - 1) cell.classList.add('out');
-        if (key === t) cell.classList.add('today');
-        if (d.getUTCDay() === 0) cell.classList.add('sun');
-        if (d.getUTCDay() === 6) cell.classList.add('sat');
-        cell.append(el('span', 'yse-num', String(d.getUTCDate())));
-        for (const ev of days[key] || []) {
-          const b = el('button', 'yse-ev', ev.title);
-          b.type = 'button'; b.style.background = COLORS[ev.category];
-          b.title = [ev.title, timeOf(ev)].filter(Boolean).join(' ');
-          b.onclick = () => show(ev);
-          cell.append(b);
+      board.replaceChildren();
+      const wds = el('div', 'yse-wds');
+      WD.forEach((w, i) => wds.append(el('div', `yse-wd${i === 0 ? ' sun' : i === 6 ? ' sat' : ''}`, w)));
+      board.append(wds);
+
+      for (let w = 0; w < 6; w++) {
+        const ws = new Date(gridStart.getTime() + w * 7 * DAY);
+        if (w > 0 && ws.getUTCMonth() !== m - 1) break;
+        const row = el('div', 'yse-week');
+        const wsKey = ymd(ws), weKey = ymd(new Date(ws.getTime() + 6 * DAY));
+        // この週の複数日予定に段を割り当て、帯の高さをそろえる
+        const lanes = [];
+        for (let i = 0; i < 7; i++) {
+          for (const ev of days[ymd(new Date(ws.getTime() + i * DAY))] || []) {
+            if (multi(ev) && !lanes.includes(ev)) lanes.push(ev);
+          }
         }
-        grid.append(cell);
+        for (let i = 0; i < 7; i++) {
+          const d = new Date(ws.getTime() + i * DAY);
+          const key = ymd(d);
+          const cell = el('div', 'yse-cell');
+          if (d.getUTCMonth() !== m - 1) cell.classList.add('out');
+          if (key === t) cell.classList.add('today');
+          if (i === 0) cell.classList.add('sun');
+          if (i === 6) cell.classList.add('sat');
+          cell.append(el('span', 'yse-n', String(d.getUTCDate())));
+          const list = days[key] || [];
+          for (const ev of lanes) {
+            if (list.includes(ev)) cell.append(evButton(ev, key, wsKey, weKey));
+            else if (lanes.indexOf(ev) < lanes.findLastIndex((e) => list.includes(e))) {
+              const g = el('span', 'yse-ev ghost', '·'); cell.append(g);
+            }
+          }
+          const singles = list.filter((ev) => !multi(ev));
+          singles.slice(0, 3).forEach((ev) => cell.append(evButton(ev, key, wsKey, weKey)));
+          if (singles.length > 3) cell.append(el('span', 'yse-more', `ほか ${singles.length - 3} 件`));
+          row.append(cell);
+        }
+        board.append(row);
       }
 
-      list.replaceChildren();
-      const keys = Object.keys(days).filter((k) => k.startsWith(`${y}-${pad(m)}`)).sort();
-      if (!keys.length) list.append(el('li', 'yse-empty', 'この月の予定はまだありません'));
+      const list = el('ul', 'yse-list');
+      const prefix = `${y}-${pad(m)}`;
+      const firstKey = (ev) => (ev.start.slice(0, 7) < prefix ? `${prefix}-01` : ev.start.slice(0, 10));
+      const daily = {};
+      for (const [k, evs] of Object.entries(days)) {
+        if (!k.startsWith(prefix)) continue;
+        const own = evs.filter((ev) => !multi(ev) || firstKey(ev) === k);
+        if (own.length) daily[k] = own;
+      }
+      const keys = Object.keys(daily).sort();
+      if (!keys.length) list.append(el('li', 'yse-empty', 'この月の予定は、まだありません'));
       for (const k of keys) {
-        const d = new Date(k + 'T00:00:00Z');
+        const d = dateOf(k);
         const li = el('li', 'yse-day');
         const date = el('div', 'yse-date');
-        date.append(el('b', null, String(d.getUTCDate())), el('span', null, `${m}月・${WD[d.getUTCDay()]}`));
+        if (d.getUTCDay() === 0) date.classList.add('sun');
+        if (d.getUTCDay() === 6) date.classList.add('sat');
+        if (k === t) date.classList.add('today');
+        date.append(el('b', null, String(d.getUTCDate())), el('span', null, WD[d.getUTCDay()]));
         const items = el('div', 'yse-items');
-        for (const ev of days[k]) {
+        for (const ev of daily[k]) {
           const it = el('button', 'yse-item'); it.type = 'button';
-          const dot = el('span', 'yse-dot'); dot.style.background = COLORS[ev.category];
-          const txt = el('span');
-          txt.append(el('span', null, ev.title));
-          if (!ev.allDay) txt.append(document.createTextNode(' '), el('span', 'yse-time', timeOf(ev)));
-          it.append(dot, txt);
-          it.onclick = () => show(ev);
+          it.style.color = ink(ev.category); it.style.background = wash(ev.category);
+          it.append(el('b', null, ev.title), el('span', null, ev.allDay ? (multi(ev) ? `${label(ev.category)}・${shortDate(ev.start)} 〜 ${shortDate(ev.end)}` : `${label(ev.category)}・終日`) : `${label(ev.category)}・${timeOf(ev)}`));
+          it.onclick = () => openDialog(ev);
           items.append(it);
         }
         li.append(date, items);
         list.append(li);
       }
+      board.append(list);
     }
 
     async function load() {
       const month = `${y}-${pad(m)}`;
-      detail.hidden = true; msg.hidden = true;
-      title.textContent = `${y}年${m}月の予定`;
+      msg.hidden = true;
+      root.classList.add('loading');
+      events = [];
+      render();
       try {
         const res = await fetch(`${cfg.api}?month=${month}`);
         const data = await res.json();
         if (month !== `${y}-${pad(m)}`) return; // 連打で古い月が後から届いたとき
-        render(data.events || []);
-        if (data.error) { msg.textContent = '予定を読み込めませんでした。時間をおいてもう一度お試しください。'; msg.hidden = false; }
+        events = data.events || [];
+        if (data.error) throw new Error(data.error);
       } catch (e) {
-        render([]);
         msg.textContent = '予定を読み込めませんでした。時間をおいてもう一度お試しください。';
         msg.hidden = false;
       }
+      root.classList.remove('loading');
+      render();
     }
     const move = (k) => { m += k; if (m < 1) { m = 12; y--; } if (m > 12) { m = 1; y++; } load(); };
     prev.onclick = () => move(-1);
