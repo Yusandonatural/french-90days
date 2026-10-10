@@ -1,0 +1,8 @@
+name = "yusando-events"
+main = "src/worker.js"
+compatibility_date = "2026-09-01"
+keep_names = false
+
+# 公開用 Google カレンダーの iCal アドレス。
+#   npx wrangler secret put ICS_URL
+# で登録する（秘密のアドレスを使う場合も、こちらなら外に出ない）。
