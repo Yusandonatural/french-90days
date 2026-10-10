@@ -1,0 +1,19 @@
+name = "yusando-events"
+main = "src/worker.js"
+compatibility_date = "2026-09-01"
+keep_names = false
+
+# 公開用 Google カレンダーの iCal アドレス。
+#   npx wrangler secret put ICS_URL
+# で登録する（秘密のアドレスを使う場合も、こちらなら外に出ない）。
+
+# シェア時のカード画像（public/og/*.png）
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[vars]
+# yusando.com でカレンダーを貼ったページ。シェアされたリンクを開いた人をここへ案内する
+# CALENDAR_PAGE_URL = "https://yusando.com/pages/events"
+# シェア URL を独自ドメインにする場合（例：events.yusando.com を Worker に割り当てたとき）
+# PUBLIC_BASE_URL = "https://events.yusando.com"

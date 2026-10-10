@@ -1,0 +1,9 @@
+{%- comment -%}
+  悠三堂イベントカレンダー
+  Shopify 管理画面 → オンラインストア → テーマ → カスタマイズ で、
+  表示したいページに「カスタム Liquid」セクションを追加し、下の2行を貼る。
+  WORKER_URL は wrangler deploy で表示された URL に置き換える。
+  data-month="2026-10" を付けると最初に表示する月を固定できる（省略時は今月）。
+{%- endcomment -%}
+<div id="yusando-events"></div>
+<script src="https://WORKER_URL/widget.js" defer></script>

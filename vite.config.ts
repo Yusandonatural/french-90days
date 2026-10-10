@@ -22,5 +22,5 @@ export default defineConfig({
   base: './',
   plugins: [dataFiles()],
   build: { outDir: 'docs', emptyOutDir: true, assetsInlineLimit: 0 },
-  test: { environment: 'node' },
+  test: { environment: 'node', exclude: ['**/node_modules/**', 'yusando-events/**'] },
 });
