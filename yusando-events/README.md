@@ -69,13 +69,13 @@ yusando.com（Shopify）のページに貼った <div id="yusando-events">
    ```bash
    cd yusando-events
    npx wrangler secret put ICS_URL   # 2 でコピーしたアドレスを貼る
-   npx wrangler deploy               # https://yusando-events.<アカウント>.workers.dev が表示される
+   npx wrangler deploy               # https://yusando-events.isozaki-f67.workers.dev
    ```
-4. **yusando.com に貼る**
-   Shopify 管理画面 → オンラインストア → テーマ → カスタマイズ → 表示したいページ（例：新しいページ「イベント」）に
-   「カスタム Liquid」セクションを追加し、`shopify-snippet.liquid` の 2 行を貼る（`WORKER_URL` を 3 の URL に置き換え）。
-5. **シェアの戻り先を設定**
-   `wrangler.toml` の `CALENDAR_PAGE_URL` に 4 のページの URL（例 `https://yusando.com/pages/events`）を入れて、もう一度 `npx wrangler deploy`。
+4. **yusando.com のページ**（作成済み）
+   Shopify に「イベントカレンダー」ページ（`https://yusando.com/pages/events`、いまは**非公開**）を作ってあり、
+   本文に `shopify-snippet.liquid` と同じ 2 行が入っている。Worker を公開したら、Shopify 管理画面 → オンラインストア →
+   ページ → イベントカレンダー で「表示」にし、メニューに追加する。
+5. シェアされたリンクの戻り先は `wrangler.toml` の `CALENDAR_PAGE_URL`（`https://yusando.com/pages/events` に設定済み）。
 
 ## 開発
 
