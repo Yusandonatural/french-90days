@@ -6,10 +6,10 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 
 // 種類の判定：タイトル先頭の [カフェ] などのタグ → タイトル中のことば の順に見る。
 export const CATEGORIES = [
-  { id: 'farm', label: 'オープンファーム', words: ['オープンファーム', 'open farm', '茶畑'] },
-  { id: 'cafe', label: 'カフェ営業', words: ['カフェ', 'cafe', 'café'] },
-  { id: 'stay', label: '宿泊可', words: ['宿泊', '民泊', 'stay'] },
-  { id: 'closed', label: 'お休み', words: ['休業', '定休', 'お休み', 'closed'] },
+  { id: 'farm', label: 'オープンファーム', words: ['オープンファーム', 'open farm', '茶畑', 'farm day', 'tea field'] },
+  { id: 'cafe', label: 'カフェ営業', words: ['カフェ', 'cafe', 'café', 'tea room'] },
+  { id: 'stay', label: '宿泊可', words: ['宿泊', '民泊', 'stay', 'accommodation', 'lodging'] },
+  { id: 'closed', label: 'お休み', words: ['休業', '定休', 'お休み', 'closed', 'holiday'] },
 ];
 export const OTHER = { id: 'event', label: 'イベント' };
 

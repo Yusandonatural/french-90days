@@ -85,3 +85,10 @@ test('シェアページに OGP が入り、文字はエスケープされる', 
   assert.ok(!sharePage(farm, { shareUrl: 'a', imageUrl: 'b', calendarUrl: '' }).includes('location.replace'));
 });
 
+
+test('英語のタイトルでも種類がわかる', () => {
+  assert.equal(categorize('Open Farm Day'), 'farm');
+  assert.equal(categorize('オープンファーム / Open Farm'), 'farm');
+  assert.equal(categorize('Tea room open'), 'cafe');
+  assert.equal(categorize('Closed for holiday'), 'closed');
+});

@@ -9,23 +9,55 @@ export function widget(cfg) {
     closed: ['#76716A', '#ECEAE6'],
     event: ['#7A4766', '#F1E4EC'],
   };
-  const WD = ['日', '月', '火', '水', '木', '金', '土'];
   const MONTH_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const MON_EN = MONTH_EN.map((x) => x.slice(0, 3));
   const DAY = 86400000;
-  const label = (id) => (cfg.categories.find((c) => c.id === id) || {}).label || '';
+  // 日本語・英語の文言。サイトの言語（<html lang>）に合わせ、カレンダー右上のボタンでも切り替えられる
+  const T = {
+    ja: {
+      wd: ['日', '月', '火', '水', '木', '金', '土'], today: '今月', prev: '前の月', next: '次の月', close: '閉じる',
+      empty: 'この月の予定は、まだありません', error: '予定を読み込めませんでした。時間をおいてもう一度お試しください。',
+      share: 'この予定をシェア', shareBtn: 'シェア', copy: 'リンクをコピー', copied: 'リンクをコピーしました',
+      copyPrompt: 'このリンクをコピーしてください', gcal: 'Googleカレンダーに追加', allDay: '終日', tag: '#悠三堂',
+      more: (n) => `ほか ${n} 件`, shareOn: (n) => `${n}でシェア`, langBtn: 'English', langLabel: 'Switch to English',
+      cat: { farm: 'オープンファーム', cafe: 'カフェ営業', stay: '宿泊可', closed: 'お休み', event: 'イベント' },
+    },
+    en: {
+      wd: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], today: 'Today', prev: 'Previous month', next: 'Next month', close: 'Close',
+      empty: 'No events this month yet', error: 'Could not load events. Please try again later.',
+      share: 'Share this event', shareBtn: 'Share', copy: 'Copy link', copied: 'Link copied',
+      copyPrompt: 'Copy this link', gcal: 'Add to Google Calendar', allDay: 'All day', tag: '#Yusando',
+      more: (n) => `+${n} more`, shareOn: (n) => `Share on ${n}`, langBtn: '日本語', langLabel: '日本語に切り替え',
+      cat: { farm: 'Open Farm', cafe: 'Café', stay: 'Stay', closed: 'Closed', event: 'Event' },
+    },
+  };
+  let lang = 'ja';
+  const t = () => T[lang];
+  const label = (id) => t().cat[id] || t().cat.event;
+  // 予定のタイトル・場所は「日本語 / English」、説明は「---」だけの行で日本語と英語を分けて書ける
+  const pickLine = (s) => { const p = (s || '').split(/\s+\/\s+|\s*｜\s*/); return (lang === 'en' ? p[1] : p[0]) || p[0] || ''; };
+  const pickText = (s) => { const p = (s || '').split(/\n\s*[-—–]{3,}\s*\n/); return ((lang === 'en' ? p[1] : p[0]) || p[0] || '').trim(); };
+  const titleOf = (ev) => pickLine(ev.title);
+  const placeOf = (ev) => pickLine(ev.location);
+  const descOf = (ev) => pickText(ev.description);
   const ink = (id) => (COLORS[id] || COLORS.event)[0];
   const wash = (id) => (COLORS[id] || COLORS.event)[1];
 
   const css = `
-.yse{--ink:#2B2722;--sub:#8B8378;--faint:#B9B1A5;--line:#ECE6DC;--paper:#FFFFFF;--soft:#FAF7F2;--accent:#4F6B3C;
+:host{display:block}
+.yse{--ink:#2B2722;--sub:#5F584C;--faint:#9A9183;--line:#E4DED3;--paper:#FFFFFF;--soft:#F7F4EE;--accent:#4F6B3C;
   --serif:"Shippori Mincho","Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
-  color:var(--ink);max-width:1040px;margin:0 auto;line-height:1.6;font-feature-settings:"palt";-webkit-font-smoothing:antialiased}
+  color:var(--ink);max-width:1040px;margin:0 auto;line-height:1.6;font-size:16px;text-align:left;font-feature-settings:"palt";-webkit-font-smoothing:antialiased}
 .yse *{box-sizing:border-box}
-.yse button{font-family:inherit;line-height:inherit;color:inherit}
+.yse button{font-family:inherit;line-height:inherit;color:inherit;text-transform:none;letter-spacing:inherit;box-shadow:none}
 .yse :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 .yse-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:0 0 20px}
-.yse-eyebrow{margin:0 0 6px;font-size:.72rem;letter-spacing:.32em;color:var(--sub)}
+.yse-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 6px}
+.yse-eyebrow{margin:0;font-size:.72rem;letter-spacing:.32em;color:var(--sub)}
+.yse-lang{min-height:32px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper);cursor:pointer;
+  font-size:.75rem;letter-spacing:.08em;color:var(--sub);white-space:nowrap}
+.yse-lang:hover{color:var(--ink);border-color:var(--faint)}
 .yse-title{margin:0;display:flex;align-items:baseline;gap:14px;font-family:var(--serif);font-weight:500;line-height:1}
 .yse-m{font-size:clamp(2.4rem,6vw,3.4rem);letter-spacing:.02em}
 .yse-m small{font-size:.42em;margin-left:.12em}
@@ -43,7 +75,7 @@ export function widget(cfg) {
 .yse-chip{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px 0 12px;border-radius:999px;
   border:1px solid var(--line);background:var(--paper);cursor:pointer;font-size:.8rem;letter-spacing:.06em;transition:all .2s}
 .yse-chip i{width:8px;height:8px;border-radius:50%;flex:none}
-.yse-chip[aria-pressed="false"]{color:var(--faint);background:var(--soft)}
+.yse-chip[aria-pressed="false"]{color:var(--faint);background:var(--soft);text-decoration:line-through}
 .yse-chip[aria-pressed="false"] i{background:var(--faint)!important}
 
 .yse-board{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;
@@ -125,7 +157,7 @@ export function widget(cfg) {
 @media (max-width:680px){
   .yse-head{align-items:center;margin-bottom:16px}
   .yse-en{display:none}
-  .yse-eyebrow{letter-spacing:.2em;white-space:nowrap}
+  .yse-eyebrow{letter-spacing:.18em;white-space:nowrap}
   .yse-board{border-radius:16px;padding:0 12px}
   .yse-wds,.yse-week{display:none}.yse-list{display:block}
   .yse-scrim{place-items:end center;padding:0}
@@ -175,13 +207,19 @@ export function widget(cfg) {
   const timeOf = (ev) => (ev.allDay ? '' : `${ev.start.slice(11)} – ${ev.end.slice(11)}`);
   const lastDay = (ev) => (ev.end.slice(0, 10) < ev.start.slice(0, 10) ? ev.start.slice(0, 10) : ev.end.slice(0, 10));
   const multi = (ev) => lastDay(ev) > ev.start.slice(0, 10);
-  const shortDate = (s) => { const d = dateOf(s); return `${d.getUTCMonth() + 1}/${d.getUTCDate()}（${WD[d.getUTCDay()]}）`; };
-  const jpDate = (s) => { const d = dateOf(s); return `${d.getUTCMonth() + 1}月${d.getUTCDate()}日（${WD[d.getUTCDay()]}）`; };
+  const shortDate = (s) => {
+    const d = dateOf(s), w = t().wd[d.getUTCDay()];
+    return lang === 'en' ? `${w}, ${MON_EN[d.getUTCMonth()]} ${d.getUTCDate()}` : `${d.getUTCMonth() + 1}/${d.getUTCDate()}（${w}）`;
+  };
+  const longDate = (s) => {
+    const d = dateOf(s), w = t().wd[d.getUTCDay()];
+    return lang === 'en' ? `${w}, ${MON_EN[d.getUTCMonth()]} ${d.getUTCDate()}` : `${d.getUTCMonth() + 1}月${d.getUTCDate()}日（${w}）`;
+  };
 
   function whenText(ev) {
-    const a = jpDate(ev.start), b = jpDate(ev.end);
-    if (ev.allDay) return multi(ev) ? `${a} 〜 ${b}` : `${a} 終日`;
-    return ev.start.slice(0, 10) === ev.end.slice(0, 10) ? `${a} ${timeOf(ev)}` : `${a} ${ev.start.slice(11)} 〜 ${b} ${ev.end.slice(11)}`;
+    const a = longDate(ev.start), b = longDate(ev.end), to = lang === 'en' ? ' – ' : ' 〜 ';
+    if (ev.allDay) return multi(ev) ? `${a}${to}${b}` : `${a}${lang === 'en' ? ', ' : ' '}${t().allDay}`;
+    return ev.start.slice(0, 10) === ev.end.slice(0, 10) ? `${a} ${timeOf(ev)}` : `${a} ${ev.start.slice(11)}${to}${b} ${ev.end.slice(11)}`;
   }
   // Google カレンダーに追加するリンク
   function gcalLink(ev) {
@@ -191,9 +229,9 @@ export function widget(cfg) {
       const end = new Date(dateOf(ev.end).getTime() + DAY);
       dates = `${compact(ev.start)}/${compact(ymd(end))}`;
     } else dates = `${compact(ev.start)}00/${compact(ev.end)}00`;
-    const q = new URLSearchParams({ action: 'TEMPLATE', text: ev.title, dates, ctz: 'Asia/Tokyo' });
-    if (ev.location) q.set('location', ev.location);
-    if (ev.description) q.set('details', ev.description.replace(/<[^>]+>/g, ''));
+    const q = new URLSearchParams({ action: 'TEMPLATE', text: titleOf(ev), dates, ctz: 'Asia/Tokyo' });
+    if (ev.location) q.set('location', placeOf(ev));
+    if (ev.description) q.set('details', descOf(ev).replace(/<[^>]+>/g, ''));
     return `https://calendar.google.com/calendar/render?${q}`;
   }
 
@@ -212,7 +250,7 @@ export function widget(cfg) {
 
   // ---- SNS シェア ----
   const shareUrl = (ev) => `${cfg.share}${ev.id}`;
-  const shareText = (ev) => `${ev.title}\n${whenText(ev)}\n#悠三堂`;
+  const shareText = (ev) => `${titleOf(ev)}\n${whenText(ev)}\n${t().tag}`;
   const intents = (ev) => {
     const u = encodeURIComponent(shareUrl(ev)), t = encodeURIComponent(shareText(ev));
     return [
@@ -224,55 +262,55 @@ export function widget(cfg) {
 
   function shareBox(ev) {
     const box = el('div', 'yse-share');
-    box.append(el('p', 'yse-share-h', 'この予定をシェア'));
+    box.append(el('p', 'yse-share-h', t().share));
     const row = el('div', 'yse-share-row');
     const toast = el('p', 'yse-toast');
     const say = (t) => { toast.textContent = t; setTimeout(() => { if (toast.textContent === t) toast.textContent = ''; }, 2500); };
     if (navigator.share) {
       const b = el('button', 'yse-sbtn main'); b.type = 'button';
-      b.append(svg('share'), document.createTextNode('シェア'));
-      b.onclick = () => navigator.share({ title: ev.title, text: shareText(ev), url: shareUrl(ev) }).catch(() => {});
+      b.append(svg('share'), document.createTextNode(t().shareBtn));
+      b.onclick = () => navigator.share({ title: titleOf(ev), text: shareText(ev), url: shareUrl(ev) }).catch(() => {});
       row.append(b);
     }
     for (const [name, href] of intents(ev)) {
       const a = el('a', 'yse-sbtn', name); a.href = href; a.target = '_blank'; a.rel = 'noopener';
-      a.setAttribute('aria-label', `${name}でシェア`);
+      a.setAttribute('aria-label', t().shareOn(name));
       row.append(a);
     }
     const copy = el('button', 'yse-sbtn'); copy.type = 'button';
-    copy.append(svg('link'), document.createTextNode('リンクをコピー'));
+    copy.append(svg('link'), document.createTextNode(t().copy));
     copy.onclick = async () => {
-      try { await navigator.clipboard.writeText(shareUrl(ev)); say('リンクをコピーしました'); }
-      catch (e) { window.prompt('このリンクをコピーしてください', shareUrl(ev)); }
+      try { await navigator.clipboard.writeText(shareUrl(ev)); say(t().copied); }
+      catch (e) { window.prompt(t().copyPrompt, shareUrl(ev)); }
     };
     row.append(copy);
     box.append(row, toast);
     return box;
   }
 
-  function openDialog(ev) {
+  function openDialog(ev, layer) {
     const scrim = el('div', 'yse-scrim yse');
     const dlg = el('div', 'yse-dlg');
     dlg.setAttribute('role', 'dialog');
     dlg.setAttribute('aria-modal', 'true');
-    const close = el('button', 'yse-icon yse-close'); close.type = 'button'; close.setAttribute('aria-label', '閉じる');
+    const close = el('button', 'yse-icon yse-close'); close.type = 'button'; close.setAttribute('aria-label', t().close);
     close.append(svg('close'));
     const tag = el('span', 'yse-tag', label(ev.category));
     tag.style.color = ink(ev.category); tag.style.background = wash(ev.category);
-    const h = el('h3', null, ev.title); h.id = 'yse-dlg-title'; dlg.setAttribute('aria-labelledby', h.id);
+    const h = el('h3', null, titleOf(ev)); h.id = 'yse-dlg-title'; dlg.setAttribute('aria-labelledby', h.id);
     const when = el('div', 'yse-row'); when.append(svg('clock'), el('span', null, whenText(ev)));
     dlg.append(close, tag, h, when);
     if (ev.location) {
       const row = el('div', 'yse-row');
-      const a = el('a', null, ev.location);
-      a.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.location)}`;
+      const a = el('a', null, placeOf(ev));
+      a.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(placeOf(ev))}`;
       a.target = '_blank'; a.rel = 'noopener';
       row.append(svg('pin'), a);
       dlg.append(row);
     }
-    if (ev.description) { const p = el('div', 'yse-desc'); linkify(p, ev.description); dlg.append(p); }
+    if (descOf(ev)) { const p = el('div', 'yse-desc'); linkify(p, descOf(ev)); dlg.append(p); }
     const add = el('a', 'yse-add'); add.href = gcalLink(ev); add.target = '_blank'; add.rel = 'noopener';
-    add.append(svg('plus'), document.createTextNode('Googleカレンダーに追加'));
+    add.append(svg('plus'), document.createTextNode(t().gcal));
     dlg.append(add, shareBox(ev));
     scrim.append(dlg);
 
@@ -293,34 +331,38 @@ export function widget(cfg) {
     scrim.onclick = (e) => { if (e.target === scrim) done(); };
     document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
-    document.body.append(scrim);
+    layer.append(scrim);
     requestAnimationFrame(() => scrim.classList.add('on'));
     dlg.tabIndex = -1;
     dlg.focus({ preventScroll: true });
   }
 
-  function mount(root) {
+  // root はテーマの CSS が届かない Shadow DOM の中の箱。layer は詳細画面を重ねる場所
+  function mount(root, layer, opts) {
     root.classList.add('yse');
-    const head = el('div', 'yse-head');
-    const titleWrap = el('div');
+    const top = el('div', 'yse-top');
     const eyebrow = el('p', 'yse-eyebrow');
+    const langBtn = el('button', 'yse-lang'); langBtn.type = 'button';
+    top.append(eyebrow, langBtn);
+    const head = el('div', 'yse-head');
     const title = el('h2', 'yse-title');
-    titleWrap.append(eyebrow, title);
     const nav = el('div', 'yse-nav');
-    const prev = el('button', 'yse-icon'); prev.append(svg('prev')); prev.setAttribute('aria-label', '前の月');
-    const today = el('button', 'yse-today', '今月');
-    const next = el('button', 'yse-icon'); next.append(svg('next')); next.setAttribute('aria-label', '次の月');
+    const prev = el('button', 'yse-icon'); prev.append(svg('prev'));
+    const today = el('button', 'yse-today');
+    const next = el('button', 'yse-icon'); next.append(svg('next'));
     [prev, today, next].forEach((b) => { b.type = 'button'; nav.append(b); });
-    head.append(titleWrap, nav);
+    head.append(title, nav);
 
     // 種類の絞り込み
     const hidden = new Set();
     const chips = el('ul', 'yse-chips');
+    const chipText = {};
     for (const c of cfg.categories) {
       const li = el('li');
       const b = el('button', 'yse-chip'); b.type = 'button'; b.setAttribute('aria-pressed', 'true');
       const dot = el('i'); dot.style.background = ink(c.id);
-      b.append(dot, document.createTextNode(c.label));
+      chipText[c.id] = document.createTextNode('');
+      b.append(dot, chipText[c.id]);
       b.onclick = () => {
         hidden.has(c.id) ? hidden.delete(c.id) : hidden.add(c.id);
         b.setAttribute('aria-pressed', String(!hidden.has(c.id)));
@@ -331,12 +373,30 @@ export function widget(cfg) {
 
     const board = el('div', 'yse-board');
     const msg = el('p', 'yse-msg'); msg.hidden = true;
-    root.replaceChildren(head, chips, board, msg);
+    root.replaceChildren(top, head, chips, board, msg);
+
+    // 言語が変わったときに書き換える部分
+    function paint() {
+      langBtn.textContent = t().langBtn;
+      langBtn.setAttribute('aria-label', t().langLabel);
+      prev.setAttribute('aria-label', t().prev);
+      next.setAttribute('aria-label', t().next);
+      today.textContent = t().today;
+      for (const id in chipText) chipText[id].textContent = label(id);
+      msg.textContent = t().error;
+      root.lang = lang;
+      render();
+    }
+    langBtn.onclick = () => {
+      lang = lang === 'ja' ? 'en' : 'ja';
+      try { localStorage.setItem('yse-lang', lang); } catch (e) { /* noop */ }
+      paint();
+    };
 
     // シェアされたリンク（#e=20261018-xxxxxxxx）から来たら、その月を開いて予定を表示する
     const deep = (location.hash.match(/^#e=((\d{4})(\d{2})\d{2}-[0-9a-f]{8})$/) || []);
     let pendingOpen = deep[1] || null;
-    const start = (deep[1] ? `${deep[2]}-${deep[3]}` : (root.dataset.month || todayJST().slice(0, 7))).split('-').map(Number);
+    const start = (deep[1] ? `${deep[2]}-${deep[3]}` : (opts.month || todayJST().slice(0, 7))).split('-').map(Number);
     let y = start[0], m = start[1];
     let events = [];
 
@@ -349,28 +409,32 @@ export function widget(cfg) {
         if (key === weekStart || (key.slice(8) === '01')) b.classList.add('wk');
         if (key === weekEnd) b.classList.remove('cr');
       }
-      b.append(el('b', null, ev.title));
+      b.append(el('b', null, titleOf(ev)));
       if (!ev.allDay) b.append(el('em', null, timeOf(ev)));
-      b.title = `${ev.title}　${whenText(ev)}`;
-      b.onclick = () => openDialog(ev);
+      b.title = `${titleOf(ev)}　${whenText(ev)}`;
+      b.onclick = () => openDialog(ev, layer);
       return b;
     }
 
     function render() {
       eyebrow.textContent = `YUSANDO EVENTS · ${y}`;
       title.replaceChildren();
-      const mm = el('span', 'yse-m', String(m)); mm.append(el('small', null, '月'));
-      title.append(mm, el('span', 'yse-en', MONTH_EN[m - 1]));
+      if (lang === 'en') {
+        title.append(el('span', 'yse-m', MONTH_EN[m - 1]));
+      } else {
+        const mm = el('span', 'yse-m', String(m)); mm.append(el('small', null, '月'));
+        title.append(mm, el('span', 'yse-en', MONTH_EN[m - 1]));
+      }
 
       const shown = events.filter((e) => !hidden.has(e.category));
       const days = byDay(shown);
       const first = new Date(Date.UTC(y, m - 1, 1));
       const gridStart = new Date(first.getTime() - first.getUTCDay() * DAY);
-      const t = todayJST();
+      const now = todayJST();
 
       board.replaceChildren();
       const wds = el('div', 'yse-wds');
-      WD.forEach((w, i) => wds.append(el('div', `yse-wd${i === 0 ? ' sun' : i === 6 ? ' sat' : ''}`, w)));
+      t().wd.forEach((w, i) => wds.append(el('div', `yse-wd${i === 0 ? ' sun' : i === 6 ? ' sat' : ''}`, w)));
       board.append(wds);
 
       for (let w = 0; w < 6; w++) {
@@ -390,7 +454,7 @@ export function widget(cfg) {
           const key = ymd(d);
           const cell = el('div', 'yse-cell');
           if (d.getUTCMonth() !== m - 1) cell.classList.add('out');
-          if (key === t) cell.classList.add('today');
+          if (key === now) cell.classList.add('today');
           if (i === 0) cell.classList.add('sun');
           if (i === 6) cell.classList.add('sat');
           cell.append(el('span', 'yse-n', String(d.getUTCDate())));
@@ -403,7 +467,7 @@ export function widget(cfg) {
           }
           const singles = list.filter((ev) => !multi(ev));
           singles.slice(0, 3).forEach((ev) => cell.append(evButton(ev, key, wsKey, weKey)));
-          if (singles.length > 3) cell.append(el('span', 'yse-more', `ほか ${singles.length - 3} 件`));
+          if (singles.length > 3) cell.append(el('span', 'yse-more', t().more(singles.length - 3)));
           row.append(cell);
         }
         board.append(row);
@@ -419,21 +483,23 @@ export function widget(cfg) {
         if (own.length) daily[k] = own;
       }
       const keys = Object.keys(daily).sort();
-      if (!keys.length) list.append(el('li', 'yse-empty', 'この月の予定は、まだありません'));
+      if (!keys.length) list.append(el('li', 'yse-empty', t().empty));
       for (const k of keys) {
         const d = dateOf(k);
         const li = el('li', 'yse-day');
         const date = el('div', 'yse-date');
         if (d.getUTCDay() === 0) date.classList.add('sun');
         if (d.getUTCDay() === 6) date.classList.add('sat');
-        if (k === t) date.classList.add('today');
-        date.append(el('b', null, String(d.getUTCDate())), el('span', null, WD[d.getUTCDay()]));
+        if (k === now) date.classList.add('today');
+        date.append(el('b', null, String(d.getUTCDate())), el('span', null, t().wd[d.getUTCDay()]));
         const items = el('div', 'yse-items');
         for (const ev of daily[k]) {
           const it = el('button', 'yse-item'); it.type = 'button';
           it.style.color = ink(ev.category); it.style.background = wash(ev.category);
-          it.append(el('b', null, ev.title), el('span', null, ev.allDay ? (multi(ev) ? `${label(ev.category)}・${shortDate(ev.start)} 〜 ${shortDate(ev.end)}` : `${label(ev.category)}・終日`) : `${label(ev.category)}・${timeOf(ev)}`));
-          it.onclick = () => openDialog(ev);
+          const sep = lang === 'en' ? ' · ' : '・', to = lang === 'en' ? ' – ' : ' 〜 ';
+          const when = ev.allDay ? (multi(ev) ? `${shortDate(ev.start)}${to}${shortDate(ev.end)}` : t().allDay) : timeOf(ev);
+          it.append(el('b', null, titleOf(ev)), el('span', null, `${label(ev.category)}${sep}${when}`));
+          it.onclick = () => openDialog(ev, layer);
           items.append(it);
         }
         li.append(date, items);
@@ -455,7 +521,7 @@ export function widget(cfg) {
         events = data.events || [];
         if (data.error) throw new Error(data.error);
       } catch (e) {
-        msg.textContent = '予定を読み込めませんでした。時間をおいてもう一度お試しください。';
+        msg.textContent = t().error;
         msg.hidden = false;
       }
       root.classList.remove('loading');
@@ -463,22 +529,30 @@ export function widget(cfg) {
       if (pendingOpen) {
         const ev = events.find((e) => e.id === pendingOpen);
         pendingOpen = null;
-        if (ev) { root.scrollIntoView({ block: 'start' }); openDialog(ev); }
+        if (ev) { root.scrollIntoView({ block: 'start' }); openDialog(ev, layer); }
       }
     }
     const move = (k) => { m += k; if (m < 1) { m = 12; y--; } if (m > 12) { m = 1; y++; } load(); };
     prev.onclick = () => move(-1);
     next.onclick = () => move(1);
     today.onclick = () => { [y, m] = todayJST().slice(0, 7).split('-').map(Number); load(); };
+    paint();
     load();
   }
 
   function init() {
-    if (!document.getElementById('yse-style')) {
-      const s = el('style', null, css); s.id = 'yse-style'; document.head.append(s);
-    }
-    document.querySelectorAll('#yusando-events, [data-yusando-events]').forEach((root) => {
-      if (!root.dataset.yseMounted) { root.dataset.yseMounted = '1'; mount(root); }
+    let saved = null;
+    try { saved = localStorage.getItem('yse-lang'); } catch (e) { /* noop */ }
+    document.querySelectorAll('#yusando-events, [data-yusando-events]').forEach((host) => {
+      if (host.dataset.yseMounted) return;
+      host.dataset.yseMounted = '1';
+      const pageLang = (host.dataset.lang || saved || document.documentElement.lang || 'ja').toLowerCase();
+      lang = pageLang.startsWith('en') ? 'en' : 'ja';
+      // テーマのボタンや見出しの CSS が入り込まないよう、Shadow DOM の中に描く
+      const shadow = host.shadowRoot || host.attachShadow({ mode: 'open' });
+      const box = el('div');
+      shadow.replaceChildren(el('style', null, css), box);
+      mount(box, shadow, { month: host.dataset.month });
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
