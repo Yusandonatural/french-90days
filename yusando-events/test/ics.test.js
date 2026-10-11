@@ -92,3 +92,28 @@ test('英語のタイトルでも種類がわかる', () => {
   assert.equal(categorize('Tea room open'), 'cafe');
   assert.equal(categorize('Closed for holiday'), 'closed');
 });
+
+import { addEnglish, needsTranslation } from '../src/translate.js';
+
+test('日本語だけの予定に英訳を付ける（自分で書いた英語は訳さない）', async () => {
+  assert.equal(needsTranslation('お楽しみ会', 'title'), true);
+  assert.equal(needsTranslation('オープンファーム / Open Farm', 'title'), false);
+  assert.equal(needsTranslation('Tea party', 'title'), false);
+  assert.equal(needsTranslation('茶畑を歩きます\n---\nA walk', 'description'), false);
+  const calls = [];
+  const fake = async (s) => { calls.push(s); return s === '失敗' ? Promise.reject(new Error('x')) : `EN:${s}`; };
+  const list = [
+    { title: 'お楽しみ会', location: '悠三堂', description: '' },
+    { title: 'お楽しみ会', location: '', description: 'お茶を飲みます' },
+    { title: 'Open Farm / オープンファーム', location: '', description: '' },
+    { title: '失敗', location: '', description: '' },
+  ];
+  await addEnglish(list, fake);
+  assert.equal(list[0].titleEn, 'EN:お楽しみ会');
+  assert.equal(list[0].locationEn, 'EN:悠三堂');
+  assert.equal(list[1].descriptionEn, 'EN:お茶を飲みます');
+  assert.equal(list[2].titleEn, undefined);
+  assert.equal(list[3].titleEn, undefined);
+  assert.equal(list[0].machineTranslated, true);
+  assert.equal(calls.filter((c) => c === 'お楽しみ会').length, 1);
+});

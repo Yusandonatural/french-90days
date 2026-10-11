@@ -26,7 +26,7 @@ export function widget(cfg) {
       wd: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], today: 'Today', prev: 'Previous month', next: 'Next month', close: 'Close',
       empty: 'No events this month yet', error: 'Could not load events. Please try again later.',
       share: 'Share this event', shareBtn: 'Share', copy: 'Copy link', copied: 'Link copied',
-      copyPrompt: 'Copy this link', gcal: 'Add to Google Calendar', allDay: 'All day', tag: '#Yusando',
+      copyPrompt: 'Copy this link', gcal: 'Add to Google Calendar', allDay: 'All day', tag: '#Yusando', mt: 'Translated automatically from Japanese.',
       more: (n) => `+${n} more`, shareOn: (n) => `Share on ${n}`, langBtn: '日本語', langLabel: '日本語に切り替え',
       cat: { farm: 'Open Farm', cafe: 'Café', stay: 'Stay', closed: 'Closed', event: 'Event' },
     },
@@ -35,11 +35,20 @@ export function widget(cfg) {
   const t = () => T[lang];
   const label = (id) => t().cat[id] || t().cat.event;
   // 予定のタイトル・場所は「日本語 / English」、説明は「---」だけの行で日本語と英語を分けて書ける
-  const pickLine = (s) => { const p = (s || '').split(/\s+\/\s+|\s*｜\s*/); return (lang === 'en' ? p[1] : p[0]) || p[0] || ''; };
-  const pickText = (s) => { const p = (s || '').split(/\n\s*[-—–]{3,}\s*\n/); return ((lang === 'en' ? p[1] : p[0]) || p[0] || '').trim(); };
-  const titleOf = (ev) => pickLine(ev.title);
-  const placeOf = (ev) => pickLine(ev.location);
-  const descOf = (ev) => pickText(ev.description);
+  // 英語を書いていない予定は、worker が付けた機械翻訳（titleEn など）を英語表示に使う
+  const pickLine = (s, en) => {
+    const p = (s || '').split(/\s+\/\s+|\s*｜\s*/);
+    if (lang !== 'en') return p[0] || '';
+    return p[1] || en || p[0] || '';
+  };
+  const pickText = (s, en) => {
+    const p = (s || '').split(/\n\s*[-—–]{3,}\s*\n/);
+    if (lang !== 'en') return (p[0] || '').trim();
+    return (p[1] || en || p[0] || '').trim();
+  };
+  const titleOf = (ev) => pickLine(ev.title, ev.titleEn);
+  const placeOf = (ev) => pickLine(ev.location, ev.locationEn);
+  const descOf = (ev) => pickText(ev.description, ev.descriptionEn);
   const ink = (id) => (COLORS[id] || COLORS.event)[0];
   const wash = (id) => (COLORS[id] || COLORS.event)[1];
 
@@ -140,6 +149,7 @@ export function widget(cfg) {
 .yse-row svg{flex:none;width:18px;height:18px;margin-top:3px;stroke:var(--sub);fill:none;stroke-width:1.5}
 .yse-desc{margin:18px 0 0;padding-top:16px;border-top:1px solid var(--line);white-space:pre-wrap;overflow-wrap:anywhere;font-size:.9rem}
 .yse-desc a,.yse-row a{color:var(--accent)}
+.yse-mt{margin:10px 0 0;font-size:.72rem;color:var(--sub);font-style:italic}
 .yse-add{display:inline-flex;align-items:center;gap:8px;margin-top:22px;min-height:44px;padding:0 18px;border-radius:999px;
   border:1px solid var(--btn);color:var(--ink);text-decoration:none;font-size:.82rem;letter-spacing:.06em;white-space:nowrap}
 .yse-add svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;flex:none}
@@ -310,6 +320,7 @@ export function widget(cfg) {
       dlg.append(row);
     }
     if (descOf(ev)) { const p = el('div', 'yse-desc'); linkify(p, descOf(ev)); dlg.append(p); }
+    if (lang === 'en' && ev.machineTranslated) dlg.append(el('p', 'yse-mt', t().mt));
     const add = el('a', 'yse-add'); add.href = gcalLink(ev); add.target = '_blank'; add.rel = 'noopener';
     add.append(svg('plus'), document.createTextNode(t().gcal));
     dlg.append(add, shareBox(ev));

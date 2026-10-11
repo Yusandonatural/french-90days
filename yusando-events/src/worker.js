@@ -6,6 +6,7 @@
 // 読み取るのは「公開用カレンダー」の iCal アドレス（環境変数 ICS_URL）だけ。
 import { parseICS, eventsForMonth, findEvent, CATEGORIES, OTHER, ID_RE } from './ics.js';
 import { sharePage } from './share.js';
+import { addEnglish } from './translate.js';
 import ogFarm from '../public/og/farm.png';
 import ogCafe from '../public/og/cafe.png';
 import ogStay from '../public/og/stay.png';
@@ -61,10 +62,28 @@ async function events(url, env, ctx) {
   try { list = eventsForMonth(await loadEvents(env), month); } catch (e) {
     return json({ month, events: [], error: e.message }, 502);
   }
+  // 英語表示用の訳を付ける（翻訳できなくても予定はそのまま返す）
+  if (env.AI) {
+    try { await addEnglish(list, (text) => translate(text, url, env, ctx)); } catch (e) { console.error('translate failed', e); }
+  }
 
   const out = json({ month, events: list }, 200, { 'Cache-Control': `public, max-age=${CACHE_SECONDS}` });
   ctx.waitUntil(cache.put(key, out.clone()));
   return out;
+}
+
+// Workers AI で日本語→英語に訳す。訳は 30 日キャッシュする
+async function translate(text, url, env, ctx) {
+  const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)))]
+    .slice(0, 12).map((b) => b.toString(16).padStart(2, '0')).join('');
+  const key = new Request(`${url.origin}/__translation/${hash}`);
+  const hit = await caches.default.match(key);
+  if (hit) return hit.text();
+  const out = await env.AI.run('@cf/meta/m2m100-1.2b', { text, source_lang: 'japanese', target_lang: 'english' });
+  const en = (out && out.translated_text || '').trim();
+  if (!en) return null;
+  ctx.waitUntil(caches.default.put(key, new Response(en, { headers: { 'Cache-Control': 'public, max-age=2592000' } })));
+  return en;
 }
 
 async function loadEvents(env) {
