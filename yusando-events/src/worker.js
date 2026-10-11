@@ -53,7 +53,7 @@ async function events(url, env, ctx) {
   if (!env.ICS_URL) return json({ month, events: [], error: 'ICS_URL が設定されていません' }, 200);
 
   const cache = caches.default;
-  const key = new Request(`${url.origin}/events?month=${month}`);
+  const key = new Request(`${url.origin}/events?month=${month}&v=${await feedTag(env)}`);
   const hit = await cache.match(key);
   if (hit) return hit;
 
@@ -68,7 +68,7 @@ async function events(url, env, ctx) {
 }
 
 async function loadEvents(env) {
-  const res = await fetch(env.ICS_URL, { cf: { cacheTtl: CACHE_SECONDS, cacheEverything: true } });
+  const res = await fetch(env.ICS_URL, { cf: { cacheTtl: 300, cacheEverything: true } });
   if (!res.ok) throw new Error(`カレンダーを読めませんでした (${res.status})`);
   return parseICS(await res.text());
 }
@@ -76,7 +76,7 @@ async function loadEvents(env) {
 async function shared(id, url, env, ctx) {
   if (!ID_RE.test(id) || !env.ICS_URL) return notFound(env);
   const cache = caches.default;
-  const key = new Request(`${url.origin}/e/${id}`);
+  const key = new Request(`${url.origin}/e/${id}?v=${await feedTag(env)}`);
   const hit = await cache.match(key);
   if (hit) return hit;
   let ev;
@@ -104,6 +104,12 @@ function notFound(env) {
 // シェア URL の頭。独自ドメイン（例 https://events.yusando.com）を使うときは PUBLIC_BASE_URL に入れる
 function base(url, env) {
   return (env.PUBLIC_BASE_URL || url.origin).replace(/\/$/, '');
+}
+
+// キャッシュの鍵に iCal アドレスの短いハッシュを入れる（アドレスを差し替えたら古い表示を使わない）
+async function feedTag(env) {
+  const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(env.ICS_URL || ''));
+  return [...new Uint8Array(d).slice(0, 4)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 function thisMonthJST() {
