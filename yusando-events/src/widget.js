@@ -142,7 +142,6 @@ export function widget(cfg) {
     pin: '<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0113 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
     share: '<path d="M12 15V4M8 8l4-4 4 4"/><path d="M6 12v6.5A1.5 1.5 0 007.5 20h9a1.5 1.5 0 001.5-1.5V12"/>',
     link: '<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/>',
-    image: '<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9.5" r="1.6"/><path d="M20 15l-4.5-4.5L6 20"/>',
     plus: '<rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 9.5h16M8 3v4M16 3v4M12 12.5v5M9.5 15h5"/>',
   };
   function svg(name) {
@@ -223,14 +222,6 @@ export function widget(cfg) {
     ];
   };
 
-  // Instagram などに載せる縦長の画像（1080×1350）は worker が作る（日時・場所・写真入り）
-  const posterUrl = (ev) => cfg.share.replace(/\/e\/$/, `/poster/${ev.id}.png`);
-  async function poster(ev) {
-    const res = await fetch(posterUrl(ev));
-    if (!res.ok) throw new Error(`poster ${res.status}`);
-    return res.blob();
-  }
-
   function shareBox(ev) {
     const box = el('div', 'yse-share');
     box.append(el('p', 'yse-share-h', 'この予定をシェア'));
@@ -254,23 +245,7 @@ export function widget(cfg) {
       try { await navigator.clipboard.writeText(shareUrl(ev)); say('リンクをコピーしました'); }
       catch (e) { window.prompt('このリンクをコピーしてください', shareUrl(ev)); }
     };
-    const img = el('button', 'yse-sbtn'); img.type = 'button';
-    img.append(svg('image'), document.createTextNode('画像で投稿（Instagram など）'));
-    img.onclick = async () => {
-      say('画像を作っています…');
-      let blob;
-      try { blob = await poster(ev); } catch (e) { say('画像を作れませんでした。時間をおいてお試しください'); return; }
-      const file = new File([blob], `yusando-${ev.id}.png`, { type: 'image/png' });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({ files: [file], text: `${shareText(ev)}\n${shareUrl(ev)}` }).catch(() => {});
-      } else {
-        const a = el('a'); a.href = URL.createObjectURL(blob); a.download = file.name;
-        document.body.append(a); a.click(); a.remove();
-        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-        say('画像を保存しました');
-      }
-    };
-    row.append(copy, img);
+    row.append(copy);
     box.append(row, toast);
     return box;
   }

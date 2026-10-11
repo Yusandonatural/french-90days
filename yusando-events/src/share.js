@@ -9,7 +9,8 @@ export function sharePage(ev, { shareUrl, imageUrl, calendarUrl, logoUrl }) {
   const when = whenText(ev);
   const label = categoryLabel(ev.category);
   const title = `${ev.title}｜悠三堂`;
-  const lead = `${when}・${label}`;
+  // SNS に出る説明：日時・場所・種類、続けて予定の説明
+  const lead = [when, ev.location, label].filter(Boolean).join('・');
   const body = plain(ev.description || '');
   const desc = (body ? `${lead}　${body}` : `${lead}　奈良の自然栽培茶園 悠三堂のイベントです。`).slice(0, 150);
   const go = calendarUrl ? `${calendarUrl.split('#')[0]}#e=${ev.id}` : '';
