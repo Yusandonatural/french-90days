@@ -14,7 +14,8 @@ yusando.com（Shopify）のページに貼った <div id="yusando-events">
 ```
 
 - テーマの CSS が入り込まないよう、カレンダーは Shadow DOM の中に描く。
-- パソコンでは月のマス目（宿泊など数日続く予定は1本の帯）、スマホでは日ごとの一覧で表示。
+- 「カレンダー／リスト」で表示を切り替えられる（選んだ方を覚える）。カレンダーはパソコンでは予定名入りのマス目（数日続く予定は1本の帯）、
+  スマホでは予定を色の線で示し、日付を押すとその日の予定が下に出る。リストは日ごとの一覧。
 - 予定を押すと詳細（日時・場所の地図リンク・説明・「Googleカレンダーに追加」）が開く。上の種類ボタンで絞り込みもできる。
 - 詳細の下に「この予定をシェア」：X・Facebook・LINE・リンクのコピー、スマホでは「シェア」ボタンで LINE や Instagram などのアプリへ。
 - 予定は 10 分キャッシュ。カレンダーを直すと、遅くとも 10 分ほどでサイトに反映される。
@@ -78,7 +79,7 @@ yusando.com（Shopify）のページに貼った <div id="yusando-events">
 
 ```bash
 npm test                                    # iCal の読み取り・繰り返し展開のテスト
-npx wrangler dev --var ICS_URL:<iCalのURL>   # http://localhost:8787/events, /widget.js
+npx wrangler dev -c wrangler.dev.toml --var ICS_URL:<iCalのURL>   # 手元では [ai] を外した設定で動かす（wrangler.toml から [ai] を消したコピー）
 ```
 
 - `src/ics.js` … iCal の読み取り、月ごとの展開、種類の判定（ことばの一覧は `CATEGORIES`）
