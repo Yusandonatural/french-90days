@@ -6,6 +6,18 @@
 // 読み取るのは「公開用カレンダー」の iCal アドレス（環境変数 ICS_URL）だけ。
 import { parseICS, eventsForMonth, findEvent, CATEGORIES, OTHER, ID_RE } from './ics.js';
 import { sharePage } from './share.js';
+import ogFarm from '../public/og/farm.png';
+import ogCafe from '../public/og/cafe.png';
+import ogStay from '../public/og/stay.png';
+import ogClosed from '../public/og/closed.png';
+import ogEvent from '../public/og/event.png';
+import logoStamp from '../public/brand/logo-stamp.png';
+
+// 同梱の画像（/og/<種類>.png と /brand/logo-stamp.png）
+const IMAGES = {
+  '/og/farm.png': ogFarm, '/og/cafe.png': ogCafe, '/og/stay.png': ogStay,
+  '/og/closed.png': ogClosed, '/og/event.png': ogEvent, '/brand/logo-stamp.png': logoStamp,
+};
 import { widget } from './widget.js';
 
 const CACHE_SECONDS = 600;
@@ -21,6 +33,11 @@ export default {
       const body = `(function(){var __name=function(f){return f};(${widget.toString()})(${JSON.stringify(cfg)});})();`;
       return new Response(body, {
         headers: { 'Content-Type': 'application/javascript; charset=utf-8', 'Cache-Control': `public, max-age=${CACHE_SECONDS}`, ...cors() },
+      });
+    }
+    if (IMAGES[url.pathname]) {
+      return new Response(IMAGES[url.pathname], {
+        headers: { 'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400', ...cors() },
       });
     }
     if (url.pathname === '/events') return events(url, env, ctx);
