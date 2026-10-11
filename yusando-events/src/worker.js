@@ -32,7 +32,7 @@ export default {
       // ビルド時に関数名を残すための __name(...) が入っても動くようにしておく
       const body = `(function(){var __name=function(f){return f};(${widget.toString()})(${JSON.stringify(cfg)});})();`;
       return new Response(body, {
-        headers: { 'Content-Type': 'application/javascript; charset=utf-8', 'Cache-Control': `public, max-age=${CACHE_SECONDS}`, ...cors() },
+        headers: { 'Content-Type': 'application/javascript; charset=utf-8', 'Cache-Control': 'public, max-age=300', ...cors() },
       });
     }
     if (IMAGES[url.pathname]) {

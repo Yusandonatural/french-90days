@@ -45,38 +45,39 @@ export function widget(cfg) {
 
   const css = `
 :host{display:block}
-.yse{--ink:#2B2722;--sub:#5F584C;--faint:#9A9183;--line:#E4DED3;--paper:#FFFFFF;--soft:#F7F4EE;--accent:#4F6B3C;
+.yse{--ink:#2B2722;--sub:#5F584C;--faint:#9A9183;--line:#E4DED3;--btn:#B9AF9F;--paper:#FFFFFF;--soft:#F7F4EE;--accent:#4F6B3C;
   --serif:"Shippori Mincho","Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif;
   color:var(--ink);max-width:1040px;margin:0 auto;line-height:1.6;font-size:16px;text-align:left;font-feature-settings:"palt";-webkit-font-smoothing:antialiased}
 .yse *{box-sizing:border-box}
-.yse button{font-family:inherit;line-height:inherit;color:inherit;text-transform:none;letter-spacing:inherit;box-shadow:none}
+:where(.yse) button{font-family:inherit;line-height:inherit;color:inherit;text-transform:none;letter-spacing:inherit;box-shadow:none}
 .yse :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 .yse-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:0 0 20px}
 .yse-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 6px}
 .yse-eyebrow{margin:0;font-size:.72rem;letter-spacing:.32em;color:var(--sub)}
-.yse-lang{min-height:32px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper);cursor:pointer;
-  font-size:.75rem;letter-spacing:.08em;color:var(--sub);white-space:nowrap}
-.yse-lang:hover{color:var(--ink);border-color:var(--faint)}
+.yse-lang{min-height:34px;padding:0 16px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);cursor:pointer;
+  font-size:.78rem;letter-spacing:.08em;color:#fff;white-space:nowrap}
+.yse-lang:hover{background:#3E5630;border-color:#3E5630}
 .yse-title{margin:0;display:flex;align-items:baseline;gap:14px;font-family:var(--serif);font-weight:500;line-height:1}
 .yse-m{font-size:clamp(2.4rem,6vw,3.4rem);letter-spacing:.02em}
 .yse-m small{font-size:.42em;margin-left:.12em}
 .yse-en{font-size:.85rem;letter-spacing:.24em;color:var(--sub);font-family:var(--serif)}
 .yse-nav{display:flex;align-items:center;gap:4px}
-.yse-icon{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--paper);cursor:pointer;
+.yse-icon{width:44px;height:44px;border-radius:50%;border:1px solid var(--btn);background:var(--paper);color:var(--ink);cursor:pointer;
   display:grid;place-items:center;transition:background .2s,border-color .2s}
-.yse-icon:hover{background:var(--soft);border-color:var(--faint)}
+.yse-icon:hover{background:var(--soft);border-color:var(--ink)}
 .yse-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
-.yse-today{height:44px;padding:0 16px;border-radius:999px;border:0;background:none;cursor:pointer;font-size:.85rem;
-  letter-spacing:.1em;color:var(--sub);white-space:nowrap}
-.yse-today:hover{color:var(--ink)}
+.yse-today{height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--btn);background:var(--paper);cursor:pointer;font-size:.85rem;
+  letter-spacing:.1em;color:var(--ink);white-space:nowrap}
+.yse-today:hover{background:var(--soft);border-color:var(--ink)}
 
 .yse-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}
-.yse-chip{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px 0 12px;border-radius:999px;
-  border:1px solid var(--line);background:var(--paper);cursor:pointer;font-size:.8rem;letter-spacing:.06em;transition:all .2s}
-.yse-chip i{width:8px;height:8px;border-radius:50%;flex:none}
-.yse-chip[aria-pressed="false"]{color:var(--faint);background:var(--soft);text-decoration:line-through}
-.yse-chip[aria-pressed="false"] i{background:var(--faint)!important}
+.yse-chip{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 15px 0 13px;border-radius:999px;
+  border:1px solid var(--c);background:var(--w);color:var(--c);cursor:pointer;font-size:.82rem;font-weight:600;letter-spacing:.06em;transition:all .2s}
+.yse-chip i{width:9px;height:9px;border-radius:50%;flex:none;background:var(--c)}
+.yse-chip:hover{filter:brightness(.97)}
+.yse-chip[aria-pressed="false"]{color:var(--faint);background:var(--paper);border-color:var(--line);font-weight:400;text-decoration:line-through}
+.yse-chip[aria-pressed="false"] i{background:var(--faint)}
 
 .yse-board{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;
   box-shadow:0 1px 2px rgba(43,39,34,.03),0 12px 32px -18px rgba(43,39,34,.18)}
@@ -140,7 +141,7 @@ export function widget(cfg) {
 .yse-desc{margin:18px 0 0;padding-top:16px;border-top:1px solid var(--line);white-space:pre-wrap;overflow-wrap:anywhere;font-size:.9rem}
 .yse-desc a,.yse-row a{color:var(--accent)}
 .yse-add{display:inline-flex;align-items:center;gap:8px;margin-top:22px;min-height:44px;padding:0 18px;border-radius:999px;
-  border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:.82rem;letter-spacing:.06em;white-space:nowrap}
+  border:1px solid var(--btn);color:var(--ink);text-decoration:none;font-size:.82rem;letter-spacing:.06em;white-space:nowrap}
 .yse-add svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;flex:none}
 .yse-add:hover{background:var(--soft)}
 
@@ -148,7 +149,7 @@ export function widget(cfg) {
 .yse-share-h{margin:0 0 10px;font-size:.72rem;letter-spacing:.24em;color:var(--sub)}
 .yse-share-row{display:flex;flex-wrap:wrap;gap:8px}
 .yse-sbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:0 16px;border-radius:999px;
-  border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;text-decoration:none;font-size:.8rem;letter-spacing:.04em;white-space:nowrap}
+  border:1px solid var(--btn);background:var(--paper);color:var(--ink);cursor:pointer;text-decoration:none;font-size:.8rem;letter-spacing:.04em;white-space:nowrap}
 .yse-sbtn:hover{background:var(--soft)}
 .yse-sbtn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5}
 .yse-sbtn.main{background:var(--ink);border-color:var(--ink);color:#fff}
@@ -360,7 +361,8 @@ export function widget(cfg) {
     for (const c of cfg.categories) {
       const li = el('li');
       const b = el('button', 'yse-chip'); b.type = 'button'; b.setAttribute('aria-pressed', 'true');
-      const dot = el('i'); dot.style.background = ink(c.id);
+      const dot = el('i');
+      b.style.setProperty('--c', ink(c.id)); b.style.setProperty('--w', wash(c.id));
       chipText[c.id] = document.createTextNode('');
       b.append(dot, chipText[c.id]);
       b.onclick = () => {
