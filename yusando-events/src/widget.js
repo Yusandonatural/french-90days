@@ -20,7 +20,7 @@ export function widget(cfg) {
       share: 'この予定をシェア', shareBtn: 'シェア', copy: 'リンクをコピー', copied: 'リンクをコピーしました',
       copyPrompt: 'このリンクをコピーしてください', gcal: 'Googleカレンダーに追加', allDay: '終日', tag: '#悠三堂',
       more: (n) => `ほか ${n} 件`, shareOn: (n) => `${n}でシェア`, langBtn: 'English', langLabel: 'Switch to English',
-      viewCal: 'カレンダー', viewList: 'リスト', dayEmpty: 'この日の予定はありません',
+      viewCal: 'カレンダー', viewList: '予定一覧', dayEmpty: 'この日の予定はありません',
       cat: { farm: 'オープンファーム', cafe: 'カフェ営業', stay: '宿泊可', closed: 'お休み', event: 'イベント' },
     },
     en: {
@@ -29,7 +29,7 @@ export function widget(cfg) {
       share: 'Share this event', shareBtn: 'Share', copy: 'Copy link', copied: 'Link copied',
       copyPrompt: 'Copy this link', gcal: 'Add to Google Calendar', allDay: 'All day', tag: '#Yusando', mt: 'Translated automatically from Japanese.',
       more: (n) => `+${n} more`, shareOn: (n) => `Share on ${n}`, langBtn: '日本語', langLabel: '日本語に切り替え',
-      viewCal: 'Calendar', viewList: 'List', dayEmpty: 'No events on this day',
+      viewCal: 'Calendar', viewList: 'Events', dayEmpty: 'No events on this day',
       cat: { farm: 'Open Farm', cafe: 'Café', stay: 'Stay', closed: 'Closed', event: 'Event' },
     },
   };
@@ -119,13 +119,10 @@ export function widget(cfg) {
 .yse-more{display:block;margin:0 10px;font-size:.7rem;color:var(--sub)}
 
 .yse-list{margin:0;padding:0;list-style:none}
-.yse.view-list .yse-wds,.yse.view-list .yse-week,.yse.view-list .yse-panel{display:none}
-.yse.view-grid .yse-list{display:none}
+.yse-board.list{padding:0 20px}
 .yse-panel{display:none}
-.yse-bar{display:flex;justify-content:flex-end;margin:0 0 12px}
-.yse-views{display:inline-flex;border:1px solid var(--btn);border-radius:999px;padding:3px;background:var(--paper)}
-.yse-views button{min-height:34px;padding:0 16px;border:0;border-radius:999px;background:none;cursor:pointer;font-size:.8rem;letter-spacing:.06em;color:var(--sub)}
-.yse-views button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.yse-sec{margin:0 0 10px;font-family:var(--serif);font-weight:500;font-size:1.05rem;letter-spacing:.12em;color:var(--ink)}
+.yse-sec.cal{margin-top:36px}
 .yse-day{display:grid;grid-template-columns:56px 1fr;gap:14px;padding:16px 4px;border-bottom:1px solid var(--line)}
 .yse-day:last-child{border-bottom:0}
 .yse-date{text-align:center;padding-top:2px}
@@ -182,8 +179,8 @@ export function widget(cfg) {
   .yse-en{display:none}
   .yse-eyebrow{letter-spacing:.18em;white-space:nowrap}
   .yse-board{border-radius:16px;padding:0 12px}
-  .yse.view-list .yse-board{padding:0 12px}
-  .yse.view-grid .yse-board{padding:0}
+  .yse-board.grid{padding:0}
+  .yse-sec.cal{margin-top:28px}
   .yse-wd{letter-spacing:0;font-size:.7rem;padding:10px 0 8px}
   .yse-cell{min-height:64px;padding:4px 0 6px;cursor:pointer}
   .yse-n{display:grid;width:26px;height:26px;margin:0 auto 4px;font-size:.85rem}
@@ -192,7 +189,7 @@ export function widget(cfg) {
   .yse-ev.cl,.yse-ev.cr{width:calc(100% - 4px)}.yse-ev.cl.cr{width:calc(100% + 1px)}
   .yse-ev b,.yse-ev em{display:none}
   .yse-more{margin:0 4px;font-size:.6rem;text-align:center}
-  .yse.view-grid .yse-panel{display:block;padding:16px 14px 18px;border-top:1px solid var(--line)}
+  .yse-panel{display:block;padding:16px 14px 18px;border-top:1px solid var(--line)}
   .yse-scrim{place-items:end center;padding:0}
   .yse-dlg{border-radius:20px 20px 0 0;padding:24px 20px calc(20px + env(safe-area-inset-bottom));transform:translateY(24px)}
 }
@@ -406,30 +403,14 @@ export function widget(cfg) {
       li.append(b); chips.append(li);
     }
 
-    // カレンダー（マス目）とリストの切り替え
-    let view = 'grid';
-    try { view = localStorage.getItem('yse-view') === 'list' ? 'list' : 'grid'; } catch (e) { /* noop */ }
-    const bar = el('div', 'yse-bar');
-    const views = el('div', 'yse-views'); views.setAttribute('role', 'group');
-    const vCal = el('button'), vList = el('button');
-    [vCal, vList].forEach((b) => { b.type = 'button'; views.append(b); });
-    bar.append(views);
-    const setView = (v) => {
-      view = v;
-      root.classList.toggle('view-grid', v === 'grid');
-      root.classList.toggle('view-list', v === 'list');
-      vCal.setAttribute('aria-pressed', String(v === 'grid'));
-      vList.setAttribute('aria-pressed', String(v === 'list'));
-      try { localStorage.setItem('yse-view', v); } catch (e) { /* noop */ }
-    };
-    vCal.onclick = () => setView('grid');
-    vList.onclick = () => setView('list');
-    setView(view);
     let selected = null; // スマホのマス目で選んだ日
 
-    const board = el('div', 'yse-board');
+    // 上に日ごとのリスト、その下に月のカレンダー
+    const listHead = el('h3', 'yse-sec'), calHead = el('h3', 'yse-sec cal');
+    const listBoard = el('div', 'yse-board list');
+    const board = el('div', 'yse-board grid');
     const msg = el('p', 'yse-msg'); msg.hidden = true;
-    root.replaceChildren(top, head, chips, bar, board, msg);
+    root.replaceChildren(top, head, chips, listHead, listBoard, msg, calHead, board);
 
     // 言語が変わったときに書き換える部分
     function paint() {
@@ -438,8 +419,8 @@ export function widget(cfg) {
       prev.setAttribute('aria-label', t().prev);
       next.setAttribute('aria-label', t().next);
       today.textContent = t().today;
-      vCal.textContent = t().viewCal;
-      vList.textContent = t().viewList;
+      listHead.textContent = t().viewList;
+      calHead.textContent = t().viewCal;
       for (const id in chipText) chipText[id].textContent = label(id);
       msg.textContent = t().error;
       root.lang = lang;
@@ -581,7 +562,7 @@ export function widget(cfg) {
         li.append(date, items);
         list.append(li);
       }
-      board.append(list);
+      listBoard.replaceChildren(list);
     }
 
     async function load() {
