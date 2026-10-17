@@ -1,0 +1,145 @@
+// 悠三堂イベントカレンダー
+//   GET /events?month=2026-10  → その月の予定（JSON）
+//   GET /widget.js             → yusando.com に貼る表示用スクリプト
+//   GET /e/<id>                → SNS シェア用ページ（OGP 付き。開くとカレンダーへ移る）
+//   GET /og/<種類>.png          → シェア時のカード画像（public/ の静的ファイル）
+// 読み取るのは「公開用カレンダー」の iCal アドレス（環境変数 ICS_URL）だけ。
+import { parseICS, eventsForMonth, findEvent, CATEGORIES, OTHER, ID_RE } from './ics.js';
+import { sharePage } from './share.js';
+import { addEnglish } from './translate.js';
+import ogFarm from '../public/og/farm.png';
+import ogCafe from '../public/og/cafe.png';
+import ogStay from '../public/og/stay.png';
+import ogClosed from '../public/og/closed.png';
+import ogEvent from '../public/og/event.png';
+import logoStamp from '../public/brand/logo-stamp.png';
+
+// 同梱の画像（/og/<種類>.png と /brand/logo-stamp.png）
+const IMAGES = {
+  '/og/farm.png': ogFarm, '/og/cafe.png': ogCafe, '/og/stay.png': ogStay,
+  '/og/closed.png': ogClosed, '/og/event.png': ogEvent, '/brand/logo-stamp.png': logoStamp,
+};
+import { widget } from './widget.js';
+
+const CACHE_SECONDS = 600;
+
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    if (request.method === 'OPTIONS') return new Response(null, { headers: cors() });
+    if (url.pathname === '/widget.js') {
+      const api = `${url.origin}/events`;
+      const cfg = { api, share: `${base(url, env)}/e/`, categories: [...CATEGORIES, OTHER].map(({ id, label }) => ({ id, label })) };
+      // ビルド時に関数名を残すための __name(...) が入っても動くようにしておく
+      const body = `(function(){var __name=function(f){return f};(${widget.toString()})(${JSON.stringify(cfg)});})();`;
+      return new Response(body, {
+        headers: { 'Content-Type': 'application/javascript; charset=utf-8', 'Cache-Control': 'public, max-age=300', ...cors() },
+      });
+    }
+    if (IMAGES[url.pathname]) {
+      return new Response(IMAGES[url.pathname], {
+        headers: { 'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400', ...cors() },
+      });
+    }
+    if (url.pathname === '/events') return events(url, env, ctx);
+    const share = url.pathname.match(/^\/e\/([^/]+)$/);
+    if (share) return shared(share[1], url, env, ctx);
+    return new Response('Not found', { status: 404 });
+  },
+};
+
+async function events(url, env, ctx) {
+  const month = url.searchParams.get('month') || thisMonthJST();
+  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(month)) return json({ error: 'month は YYYY-MM で指定してください' }, 400);
+  if (!env.ICS_URL) return json({ month, events: [], error: 'ICS_URL が設定されていません' }, 200);
+
+  const cache = caches.default;
+  const key = new Request(`${url.origin}/events?month=${month}&v=${await feedTag(env)}`);
+  const hit = await cache.match(key);
+  if (hit) return hit;
+
+  let list;
+  try { list = eventsForMonth(await loadEvents(env), month); } catch (e) {
+    return json({ month, events: [], error: e.message }, 502);
+  }
+  // 英語表示用の訳を付ける（翻訳できなくても予定はそのまま返す）
+  if (env.AI) {
+    try { await addEnglish(list, (text) => translate(text, url, env, ctx)); } catch (e) { console.error('translate failed', e); }
+  }
+
+  const out = json({ month, events: list }, 200, { 'Cache-Control': `public, max-age=${CACHE_SECONDS}` });
+  ctx.waitUntil(cache.put(key, out.clone()));
+  return out;
+}
+
+// Workers AI で日本語→英語に訳す。訳は 30 日キャッシュする
+async function translate(text, url, env, ctx) {
+  const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)))]
+    .slice(0, 12).map((b) => b.toString(16).padStart(2, '0')).join('');
+  const key = new Request(`${url.origin}/__translation/${hash}`);
+  const hit = await caches.default.match(key);
+  if (hit) return hit.text();
+  const out = await env.AI.run('@cf/meta/m2m100-1.2b', { text, source_lang: 'japanese', target_lang: 'english' });
+  const en = (out && out.translated_text || '').trim();
+  if (!en) return null;
+  ctx.waitUntil(caches.default.put(key, new Response(en, { headers: { 'Cache-Control': 'public, max-age=2592000' } })));
+  return en;
+}
+
+async function loadEvents(env) {
+  const res = await fetch(env.ICS_URL, { cf: { cacheTtl: 300, cacheEverything: true } });
+  if (!res.ok) throw new Error(`カレンダーを読めませんでした (${res.status})`);
+  return parseICS(await res.text());
+}
+
+async function shared(id, url, env, ctx) {
+  if (!ID_RE.test(id) || !env.ICS_URL) return notFound(env);
+  const cache = caches.default;
+  const key = new Request(`${url.origin}/e/${id}?v=${await feedTag(env)}`);
+  const hit = await cache.match(key);
+  if (hit) return hit;
+  let ev;
+  try { ev = findEvent(await loadEvents(env), id); } catch { ev = null; }
+  if (!ev) return notFound(env);
+  const html = sharePage(ev, {
+    shareUrl: `${base(url, env)}/e/${id}`,
+    imageUrl: `${base(url, env)}/og/${ev.category}.png`,
+    calendarUrl: env.CALENDAR_PAGE_URL || '',
+    logoUrl: `${base(url, env)}/brand/logo-stamp.png`,
+  });
+  const out = new Response(html, {
+    headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': `public, max-age=${CACHE_SECONDS}` },
+  });
+  ctx.waitUntil(cache.put(key, out.clone()));
+  return out;
+}
+
+// 終わった・消えた予定のリンクはカレンダーへ
+function notFound(env) {
+  if (env.CALENDAR_PAGE_URL) return Response.redirect(env.CALENDAR_PAGE_URL, 302);
+  return new Response('この予定は見つかりませんでした', { status: 404, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+}
+
+// シェア URL の頭。独自ドメイン（例 https://events.yusando.com）を使うときは PUBLIC_BASE_URL に入れる
+function base(url, env) {
+  return (env.PUBLIC_BASE_URL || url.origin).replace(/\/$/, '');
+}
+
+// キャッシュの鍵に iCal アドレスの短いハッシュを入れる（アドレスを差し替えたら古い表示を使わない）
+async function feedTag(env) {
+  const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(env.ICS_URL || ''));
+  return [...new Uint8Array(d).slice(0, 4)].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+function thisMonthJST() {
+  return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 7);
+}
+function cors() {
+  return { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS' };
+}
+function json(data, status = 200, headers = {}) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { 'Content-Type': 'application/json; charset=utf-8', ...cors(), ...headers },
+  });
+}
