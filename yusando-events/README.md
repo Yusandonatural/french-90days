@@ -33,6 +33,8 @@ yusando.com（Shopify）のページに貼った <div id="yusando-events">
 | お休み | 灰 | 休業 / 定休 / お休み / closed |
 | イベント | 紫 | 上のどれにも当たらないもの |
 
+- **Shopify の /pages/events の本文**は `shopify-page.html`（上にリンクボタン、その下にカレンダー）。リンクや説明文は `yse-ja-only` / `yse-en-only` で
+  日本語・英語を書き分け、カレンダーの言語ボタン（またはリンク上の `data-yse-lang-toggle` ボタン）で `<html data-yse-lang>` が切り替わると表示が入れ替わる。
 - **日本語・英語**：カレンダーはサイトの言語（`<html lang>`）に合わせて表示し、右上の「English / 日本語」ボタンでも切り替えられる。
   予定のタイトルと場所は `オープンファームデー / Open Farm Day` のように「 / 」で区切ると、言語ごとに出し分ける。
   説明は `---` だけの行の上を日本語、下を英語にする。

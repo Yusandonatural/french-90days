@@ -424,6 +424,13 @@ export function widget(cfg) {
       for (const id in chipText) chipText[id].textContent = label(id);
       msg.textContent = t().error;
       root.lang = lang;
+      // ページ側（リンクボタンなど）も同じ言語にそろえる：<html data-yse-lang="en"> と [data-yse-lang-toggle] ボタン
+      document.documentElement.setAttribute('data-yse-lang', lang);
+      document.querySelectorAll('[data-yse-lang-toggle]').forEach((b) => {
+        b.textContent = t().langBtn;
+        b.setAttribute('aria-label', t().langLabel);
+        b.onclick = () => langBtn.onclick();
+      });
       render();
     }
     langBtn.onclick = () => {
