@@ -20,29 +20,34 @@ import { openVerb } from './Conj';
 /* curated situations */
 interface Sit { t: string; s: Subj; v: string; f: FormKey; ja: string; why: string; alt?: FormKey[]; noSubj?: number }
 const SIT: Sit[] = [
- {t:"Demain, ___ tôt.",s:'je',v:'partir',f:'al',ja:'明日、私は早く出発する。',why:'demain（明日）は未来。会話の未来は aller ＋不定詞。'},
+ {t:"Demain, ___ tôt.",s:'je',v:'partir',f:'al',alt:['pr'],ja:'明日、私は早く出発する。',why:'demain（明日）は未来。会話の未来は aller ＋不定詞。'},
  {t:"Hier, ___ au restaurant.",s:'on',v:'manger',f:'pc',ja:'昨日、私たちはレストランで食べた。',why:'hier（昨日）は「たった今」ではないので複合過去。会話の「私たち」は nous より on。'},
  {t:"Attends, ___ ! J'enlève encore mon manteau.",s:'je',v:'arriver',f:'vd',alt:['pc'],ja:'待って、着いたばかりなんだ！まだコートを脱いでいるところ。',why:'コートを脱いでいる最中＝着いた直後。venir de がいちばん自然（複合過去も可）。'},
- {t:"Ce soir, ___ un film.",s:'on',v:'regarder',f:'al',ja:'今夜、私たちは映画を観る。',why:'ce soir（今夜）はこれからの予定。'},
+ {t:"Ce soir, ___ un film.",s:'on',v:'regarder',f:'al',alt:['pr'],ja:'今夜、私たちは映画を観る。',why:'ce soir（今夜）はこれからの予定。'},
  {t:"L'année dernière, ___ au Japon.",s:'tu',v:'aller',f:'pc',ja:'去年、君は日本に行ったよね。',why:"l'année dernière（去年）は過去。aller は être を使う（女性なら allée）。"},
- {t:"Le week-end prochain, qu'est-ce que ___ ?",s:'tu',v:'faire',f:'al',ja:'来週末、何をするの？',why:'le week-end prochain（来週末）は未来。'},
+ {t:"Le week-end prochain, qu'est-ce que ___ ?",s:'tu',v:'faire',f:'al',alt:['pr'],ja:'来週末、何をするの？',why:'le week-end prochain（来週末）は未来。'},
  {t:"Ce matin, ___ trois cafés.",s:'je',v:'boire',f:'pc',ja:'今朝、私はコーヒーを3杯飲んだ。',why:'ce matin（今朝）の出来事を事実として言う。'},
  {t:"Je suis libre : ___ mon travail à l'instant.",s:'je',v:'finir',f:'vd',alt:['pc'],ja:'手が空いたよ。たった今仕事を終えたところ。',why:"à l'instant（たった今）は venir de の定番の相棒（複合過去も可）。"},
  {t:"En 2019, ___ une maison.",s:'on',v:'acheter',f:'pc',ja:'2019年、私たちは家を買った。',why:'年号＝はっきりした過去。'},
  {t:"Regarde le ciel : ___ !",s:'il',v:'pleuvoir',f:'al',ja:'空を見て、雨が降りそう！',why:'今にも起きそうなことは aller ＋不定詞。'},
  {t:"___ ce livre ? — Oui, la semaine dernière.",s:'tu',v:'lire',f:'pc',ja:'この本読んだ？—うん、先週。',why:'la semaine dernière（先週）なので複合過去。'},
- {t:"Le train ___ dans cinq minutes, dépêche-toi !",s:'il',noSubj:1,v:'partir',f:'al',ja:'電車はあと5分で出るよ、急いで！',why:'dans cinq minutes（5分後に）は未来。'},
+ {t:"Le train ___ dans cinq minutes, dépêche-toi !",s:'il',noSubj:1,v:'partir',f:'al',alt:['pr'],ja:'電車はあと5分で出るよ、急いで！',why:'dans cinq minutes（5分後に）は未来。'},
  {t:"Hier soir, ___ tard.",s:'on',v:'rentrer',f:'pc',ja:'昨夜、私たちは遅く帰ってきた。',why:'hier soir（昨夜）は過去。rentrer は être を使う（on est rentré(s)）。'},
  {t:"Non merci, pas de gâteau : ___.",s:'je',v:'manger',f:'vd',alt:['pc'],ja:'ありがとう、でもケーキはいいです。食べたばかりなので。',why:'「さっき食べたから」は venir de が自然（複合過去も可）。'},
- {t:"___ Paul plus tard ?",s:'tu',v:'appeler',f:'al',ja:'後でポールに電話する？',why:'plus tard（後で）は未来。'},
+ {t:"___ Paul plus tard ?",s:'tu',v:'appeler',f:'al',alt:['pr'],ja:'後でポールに電話する？',why:'plus tard（後で）は未来。'},
  {t:"Je suis en forme : ___ dix heures cette nuit.",s:'je',v:'dormir',f:'pc',ja:'元気だよ。昨夜10時間寝たから。',why:'昨夜という過去の出来事。'},
  {t:"Désolé, ___ ! J'ai encore les yeux fermés.",s:'je',v:'se réveiller',f:'vd',alt:['pc'],ja:'ごめん、目が覚めたばかりなんだ！まだ目が開かない。',why:'まだ目が開かない＝目覚めた直後。再帰動詞は je viens de me réveiller。'},
- {t:"Demain, ___ à six heures.",s:'je',v:'se lever',f:'al',ja:'明日、私は6時に起きる。',why:'demain は未来。再帰動詞は je vais me lever。'},
+ {t:"Demain, ___ à six heures.",s:'je',v:'se lever',f:'al',alt:['pr'],ja:'明日、私は6時に起きる。',why:'demain は未来。再帰動詞は je vais me lever。'},
  {t:"Hier, ___ dans la forêt.",s:'on',v:'se promener',f:'pc',ja:'昨日、私たちは森を散歩した。',why:"hier は過去。再帰動詞は être：on s'est promené(s)。"},
- {t:"Tu as l'air fatigué. ___ ?",s:'tu',v:'se coucher',f:'pc',ja:'疲れてるみたい。ちゃんと寝た？',why:"昨夜のことを聞くので複合過去。tu t'es couché ?"}];
+ {t:"Tu as l'air fatigué. ___ ?",s:'tu',v:'se coucher',f:'pc',ja:'疲れてるみたい。ちゃんと寝た？',why:"昨夜のことを聞くので複合過去。tu t'es couché ?"},
+ {t:"D'habitude, ___ à sept heures.",s:'je',v:'se lever',f:'pr',ja:'いつもは、私は7時に起きる。',why:"d'habitude（いつもは）は習慣なので現在形。再帰動詞は je me lève。"},
+ {t:"Le dimanche, ___ au marché.",s:'on',v:'aller',f:'pr',ja:'日曜日はいつも、私たちは市場に行く。',why:'le dimanche（毎週日曜日）は習慣なので現在形。aller は on va。'},
+ {t:"___ du café le matin ?",s:'tu',v:'boire',f:'pr',ja:'君は朝コーヒーを飲む？',why:'le matin（毎朝）の習慣を聞くので現在形。boire は tu bois。'},
+ {t:"Tous les jours, ___ jusqu'à six heures.",s:'je',v:'travailler',f:'pr',ja:'毎日、私は6時まで働く。',why:'tous les jours（毎日）は習慣なので現在形。'}];
 /** Start adverb in front of a choice sentence: "Heureusement, hier, ___ …" */
 function withStartAdv(t: string, ja: string, f: FormKey, s: Subj) {
-  const adv = pickAdv(advForm(f), { pos: ['start'], subj: s });
+  // not the time word already in the sentence (D'habitude, d'habitude …)
+  const adv = rnd(advCandidates(advForm(f), { pos: ['start'], subj: s }).filter(a => !t.toLowerCase().includes(a.fr)));
   if (!adv) return { t, ja };
   return { t: cap(adv.fr) + ', ' + t.charAt(0).toLowerCase() + t.slice(1), ja: adv.ja[advForm(f)] + '、' + ja };
 }
@@ -52,7 +57,8 @@ const capAt = (t: string) => { const i = t.indexOf('___'); return i === 0 || /[.
 const fillT = (t: string, c: string) => t.replace('___', capAt(t) ? cap(c) : c);
 
 /* time markers for generated items */
-const MK: Record<'pc' | 'al', [string, string][]> = {
+const MK: Record<'pr' | 'pc' | 'al', [string, string][]> = {
+  pr: [["D'habitude",'いつもは'],['Tous les jours','毎日'],['Le dimanche','日曜日はいつも'],['Chaque matin','毎朝'],['En général','ふだんは']],
   pc: [['Hier','昨日'],['Ce matin','今朝'],['La semaine dernière','先週'],["L'année dernière",'去年'],['Il y a deux jours','2日前']],
   al: [['Demain','明日'],['Ce soir','今夜'],['Ce week-end','今週末'],['La semaine prochaine','来週'],['Plus tard','後で']],
 };
@@ -122,11 +128,11 @@ export function nextDrill() {
 }
 
 function renderNegDrill() {
-  const v = exOf(pickVerb()), s = rnd(subjFor(v)), al = allowed(v).filter(f => f !== 'vd') as ('pc' | 'al')[], base = rnd(al);
+  const v = exOf(pickVerb()), s = rnd(subjFor(v)), al = allowed(v).filter(f => f !== 'vd') as ('pr' | 'pc' | 'al')[], base = rnd(al);
   // an adverb that survives negation: start / end ones, or mid ones with a negative partner (déjà → pas encore)
   const fa = advForm(base);
   const adv = rnd(advCandidates(fa, { subj: s }).filter(a => a.pos !== 'mid' || (a.neg && a.neg.forms.includes(fa))));
-  const src = build(s, v, base, { adv }), acc = acceptedNeg(s, v, base, adv), f = (base + 'n') as 'pcn' | 'aln';
+  const src = build(s, v, base, { adv }), acc = acceptedNeg(s, v, base, adv), f = (base + 'n') as 'pcn' | 'aln' | 'prn';
   $('#drill').innerHTML = `${vtag(v)}<p class="label">この文を否定文にしてください</p>
    <p class="q fr ${FORMS[base].cls}" style="color:var(--c)">${esc(src)} <button class="say" data-say="${esc(src)}" aria-label="発音">▶</button></p>
    <p><span class="badge ${FORMS[f].cls}">${FORMS[f].ja}　${FORMS[f].hint}</span></p>${inputBlock()}`;
@@ -137,7 +143,8 @@ function renderNegDrill() {
 
 interface ChoiceItem { t: string; ja: string; why: string; f: FormKey; alt: FormKey[]; v: VerbEx; chunks: Record<FormKey, string> }
 function genChoice(): ChoiceItem {
-  const v = exOf(pickVerb()); const f = rnd(allowed(v)); const s = rnd(subjFor(v));
+  // il-only life verbs (naître, mourir) make odd habits → no present items for them
+  const v = exOf(pickVerb()); const f = rnd(allowed(v).filter(g => g !== 'pr' || !v.T)); const s = rnd(subjFor(v));
   let t: string, ja: string, why: string, alt: FormKey[] = [];
   const chunk = (g: FormKey) => build(s, v, g, { obj: false, sentence: false });
   const obj = v.obj ? ' ' + v.obj : '';
@@ -147,7 +154,10 @@ function genChoice(): ChoiceItem {
     alt = ['pc'];
   } else {
     const [m, mj] = rnd(MK[f]); t = m + ', ___' + obj + '.'; ja = jaOf(s, v, f, mj);
-    why = f === 'pc' ? `${m}（${mj}）は過去の時点なので複合過去。` : `${m}（${mj}）はこれからのことなので aller ＋ 不定詞。`;
+    why = f === 'pc' ? `${m}（${mj}）は過去の時点なので複合過去。`
+      : f === 'pr' ? `${m}（${mj}）はいつものこと（習慣）なので現在形。`
+      : `${m}（${mj}）はこれからのことなので aller ＋ 不定詞（近い予定なら現在形も可）。`;
+    if (f === 'al') alt = ['pr'];
   }
   if (f === 'pc' && v.etre) why += v.R ? ' 再帰動詞は être を使います。' : ' この動詞は être を使います。';
   ({ t, ja } = withStartAdv(t, ja, f, s));

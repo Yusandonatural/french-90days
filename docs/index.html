@@ -96,8 +96,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="./assets/index-CIHy047C.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Cn0ekIIE.css">
+  <script type="module" crossorigin src="./assets/index-DyRntV2B.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-D9_-P-Ae.css">
 </head>
 <body>
 <main>
@@ -125,7 +125,7 @@
 <section class="tab" id="t-learn" aria-label="文法の説明">
   <p><button class="linkbtn" data-go="home">← ホームへ</button></p>
   <div class="fr h1" role="heading" aria-level="2">Hier, maintenant, demain.</div>
-  <p class="muted">会話の時間は、この3つの形でほとんど言えます。文をタップすると発音を聞けます。</p>
+  <p class="muted">会話の時間は、現在形とこの3つの形でほとんど言えます。文をタップすると発音を聞けます。</p>
   <div class="axis" role="group" aria-label="時間軸">
     <div class="line"></div>
     <span class="end" style="left:0">hier</span>
@@ -143,7 +143,14 @@
   </div>
   <p class="axis-note">左から右へ時間が流れます。いちばん使うのは J'ai fini と Je vais finir。「たった今」を言いたいときだけ venir de。</p>
 
-  <h2>3つの形のつくり方</h2>
+  <h2>4つの形のつくり方</h2>
+  <div class="form k-pr">
+    <span class="badge">現在形　〜する</span>
+    <div class="formula">動詞そのものが <b>主語に合わせて変わる</b></div>
+    <p class="small">いつものこと・今のこと・近い予定。-er 動詞は je mange / tu manges / on mange（発音は同じ）。助動詞は使いません。</p>
+    <div class="ex"><button class="say" data-say="D'habitude, je me lève à sept heures." aria-label="発音">▶</button><span class="fr">D'habitude, je me lève à sept heures.</span></div>
+    <div class="ex"><button class="say" data-say="Tu finis à quelle heure ?" aria-label="発音">▶</button><span class="fr">Tu finis à quelle heure ?</span></div>
+  </div>
   <div class="form k-pc">
     <span class="badge">複合過去　〜した</span>
     <div class="formula">avoir / être ＋ <b>過去分詞</b></div>
@@ -180,12 +187,14 @@
 
   <h2>再帰動詞（se lever など）</h2>
   <p class="small">se が主語に合わせて me / te / se / nous / vous に変わります。複合過去は必ず être。</p>
+  <div class="ex"><button class="say" data-say="Je me lève à six heures." aria-label="発音">▶</button><span class="fr col-pr">Je me lève.</span><span class="muted small">起きる</span></div>
   <div class="ex"><button class="say" data-say="Je me suis levé à six heures." aria-label="発音">▶</button><span class="fr col-pc">Je me suis levé.</span><span class="muted small">起きた</span></div>
   <div class="ex"><button class="say" data-say="Je viens de me lever." aria-label="発音">▶</button><span class="fr col-vd">Je viens de me lever.</span><span class="muted small">起きたばかり</span></div>
   <div class="ex"><button class="say" data-say="Je vais me lever." aria-label="発音">▶</button><span class="fr col-al">Je vais me lever.</span><span class="muted small">これから起きる</span></div>
 
   <h2>時間の言葉が形を決める</h2>
   <div class="words">
+    <div class="k-pr"><h3 class="col-pr">現在形と一緒に</h3><span class="fr">d'habitude, tous les jours, le dimanche, chaque matin, en général</span></div>
     <div class="k-pc"><h3 class="col-pc">複合過去と一緒に</h3><span class="fr">hier, ce matin, la semaine dernière, l'année dernière, il y a deux jours</span></div>
     <div class="k-vd"><h3 class="col-vd">venir de と一緒に</h3><span class="fr">à l'instant, juste (je viens juste de…)</span></div>
     <div class="k-al"><h3 class="col-al">aller と一緒に</h3><span class="fr">demain, ce soir, ce week-end, plus tard, la semaine prochaine</span></div>
@@ -240,6 +249,7 @@
   <div class="trio" id="trio"></div>
   <h2>全員分を見る</h2>
   <div class="seg" id="tableSeg" role="group" aria-label="形を選ぶ">
+    <button data-f="pr" aria-pressed="false">〜する</button>
     <button data-f="pc" aria-pressed="true">〜した</button>
     <button data-f="vd" aria-pressed="false">〜したばかり</button>
     <button data-f="al" aria-pressed="false">これから〜</button>

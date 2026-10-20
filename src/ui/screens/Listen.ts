@@ -112,8 +112,8 @@ let lmode: 'player' | 'quiz' = 'player';
 
 function newListen() {
   const v = exOf(pickVerb()), s = rnd(subjFor(v)), f = rnd(allowed(v));
-  // a start adverb that fits all three forms, so it doesn't give the answer away
-  const adv = rnd(ADVERBS.filter(a => a.pos === 'start' && ['p', 'v', 'a'].every(x => a.forms.includes(x as 'p'))));
+  // a start adverb that fits all four forms, so it doesn't give the answer away
+  const adv = rnd(ADVERBS.filter(a => a.pos === 'start' && ['r', 'p', 'v', 'a'].every(x => a.forms.includes(x as 'p'))));
   const fr = build(s, v, f, { adv });
   $('#listen').innerHTML = `${hasTTS() ? '' : '<p class="small" style="color:var(--ng)">この端末では読み上げが使えません。別のブラウザでお試しください。</p>'}
    <p class="vtag">ステージ${ST.stage + 1} の動詞から出題</p>
@@ -128,7 +128,7 @@ function newListen() {
     $$<HTMLButtonElement>('#listen .opt').forEach(x => { x.disabled = true; if (x.dataset.f === f) x.classList.add('right'); });
     if (!ok) b.classList.add('wrong');
     rec(f, ok, v.key, true); // not counted in lesson progress
-    const cue = { pc: (v.etre ? 'être' : 'avoir') + ' の活用＋過去分詞', vd: 'viens / vient / venons… ＋ de', al: 'vais / va / allons… ＋ 不定詞' }[f];
+    const cue = { pr: '助動詞がなく、動詞そのものが変わる（je mange / tu manges）', pc: (v.etre ? 'être' : 'avoir') + ' の活用＋過去分詞', vd: 'viens / vient / venons… ＋ de', al: 'vais / va / allons… ＋ 不定詞' }[f];
     $('#lfb').innerHTML = `<div class="fb ${ok ? 'good' : 'bad'}"><span class="verdict">${ok ? '正解' : 'もう一歩'}</span>
       <p class="fr" style="font-size:19px;margin:6px 0">${esc(fr)} <button class="say" data-say="${esc(fr)}" aria-label="発音">▶</button></p>
       <p class="small" style="margin:0">${esc(jaOf(s, v, f, undefined, adv))}　聞き分けの手がかり：${esc(cue)}</p></div>

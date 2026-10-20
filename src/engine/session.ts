@@ -41,9 +41,9 @@ export function finishLesson() {
 }
 
 /* ---------- answers ---------- */
-/** f: pc / vd / al, or pcn / aln (counted as negation) */
+/** f: pr / pc / vd / al, or pcn / aln / prn (counted as negation) */
 export function recordVerb(f: string, ok: boolean, key: string | null, noSes?: boolean) {
-  const fk = (f === 'pcn' || f === 'aln') ? 'neg' : f as 'pc' | 'vd' | 'al';
+  const fk = (f === 'pcn' || f === 'aln' || f === 'prn') ? 'neg' : f as 'pr' | 'pc' | 'vd' | 'al';
   ST.forms[fk][1]++;
   if (ok) { ST.forms[fk][0]++; ST.streak++; ST.best = Math.max(ST.best, ST.streak); } else ST.streak = 0;
   ST.total++;

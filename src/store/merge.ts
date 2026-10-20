@@ -45,7 +45,7 @@ export function mergeStates(x: Partial<State>, y: Partial<State>): State {
   const days: Record<string, number> = {};
   for (const k of new Set([...Object.keys(a.days), ...Object.keys(b.days)])) days[k] = Math.max(a.days[k] || 0, b.days[k] || 0);
   const s: State = {
-    forms: { pc: maxTally(a.forms.pc, b.forms.pc), vd: maxTally(a.forms.vd, b.forms.vd), al: maxTally(a.forms.al, b.forms.al), neg: maxTally(a.forms.neg, b.forms.neg) },
+    forms: { pr: maxTally(a.forms.pr, b.forms.pr), pc: maxTally(a.forms.pc, b.forms.pc), vd: maxTally(a.forms.vd, b.forms.vd), al: maxTally(a.forms.al, b.forms.al), neg: maxTally(a.forms.neg, b.forms.neg) },
     streak: n.streak, best: Math.max(a.best, b.best), total: Math.max(a.total, b.total),
     v: mergeTallies(a.v, b.v), stage: n.stage, xp: Math.max(a.xp, b.xp), days, goal: n.goal,
     lessons: Math.max(a.lessons, b.lessons), perfect: Math.max(a.perfect, b.perfect),

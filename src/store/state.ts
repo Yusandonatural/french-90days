@@ -19,7 +19,7 @@ export interface Course {
   days: Record<number, CourseDay>; final?: { score: Score; date: string };
 }
 export interface State {
-  forms: Record<'pc' | 'vd' | 'al' | 'neg', Tally>;
+  forms: Record<'pr' | 'pc' | 'vd' | 'al' | 'neg', Tally>;
   streak: number; best: number; total: number;
   v: Record<string, Tally>; stage: number; xp: number;
   days: Record<string, number>; goal: number; lessons: number; perfect: number;
@@ -31,12 +31,13 @@ export interface State {
   epoch?: number;
 }
 
-export const blank = (): State => ({ forms: { pc: [0, 0], vd: [0, 0], al: [0, 0], neg: [0, 0] }, streak: 0, best: 0, total: 0, v: {}, stage: 0, xp: 0, days: {}, goal: 50, lessons: 0, perfect: 0, wd: {} });
+export const blank = (): State => ({ forms: { pr: [0, 0], pc: [0, 0], vd: [0, 0], al: [0, 0], neg: [0, 0] }, streak: 0, best: 0, total: 0, v: {}, stage: 0, xp: 0, days: {}, goal: 50, lessons: 0, perfect: 0, wd: {} });
 
 /** Fill in defaults for data saved by older versions. */
 export function migrate(saved: Partial<State> | null): State {
   const s: State = Object.assign(blank(), saved || {});
   s.forms.neg = s.forms.neg || [0, 0];
+  s.forms.pr = s.forms.pr || [0, 0];
   s.days = s.days || {};
   s.wd = s.wd || {};
   return s;

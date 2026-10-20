@@ -1,4 +1,4 @@
-// Japanese generation: affirmative / negative translations of the three forms.
+// Japanese generation: affirmative / negative translations of the four forms.
 import type { VerbEx, Word } from '../data';
 import { SJ, subj0, type FormKey, type Subj } from './conjugate';
 import { advForm, jaWithAdv, type Adverb } from './adverbs';
@@ -6,6 +6,7 @@ import { advForm, jaWithAdv, type Adverb } from './adverbs';
 /** mk = optional time word (昨日 …); adv = adverb in the French sentence */
 export function jaOf(s: Subj, v: VerbEx, f: FormKey, mk?: string, adv?: Adverb) {
   const S = v.I ? '' : SJ[s], a = advForm(f);
+  if (f === 'pr') return (mk ? mk + '、' : '') + jaWithAdv(S, v.now || v.ru, adv, a) + '。';
   if (f === 'pc') return (mk ? mk + '、' : '') + jaWithAdv(S, v.ta, adv, a) + '。';
   if (f === 'vd') return jaWithAdv(S, (mk || '') + v.ta + 'ばかりだ', adv, a) + '。';
   return mk ? mk + '、' + jaWithAdv(S, v.ru, adv, a) + '。' : jaWithAdv(S, 'これから' + v.ru, adv, a) + '。';
@@ -68,6 +69,7 @@ export const negAdv = (adv?: Adverb) => adv && adv.pos === 'mid' ? adv.neg : adv
 export function jaNegOf(s: Subj, v: VerbEx, f: FormKey, adv?: Adverb): string | null {
   const S = v.I ? '' : SJ[s], ad = negAdv(adv);
   if (f === 'pc') { const n = (ad && ad.teinai && teinai(v.ta)) || jNegPast(v.ta, v.ru); return n ? jaWithAdv(S, n, ad, 'p') + '。' : null; }
+  if (f === 'pr') { const n = jNeg(v.now || v.ru, v.ta); return n ? jaWithAdv(S, n, ad, 'r') + '。' : null; }
   const n = jNeg(v.ru, v.ta);
   return n ? jaWithAdv(S, 'これから' + n, ad, 'a') + '。' : null;
 }

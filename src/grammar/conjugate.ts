@@ -1,22 +1,24 @@
-// French grammar engine: the three forms (passé composé / venir de / aller),
-// present tense for je, and negation.
+// French grammar engine: the four forms (présent / passé composé / venir de / aller)
+// and negation.
 import { VOW, type Verb, type VerbEx } from '../data';
 import { cap } from '../util/dom';
 import { placeAdv, placeNegAdv, type Adverb } from './adverbs';
 
 export type Subj = 'je' | 'tu' | 'il' | 'elle' | 'on' | 'nous' | 'vous' | 'ils' | 'elles';
-/** pc = passé composé, vd = venir de, al = aller + inf */
-export type FormKey = 'pc' | 'vd' | 'al';
-export type NegFormKey = 'pcn' | 'aln';
+/** pr = présent, pc = passé composé, vd = venir de, al = aller + inf */
+export type FormKey = 'pr' | 'pc' | 'vd' | 'al';
+export type NegFormKey = 'pcn' | 'aln' | 'prn';
 
 export const FORMS: Record<FormKey | NegFormKey, { ja: string; hint: string; cls: string }> = {
+  pr: { ja: '現在形', hint: '〜する', cls: 'k-pr' },
   pc: { ja: '複合過去', hint: '〜した', cls: 'k-pc' },
   vd: { ja: '直近過去', hint: '〜したばかり', cls: 'k-vd' },
   al: { ja: '近接未来', hint: 'これから〜する', cls: 'k-al' },
   pcn: { ja: '複合過去の否定', hint: '〜しなかった', cls: 'k-pc' },
   aln: { ja: '近接未来の否定', hint: 'これから〜しない', cls: 'k-al' },
+  prn: { ja: '現在形の否定', hint: '〜しない', cls: 'k-pr' },
 };
-export const FKEYS: FormKey[] = ['pc', 'vd', 'al'];
+export const FKEYS: FormKey[] = ['pr', 'pc', 'vd', 'al'];
 export const SUBJ: { k: Subj; ja: string }[] = [{ k: 'je', ja: '私は' }, { k: 'on', ja: '私たちは' }, { k: 'tu', ja: '君は' }];
 export const SJ: Record<string, string> = Object.assign({ il: '彼は', elle: '彼女は' }, Object.fromEntries(SUBJ.map(s => [s.k, s.ja])));
 export const ALLS: Subj[] = SUBJ.map(s => s.k);
@@ -54,6 +56,10 @@ export function build(s: Subj, v: VerbEx, f: FormKey, o: BuildOpts = {}) {
     const part = agree(v.pp, v.etre ? (o.agr != null ? o.agr : AGR[s]) : '');
     const core = v.R ? (o.noSubj ? '' : s + ' ') + refl(s, w) : (o.noSubj ? w : subjWord(s, w));
     t = placeAdv(core, part + obj, o.adv);
+  } else if (f === 'pr') {
+    const w = presFor(s, v);
+    const core = v.R ? (o.noSubj ? '' : s + ' ') + refl(s, w) : (o.noSubj ? w : subjWord(s, w));
+    t = placeAdv(core, obj.trim(), o.adv);
   } else {
     const aux = f === 'vd' ? 'venir' : 'aller', w = CONJ[aux][s];
     const h = o.noSubj ? w : subjWord(s, w);
@@ -88,7 +94,7 @@ export function notesOf(v: Verb) {
   return n;
 }
 
-/* ---------- present tense (je) ---------- */
+/* ---------- present tense ---------- */
 export const PRES_IRR: Record<string, string> = {'être':'suis',avoir:'ai',faire:'fais',dire:'dis',pouvoir:'peux',aller:'vais',voir:'vois',savoir:'sais',vouloir:'veux',venir:'viens',devoir:'dois',prendre:'prends',mettre:'mets',croire:'crois',attendre:'attends',comprendre:'comprends',partir:'pars',sortir:'sors',entendre:'entends','connaître':'connais',boire:'bois','écrire':'écris',lire:'lis','répondre':'réponds',tenir:'tiens',rendre:'rends',sentir:'sens',revenir:'reviens',devenir:'deviens',perdre:'perds',vivre:'vis',dormir:'dors',acheter:'achète',payer:'paie',essayer:'essaie',suivre:'suis',ouvrir:'ouvre',apprendre:'apprends',recevoir:'reçois',envoyer:'envoie',courir:'cours',descendre:'descends',promettre:'promets',nettoyer:'nettoie',conduire:'conduis',lever:'lève',promener:'promène',asseoir:'assieds',souvenir:'souviens','inquiéter':'inquiète',vendre:'vends',construire:'construis','éteindre':'éteins',traduire:'traduis','répéter':'répète',emmener:'emmène',amener:'amène','récupérer':'récupère','découvrir':'découvre',offrir:'offre',rire:'ris',sourire:'souris',rappeler:'rappelle',appeler:'appelle',peindre:'peins',cueillir:'cueille',servir:'sers'};
 export const PRES_IL: Record<string, string> = { falloir: 'faut', pleuvoir: 'pleut', neiger: 'neige', 'naître': 'naît', mourir: 'meurt' };
 /** subject used for "my own" sentences: je, or il for impersonal / il-only verbs */
@@ -100,6 +106,19 @@ export function presWord(v: Verb) {
   if (k.endsWith('er')) return k.slice(0, -2) + 'e';
   if (k.endsWith('ir')) return k.slice(0, -2) + 'is';
   return k;
+}
+const PRES_TU_IL: Record<string, [string, string]> = { 'être': ['es', 'est'], avoir: ['as', 'a'], aller: ['vas', 'va'], 'connaître': ['connais', 'connaît'] };
+/** present tense for je / tu / il / on, derived from the je form */
+export function presFor(s: Subj, v: Verb) {
+  if (PRES_IL[v.inf]) return PRES_IL[v.inf];
+  const je = presWord(v), ov = PRES_TU_IL[v.inf];
+  if (s === 'je') return je;
+  if (s === 'tu') return ov ? ov[0] : /[sx]$/.test(je) ? je : je + 's';
+  if (ov) return ov[1];
+  if (/e$/.test(je)) return je;
+  if (/[dt]s$/.test(je)) return je.slice(0, -1);
+  if (/[sx]$/.test(je)) return je.slice(0, -1) + 't';
+  return je;
 }
 export function presFr(v: VerbEx, adv?: Adverb) {
   const s = subj0(v), w = presWord(v);
@@ -131,7 +150,7 @@ export function buildNeg(s: Subj, v: VerbEx, f: 'pc' | 'al' | 'pr', o: BuildOpts
     const w = CONJ.aller[s];
     t = s + ' ' + neW(w) + ' pas ' + (v.R ? refl(s, v.inf) : v.inf) + obj;
   } else {
-    const w = presWord(v);
+    const w = presFor(s, v);
     t = s + ' ' + (v.R ? 'ne ' + refl(s, w) : neW(w)) + ' pas' + obj;
   }
   // a "mid" adverb becomes its negative partner (déjà → pas encore)

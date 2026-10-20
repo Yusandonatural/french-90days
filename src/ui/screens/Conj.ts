@@ -1,4 +1,4 @@
-// 活用表: one verb in the three forms, for each subject.
+// 活用表: one verb in the four forms, for each subject.
 import { $, $$, esc } from '../../util/dom';
 import { NST, V, stageVerbs, withEx } from '../../data';
 import { FKEYS, FORMS, allowed, build, notesOf, subjFor, type FormKey, type Subj } from '../../grammar/conjugate';

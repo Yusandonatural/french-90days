@@ -23,7 +23,7 @@ export function renderHome() {
   $('#hNext').innerHTML = tile('verb', '🧠', '動詞レッスン', `ステージ${ST.stage + 1}・習得 ${mastered(ST.stage)}/20`)
     + tile('word', nextT.emo, '単語レッスン', esc(nextT.title))
     + tile('listen', '🎧', 'je で連続再生', '流して聞く・まねする')
-    + tile('learn', '📖', '文法の説明', '3つの形・否定・être動詞');
+    + tile('learn', '📖', '文法の説明', '現在形と3つの形・否定');
   $('#hProg').innerHTML = `<div class="prow"><span>動詞（1回正解で習得）</span><b>${mv} / 200</b></div><div class="bar thick"><i style="width:${mv / 2}%;background:var(--pc)"></i></div>
    <div class="prow"><span>単語（1回正解で習得）</span><b>${l} / ${WORDS.length}</b></div><div class="bar thick"><i style="width:${l / WORDS.length * 100}%;background:var(--vd)"></i></div>
    <div class="prow"><span>例文</span><b>1000文</b></div><p class="small muted" style="margin:0">レッスン完了 ${ST.lessons || 0} 回</p>`;

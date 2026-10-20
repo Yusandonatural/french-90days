@@ -24,7 +24,9 @@ function outputs(g: Record<string, (...a: unknown[]) => unknown>, v: unknown) {
       o[`${s} ${f} noSubj`] = g.build(s, v, f, { obj: false, sentence: false, noSubj: 1 });
       o[`${s} ${f} acc`] = g.accepted(s, v, f);
     }
-    for (const f of ['pc', 'al', 'pr'] as const) {
+    // the original only had the je form for the present (je ne mange pas, also used for tu / on)
+    const vv = v as { I?: number; T?: number };
+    for (const f of (s === 'je' || vv.I || vv.T) ? ['pc', 'al', 'pr'] as const : ['pc', 'al'] as const) {
       o[`${s} ${f}n`] = g.buildNeg(s, v, f);
       o[`${s} ${f}n acc`] = g.acceptedNeg(s, v, f);
     }
@@ -53,7 +55,7 @@ describe('matches the reference app', () => {
   test.each(VERBS.map(v => [v.idx + 1, v.key] as const))('No.%i %s — all examples, subjects and forms', (n) => {
     const v = VERBS[n - 1], rv = ref.VERBS[n - 1];
     expect(presWord(v)).toBe(ref.presWord(rv));
-    expect(allowed(v)).toEqual([...ref.allowed(rv)]);
+    expect(allowed(v).filter(f => f !== 'pr')).toEqual([...ref.allowed(rv)]);
     expect(subjFor(v)).toEqual([...ref.subjFor(rv)]);
     expect(notesOf(v)).toEqual([...ref.notesOf(rv)]);
     v.ex.forEach((_, i) => {
