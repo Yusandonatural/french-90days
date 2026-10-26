@@ -558,7 +558,8 @@ export function widget(cfg) {
       if (!sel.length) dayItems.append(el('p', 'yse-empty', t().dayEmpty));
       sel.forEach((ev) => dayItems.append(itemButton(ev)));
       panel.append(dayItems);
-      board.append(panel);
+      // 予定のない月は、上のリストの「まだありません」だけにして同じ案内を重ねない
+      if (Object.keys(days).some((k) => k.startsWith(prefix))) board.append(panel);
 
       const list = el('ul', 'yse-list');
       const firstKey = (ev) => (ev.start.slice(0, 7) < prefix ? `${prefix}-01` : ev.start.slice(0, 10));

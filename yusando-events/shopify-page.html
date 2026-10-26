@@ -1,11 +1,12 @@
 <style>
-.yslk{max-width:560px;margin:8px auto 40px;font-family:'Zen Kaku Gothic New',sans-serif}
+.yslk{max-width:1040px;margin:8px auto 40px;text-align:left;font-family:'Zen Kaku Gothic New',sans-serif}
 .yslk *{box-sizing:border-box}
 .yslk-top{display:flex;align-items:center;justify-content:space-between;margin:0 0 14px}
 .yslk-h{margin:0;font-size:11px;letter-spacing:.32em;color:#5C7A52}
 .yslk .yslk-lang{min-height:36px!important;margin:0!important;padding:0 16px!important;border:0!important;border-radius:999px!important;background:#4F6B3C!important;color:#fff!important;font-family:inherit!important;font-size:12.5px!important;letter-spacing:.08em!important;line-height:36px!important;cursor:pointer;width:auto!important;height:auto!important;text-transform:none!important;box-shadow:none!important}
 .yslk .yslk-lang:hover{background:#3E5730!important}
 .yslk ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+@media (min-width:760px){.yslk ul{grid-template-columns:1fr 1fr}}
 .yslk li{margin:0;padding:0}
 .yslk a{display:flex;align-items:center;gap:14px;min-height:68px;padding:12px 18px 12px 14px;border:1px solid rgba(46,75,58,.22);border-radius:999px;background:#FAFAF6;color:#26251F;text-decoration:none;transition:background .15s,border-color .15s,transform .15s}
 .yslk a:hover{background:#F3F2E8;border-color:#2E4B3A;transform:translateY(-1px)}
@@ -16,7 +17,8 @@
 .yslk b{display:block;font-family:'Shippori Mincho',serif;font-weight:700;font-size:16px;letter-spacing:.06em;color:#2E4B3A}
 .yslk small{display:block;font-size:12px;letter-spacing:.04em;color:#4A5A4E}
 .yslk em{flex:none;font-style:normal;font-size:18px;color:#5C7A52}
-.yslk-intro{max-width:560px;margin:0 auto 24px}
+.yslk-intro{max-width:1040px;margin:0 auto 24px;text-align:left}
+.yslk-intro p{text-align:left}
 .yse-en-only{display:none!important}
 html[data-yse-lang="en"] .yse-en-only{display:block!important}
 html[data-yse-lang="en"] .yse-ja-only{display:none!important}
@@ -35,4 +37,4 @@ html[data-yse-lang="en"] .yse-ja-only{display:none!important}
 <p class="yse-en-only">Open farm days, café opening days, stays and other events at Yusando. Tap an event to see the date, time and place.</p>
 </div>
 <div id="yusando-events"></div>
-<script src="https://yusando-events.isozaki-f67.workers.dev/widget.js?v=8" defer></script>
+<script src="https://yusando-events.isozaki-f67.workers.dev/widget.js?v=9" defer></script>
