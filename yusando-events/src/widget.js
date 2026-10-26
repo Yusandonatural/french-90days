@@ -16,7 +16,7 @@ export function widget(cfg) {
   const T = {
     ja: {
       wd: ['日', '月', '火', '水', '木', '金', '土'], today: '今月', prev: '前の月', next: '次の月', close: '閉じる',
-      empty: 'この月の予定は、まだありません', error: '予定を読み込めませんでした。時間をおいてもう一度お試しください。',
+      empty: 'この月の予定は、まだありません', allPast: 'この月の予定はすべて終了しました', pastShow: (n) => `終了した予定を表示（${n}日分）`, pastHide: '終了した予定を隠す', error: '予定を読み込めませんでした。時間をおいてもう一度お試しください。',
       share: 'この予定をシェア', shareBtn: 'シェア', copy: 'リンクをコピー', copied: 'リンクをコピーしました',
       copyPrompt: 'このリンクをコピーしてください', gcal: 'Googleカレンダーに追加', allDay: '終日', tag: '#悠三堂',
       more: (n) => `ほか ${n} 件`, shareOn: (n) => `${n}でシェア`, langBtn: 'English', langLabel: 'Switch to English',
@@ -25,7 +25,7 @@ export function widget(cfg) {
     },
     en: {
       wd: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], today: 'Today', prev: 'Previous month', next: 'Next month', close: 'Close',
-      empty: 'No events this month yet', error: 'Could not load events. Please try again later.',
+      empty: 'No events this month yet', allPast: 'All events this month have ended', pastShow: (n) => `Show past events (${n} ${n === 1 ? 'day' : 'days'})`, pastHide: 'Hide past events', error: 'Could not load events. Please try again later.',
       share: 'Share this event', shareBtn: 'Share', copy: 'Copy link', copied: 'Link copied',
       copyPrompt: 'Copy this link', gcal: 'Add to Google Calendar', allDay: 'All day', tag: '#Yusando', mt: 'Translated automatically from Japanese.',
       more: (n) => `+${n} more`, shareOn: (n) => `Share on ${n}`, langBtn: '日本語', langLabel: '日本語に切り替え',
@@ -69,6 +69,12 @@ export function widget(cfg) {
 .yse-lang{min-height:34px;padding:0 16px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);cursor:pointer;
   font-size:.78rem;letter-spacing:.08em;color:#fff;white-space:nowrap}
 .yse-lang:hover{background:#3E5630;border-color:#3E5630}
+.yse-lang[hidden]{display:none}
+.yse-past{display:block;width:100%;margin:0;padding:14px 4px;border:0;border-bottom:1px solid var(--line);background:none;cursor:pointer;
+  text-align:left;font-size:.8rem;letter-spacing:.06em;color:var(--sub)}
+.yse-past:hover{color:var(--ink)}
+.yse-past::before{content:'＋';display:inline-block;width:1.4em;color:var(--accent)}
+.yse-past.open::before{content:'－'}
 .yse-title{margin:0;display:flex;align-items:baseline;gap:14px;font-family:var(--serif);font-weight:500;line-height:1}
 .yse-m{font-size:clamp(2.4rem,6vw,3.4rem);letter-spacing:.02em}
 .yse-m small{font-size:.42em;margin-left:.12em}
@@ -404,6 +410,8 @@ export function widget(cfg) {
     }
 
     let selected = null; // スマホのマス目で選んだ日
+    let picked = false; // 自分で日付を押したか（押すまでは予定が届くたびに選び直す）
+    let showPast = false; // 終了した予定をリストに出すか
 
     // 上に日ごとのリスト、その下に月のカレンダー
     const listHead = el('h3', 'yse-sec'), calHead = el('h3', 'yse-sec cal');
@@ -426,7 +434,9 @@ export function widget(cfg) {
       root.lang = lang;
       // ページ側（リンクボタンなど）も同じ言語にそろえる：<html data-yse-lang="en"> と [data-yse-lang-toggle] ボタン
       document.documentElement.setAttribute('data-yse-lang', lang);
-      document.querySelectorAll('[data-yse-lang-toggle]').forEach((b) => {
+      const outside = document.querySelectorAll('[data-yse-lang-toggle]');
+      langBtn.hidden = outside.length > 0; // ページ側にボタンがあれば、二つ並ばないようカレンダー内のボタンは隠す
+      outside.forEach((b) => {
         b.textContent = t().langBtn;
         b.setAttribute('aria-label', t().langLabel);
         b.onclick = () => langBtn.onclick();
@@ -488,9 +498,13 @@ export function widget(cfg) {
       const gridStart = new Date(first.getTime() - first.getUTCDay() * DAY);
       const now = todayJST();
       const prefix = `${y}-${pad(m)}`;
-      if (!selected || !selected.startsWith(prefix)) {
-        const firstEv = Object.keys(days).filter((k) => k.startsWith(prefix)).sort()[0];
-        selected = now.startsWith(prefix) ? now : firstEv || `${prefix}-01`;
+      if (!picked || !selected || !selected.startsWith(prefix)) {
+        picked = false;
+        // 今月なら今日以降で予定のある最初の日、ほかの月ならその月の最初の予定日を選ぶ
+        const evDays = Object.keys(days).filter((k) => k.startsWith(prefix)).sort();
+        selected = now.startsWith(prefix)
+          ? evDays.find((k) => k >= now) || now
+          : evDays[0] || `${prefix}-01`;
       }
 
       board.replaceChildren();
@@ -517,7 +531,7 @@ export function widget(cfg) {
           if (d.getUTCMonth() !== m - 1) cell.classList.add('out');
           if (key === now) cell.classList.add('today');
           if (key === selected) cell.classList.add('sel');
-          if (d.getUTCMonth() === m - 1) cell.onclick = () => { selected = key; render(); };
+          if (d.getUTCMonth() === m - 1) cell.onclick = () => { selected = key; picked = true; render(); };
           if (i === 0) cell.classList.add('sun');
           if (i === 6) cell.classList.add('sat');
           cell.append(el('span', 'yse-n', String(d.getUTCDate())));
@@ -555,8 +569,22 @@ export function widget(cfg) {
         if (own.length) daily[k] = own;
       }
       const keys = Object.keys(daily).sort();
+      // 今日より前に終わった予定だけの日は、ボタンの中にたたんでおく
+      const ended = (k) => k < now && daily[k].every((ev) => (ev.end || ev.start).slice(0, 10) < now);
+      const past = keys.filter(ended);
       if (!keys.length) list.append(el('li', 'yse-empty', t().empty));
+      if (past.length) {
+        const li = el('li');
+        const btn = el('button', `yse-past${showPast ? ' open' : ''}`, showPast ? t().pastHide : t().pastShow(past.length));
+        btn.type = 'button';
+        btn.setAttribute('aria-expanded', String(showPast));
+        btn.onclick = () => { showPast = !showPast; render(); };
+        li.append(btn);
+        list.append(li);
+        if (past.length === keys.length && !showPast) list.append(el('li', 'yse-empty', t().allPast));
+      }
       for (const k of keys) {
+        if (!showPast && past.includes(k)) continue;
         const d = dateOf(k);
         const li = el('li', 'yse-day');
         const date = el('div', 'yse-date');
